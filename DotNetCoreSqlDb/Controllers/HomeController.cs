@@ -23,7 +23,7 @@ namespace DotNetCoreSqlDb.Controllers
         // Ny metod som returnerar Index-vyn från Views/Site/
         public IActionResult SiteIndex()
         {
-            return View("~/Views/Site/Index.cshtml");
+            return View("~/Views/Sites/Index.cshtml");
         }
 
         public IActionResult Privacy()
