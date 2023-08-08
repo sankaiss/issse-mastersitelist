@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using DotNetCoreSqlDb.Models;
 
@@ -13,9 +14,16 @@ namespace DotNetCoreSqlDb.Controllers
             _logger = logger;
         }
 
+        // Denna metod returnerar Index-vyn från Views/Home/
         public IActionResult Index()
         {
             return View();
+        }
+
+        // Ny metod som returnerar Index-vyn från Views/Site/
+        public IActionResult SiteIndex()
+        {
+            return View("~/Views/Site/Index.cshtml");
         }
 
         public IActionResult Privacy()
