@@ -4,9 +4,9 @@
     ViewData["Title"] = "Ta bort en Site";
 }
 
-<h1>Ta bort</h1>
+<h2>Ta bort</h2>
 
-<h3>Är du säker att du vill radera?</h3>
+<h4>Är du säker att du vill radera?</h4>
 <div>
     <hr />
     <dl class="row">
@@ -111,6 +111,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Tillbaka</a>
     </form>
 </div>
