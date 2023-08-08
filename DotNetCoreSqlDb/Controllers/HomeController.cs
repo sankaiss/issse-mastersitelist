@@ -26,6 +26,11 @@ namespace DotNetCoreSqlDb.Controllers
             return View("~/Views/Sites/Index.cshtml");
         }
 
+        public IActionResult Info()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
