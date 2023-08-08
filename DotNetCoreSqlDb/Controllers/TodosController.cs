@@ -13,99 +13,99 @@ using Microsoft.Extensions.Caching.Distributed;
 namespace DotNetCoreSqlDb.Controllers
 {
     [ActionTimerFilter]
-    public class TodosController : Controller
+    public class SitesController : Controller
     {
         private readonly MyDatabaseContext _context;
         private readonly IDistributedCache _cache;
-        private readonly string _TodoItemsCacheKey = "TodoItemsList";
+        private readonly string _SiteItemsCacheKey = "SiteItemsList";
 
-        public TodosController(MyDatabaseContext context, IDistributedCache cache)
+        public SitesController(MyDatabaseContext context, IDistributedCache cache)
         {
             _context = context;
             _cache = cache;
         }
 
-        // GET: Todos
+        // GET: Sites
         public async Task<IActionResult> Index()
         {
-            var todos = new List<Todo>();
-            byte[]? TodoListByteArray;
+            var sites = new List<Site>();
+            byte[]? SiteListByteArray;
 
-            TodoListByteArray = await _cache.GetAsync(_TodoItemsCacheKey);
-            if (TodoListByteArray != null && TodoListByteArray.Length > 0)
+            SiteListByteArray = await _cache.GetAsync(_SiteItemsCacheKey);
+            if (SiteListByteArray != null && SiteListByteArray.Length > 0)
             { 
-                todos = ConvertData<Todo>.ByteArrayToObjectList(TodoListByteArray);
+                sites = ConvertData<Site>.ByteArrayToObjectList(SiteListByteArray);
             }
             else 
             {
-                todos = await _context.Todo.ToListAsync();
-                TodoListByteArray = ConvertData<Todo>.ObjectListToByteArray(todos);
-                await _cache.SetAsync(_TodoItemsCacheKey, TodoListByteArray);
+                sites = await _context.Site.ToListAsync();
+                SiteListByteArray = ConvertData<Site>.ObjectListToByteArray(sites);
+                await _cache.SetAsync(_SiteItemsCacheKey, SiteListByteArray);
             }
 
-            return View(todos);
+            return View(sites);
         }
 
-        // GET: Todos/Details/5
+        // GET: Sites/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             byte[]? todoItemByteArray;
-            Todo? todo;
+            Site? site;
 
             if (id == null)
             {
                 return NotFound();
             }
 
-            todoItemByteArray = await _cache.GetAsync(GetTodoItemCacheKey(id));
+            todoItemByteArray = await _cache.GetAsync(GetSiteItemCacheKey(id));
 
             if (todoItemByteArray != null && todoItemByteArray.Length > 0)
             {
-                todo = ConvertData<Todo>.ByteArrayToObject(todoItemByteArray);
+                site = ConvertData<Site>.ByteArrayToObject(todoItemByteArray);
             }
             else 
             {
-                todo = await _context.Todo
+                site = await _context.Site
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (todo == null)
+            if (site == null)
             {
                 return NotFound();
             }
 
-                todoItemByteArray = ConvertData<Todo>.ObjectToByteArray(todo);
-                await _cache.SetAsync(GetTodoItemCacheKey(id), todoItemByteArray);
+                todoItemByteArray = ConvertData<Site>.ObjectToByteArray(site);
+                await _cache.SetAsync(GetSiteItemCacheKey(id), todoItemByteArray);
             }
 
             
 
-            return View(todo);
+            return View(site);
         }
 
-        // GET: Todos/Create
+        // GET: Sites/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Todos/Create
+        // POST: Sites/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Description,Priority,CreatedDate")] Todo todo)
+        public async Task<IActionResult> Create([Bind("ID,Description,Priority,CreatedDate")] Site site)
 
         {
             if (ModelState.IsValid)
             {
-                _context.Add(todo);
+                _context.Add(site);
                 await _context.SaveChangesAsync();
-                await _cache.RemoveAsync(_TodoItemsCacheKey);
+                await _cache.RemoveAsync(_SiteItemsCacheKey);
                 return RedirectToAction(nameof(Index));
             }
-            return View(todo);
+            return View(site);
         }
 
-        // GET: Todos/Edit/5
+        // GET: Sites/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -113,22 +113,22 @@ namespace DotNetCoreSqlDb.Controllers
                 return NotFound();
             }
 
-            var todo = await _context.Todo.FindAsync(id);
-            if (todo == null)
+            var site = await _context.Site.FindAsync(id);
+            if (site == null)
             {
                 return NotFound();
             }
-            return View(todo);
+            return View(site);
         }
 
-        // POST: Todos/Edit/5
+        // POST: Sites/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Description,Priority,CreatedDate")] Todo todo)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Description,Priority,CreatedDate")] Site site)
         {
-            if (id != todo.ID)
+            if (id != site.ID)
             {
                 return NotFound();
             }
@@ -137,14 +137,14 @@ namespace DotNetCoreSqlDb.Controllers
             {
                 try
                 {
-                    _context.Update(todo);
+                    _context.Update(site);
                     await _context.SaveChangesAsync();
-                    await _cache.RemoveAsync(GetTodoItemCacheKey(todo.ID));
-                    await _cache.RemoveAsync(_TodoItemsCacheKey);
+                    await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
+                    await _cache.RemoveAsync(_SiteItemsCacheKey);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TodoExists(todo.ID))
+                    if (!SiteExists(site.ID))
                     {
                         return NotFound();
                     }
@@ -155,10 +155,10 @@ namespace DotNetCoreSqlDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(todo);
+            return View(site);
         }
 
-        // GET: Todos/Delete/5
+        // GET: Sites/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -166,40 +166,40 @@ namespace DotNetCoreSqlDb.Controllers
                 return NotFound();
             }
 
-            var todo = await _context.Todo
+            var site = await _context.Site
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (todo == null)
+            if (site == null)
             {
                 return NotFound();
             }
 
-            return View(todo);
+            return View(site);
         }
 
-        // POST: Todos/Delete/5
+        // POST: Sites/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var todo = await _context.Todo.FindAsync(id);
-            if (todo != null)
+            var site = await _context.Site.FindAsync(id);
+            if (site != null)
             {
-                _context.Todo.Remove(todo);
+                _context.Site.Remove(site);
                 await _context.SaveChangesAsync();
-                await _cache.RemoveAsync(GetTodoItemCacheKey(todo.ID));
-                await _cache.RemoveAsync(_TodoItemsCacheKey);
+                await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
+                await _cache.RemoveAsync(_SiteItemsCacheKey);
             }
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TodoExists(int id)
+        private bool SiteExists(int id)
         {
-            return _context.Todo.Any(e => e.ID == id);
+            return _context.Site.Any(e => e.ID == id);
         }
 
-        private string GetTodoItemCacheKey(int? id)
+        private string GetSiteItemCacheKey(int? id)
         {
-            return _TodoItemsCacheKey+"_&_"+id;
+            return _SiteItemsCacheKey+"_&_"+id;
         }
     }
 
