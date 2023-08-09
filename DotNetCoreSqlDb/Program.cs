@@ -63,7 +63,7 @@ app.MapControllerRoute(
 
 app.Run();
 
-static static async Task EnsureRolesCreated(IServiceProvider serviceProvider)
+private static async Task EnsureRolesCreated(IServiceProvider serviceProvider)
 {
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
