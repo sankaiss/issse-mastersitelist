@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 public class AccountController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
