@@ -8,6 +8,7 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using DotNetCoreSqlDb.Services;
 
 
 
