@@ -8,7 +8,8 @@
     var localLastUpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(Model.Max(m => m.LastUpdatedDate), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
 }
 
-<h2>Master Site list - <span class="lastUpdated">Senast uppdaterad: @localLastUpdatedDate</span></h2>
+<h2> - ISS SE Network Master Site list - <span class="lastUpdated">Senast uppdaterad: @localLastUpdatedDate.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))
+</span></h2>
 
 
 
