@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using DotNetCoreSqlDb.ViewModels;
+using DotNetCoreSqlDb.ViewModel;
 
 
 public class AccountController : Controller
