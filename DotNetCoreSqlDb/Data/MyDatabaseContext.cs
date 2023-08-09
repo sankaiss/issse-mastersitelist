@@ -15,5 +15,6 @@ namespace DotNetCoreSqlDb.Data
         }
 
         public DbSet<DotNetCoreSqlDb.Models.Site> Site { get; set; } = default!;
+        public DbSet<DotNetCoreSqlDb.Models.IPPlan> IPPlan { get; set; } = default!;
     }
 }
