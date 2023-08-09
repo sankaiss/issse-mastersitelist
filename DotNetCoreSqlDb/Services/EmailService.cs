@@ -6,6 +6,7 @@ using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
 
 namespace DotNetCoreSqlDb.Services
+{
 public class EmailService : IEmailService
 {
     private readonly ISendGridClient _sendGridClient;

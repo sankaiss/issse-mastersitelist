@@ -1,6 +1,9 @@
-namespace DotNetCoreSqlDb.Services
+using System.Threading.Tasks;
 
-public interface IEmailService
+namespace DotNetCoreSqlDb.Services
 {
-    Task SendEmailAsync(string toEmail, string subject, string content);
+    public interface IEmailService
+    {
+        Task SendEmailAsync(string toEmail, string subject, string content);
+    }
 }
