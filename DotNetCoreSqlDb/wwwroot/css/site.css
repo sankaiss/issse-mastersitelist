@@ -20,3 +20,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.lastUpdated {
+  font-size: 0.8em;
+  color: gray;
+}

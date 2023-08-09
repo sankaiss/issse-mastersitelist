@@ -4,7 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Master Site list - <span class="lastUpdated">Senast uppdaterad: @Model.Max(m => m.LastUpdatedDate)</span></h2>
+@{
+    var localLastUpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(Model.Max(m => m.LastUpdatedDate), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
+}
+
+<h2>Master Site list - <span class="lastUpdated">Senast uppdaterad: @localLastUpdatedDate</span></h2>
+
 
 
 <p>
