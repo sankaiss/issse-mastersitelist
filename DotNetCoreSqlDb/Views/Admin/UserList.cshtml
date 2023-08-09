@@ -1,0 +1,22 @@
+@model IEnumerable<IdentityUser>
+
+<h2>Alla användare</h2>
+
+<table>
+    @foreach(var user in Model)
+    {
+        <tr>
+            <td>@user.UserName</td>
+            <td>
+                @if(!(await Context.GetUserManager<IdentityUser>().IsInRoleAsync(user, "Admin")))
+                {
+                    <a href="@Url.Action("AssignAdminRole", new { userId = user.Id })">Gör till Admin</a>
+                }
+                else
+                {
+                    <span>Admin</span>
+                }
+            </td>
+        </tr>
+    }
+</table>

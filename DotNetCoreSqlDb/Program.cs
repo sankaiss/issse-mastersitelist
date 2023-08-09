@@ -2,11 +2,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetCoreSqlDb.Data;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDefaultIdentity<IdentityUser>()
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<MyDatabaseContext>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Lösenordsinställningar
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+
+    // Andra inställningar kan också läggas till här
+});
 
 // Add database context and cache
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
@@ -40,8 +54,26 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+using var serviceScope = app.Services.CreateScope();
+await EnsureRolesCreated(serviceScope.ServiceProvider);
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Sites}/{action=Index}/{id?}");
 
 app.Run();
+
+private static async Task EnsureRolesCreated(IServiceProvider serviceProvider)
+{
+    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    var roles = new List<string> { "Admin", "User" };  // Lägg till fler roller om det behövs
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+}
