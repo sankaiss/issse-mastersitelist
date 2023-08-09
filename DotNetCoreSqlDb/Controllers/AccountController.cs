@@ -1,16 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using MyApp.ViewModels;
 
 
 public class AccountController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly IEmailService _emailService;
+
 
     public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _emailService = emailService;
     }
 
     public IActionResult Register()
@@ -18,6 +22,69 @@ public class AccountController : Controller
         return View();
     }
 
+    public IActionResult ForgotPassword()
+    {
+        return View();
+    }
+
+    public IActionResult ForgotPasswordConfirmation()
+    {
+    return View();
+    }
+
+    public IActionResult ResetPassword(string userId, string token)
+    {
+    return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+    {
+    if (!ModelState.IsValid)
+    {
+        return View(model);
+    }
+
+    var user = await _userManager.FindByIdAsync(model.UserId);
+    if (user == null)
+    {
+        return View("Error"); // Eller någon annan vy som säger att något gick fel
+    }
+
+    var resetPasswordResult = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+    if (resetPasswordResult.Succeeded)
+    {
+        return RedirectToAction("ResetPasswordConfirmation");
+    }
+    
+    foreach (var error in resetPasswordResult.Errors)
+    {
+        ModelState.AddModelError(string.Empty, error.Description);
+    }
+    return View(model);
+    }
+
+
+
+    [HttpPost]
+    public async Task<IActionResult> ForgotPassword(string email)
+    {
+    if (string.IsNullOrEmpty(email))
+        return View();  // du kan lägga till ett felmeddelande här om du vill
+
+    var user = await _userManager.FindByEmailAsync(email);
+    if (user == null)
+        return View();  // av säkerhetsskäl, visa inte ett felmeddelande om e-posten inte finns
+
+    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+    var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = token }, protocol: HttpContext.Request.Scheme);
+
+    await _emailService.SendEmailAsync(email, "Reset Password", $"Please reset your password by <a href='{callbackUrl}'>clicking here</a>");
+
+    return RedirectToAction("ForgotPasswordConfirmation");
+    }
+
+    
     [HttpPost]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {

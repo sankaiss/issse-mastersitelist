@@ -22,6 +22,14 @@ builder.Services.Configure<IdentityOptions>(options =>
     // Andra inställningar kan också läggas till här
 });
 
+builder.Services.AddHttpClient();
+builder.Services.AddSingleton<ISendGridClient>(x => 
+    new SendGridClient(new SendGridClientOptions
+    {
+        ApiKey = builder.Configuration["SendGrid:ApiKey"]
+    }));
+builder.Services.AddTransient<IEmailService, EmailService>();
+
 // Add database context and cache
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnection")));
