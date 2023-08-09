@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using MyApp.ViewModels;
+using DotNetCoreSqlDb.ViewModels;
 
 
 public class AccountController : Controller
@@ -10,7 +10,7 @@ public class AccountController : Controller
     private readonly IEmailService _emailService;
 
 
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailService emailService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
