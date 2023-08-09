@@ -15,7 +15,9 @@ namespace DotNetCoreSqlDb.Services
         public EmailService(IConfiguration configuration)
         {
             var keyVaultUrl = configuration.GetValue<string>("AzureKeyVaultEndpoint");
-            var client = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+            var managedIdentityCredential = new ManagedIdentityCredential();
+            var client = new SecretClient(new Uri(keyVaultUrl), managedIdentityCredential);
+
             KeyVaultSecret sendGridKey = client.GetSecret("SendGridApiKey");
             string sendGridApiKey = sendGridKey.Value;
 
