@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 public class RegisterViewModel
 {
     public string Email { get; set; }
