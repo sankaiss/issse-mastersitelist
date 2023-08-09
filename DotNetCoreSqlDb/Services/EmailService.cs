@@ -1,19 +1,22 @@
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Microsoft.Extensions.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
-
-public interface IEmailService
-{
-    Task SendEmailAsync(string toEmail, string subject, string content);
-}
 
 public class EmailService : IEmailService
 {
     private readonly ISendGridClient _sendGridClient;
 
-    public EmailService(ISendGridClient sendGridClient)
+    public EmailService(IConfiguration configuration)
     {
-        _sendGridClient = sendGridClient;
+        var keyVaultUrl = configuration.GetValue<string>("AzureKeyVaultEndpoint");
+        var client = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+        KeyVaultSecret sendGridKey = client.GetSecret("SendGridApiKey");
+        string sendGridApiKey = sendGridKey.Value;
+
+        _sendGridClient = new SendGridClient(sendGridApiKey);
     }
 
     public async Task SendEmailAsync(string toEmail, string subject, string content)
@@ -24,3 +27,4 @@ public class EmailService : IEmailService
         await _sendGridClient.SendEmailAsync(msg);
     }
 }
+
