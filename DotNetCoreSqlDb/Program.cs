@@ -3,6 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using DotNetCoreSqlDb.Data;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddEntityFrameworkStores<MyDatabaseContext>();
+
 // Add database context and cache
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnection")));

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DotNetCoreSqlDb.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DotNetCoreSqlDb.Data
 {
-    public class MyDatabaseContext : DbContext
+    public class MyDatabaseContext : IdentityDbContext
     {
         public MyDatabaseContext (DbContextOptions<MyDatabaseContext> options)
             : base(options)
