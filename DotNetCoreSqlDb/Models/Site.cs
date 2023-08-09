@@ -22,5 +22,7 @@ namespace DotNetCoreSqlDb.Models
         public int? AntalEnheter { get; set; }
         public string? Sitestorlek { get; set; }
         public string? Kommentarer { get; set; }
+        public DateTime LastUpdatedDate { get; set; }
+
     }
 }
