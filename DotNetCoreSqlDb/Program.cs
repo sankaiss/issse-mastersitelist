@@ -4,6 +4,9 @@ using DotNetCoreSqlDb.Data;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
