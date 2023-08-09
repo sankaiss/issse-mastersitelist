@@ -1,4 +1,5 @@
 @using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
 @model IEnumerable<IdentityUser>
 
 <h2>Alla användare</h2>
@@ -9,7 +10,7 @@
         <tr>
             <td>@user.UserName</td>
             <td>
-                @if(!(await Context.GetUserManager<IdentityUser>().IsInRoleAsync(user, "Admin")))
+                @if(!(await UserManager.IsInRoleAsync(user, "Admin")))
                 {
                     <a href="@Url.Action("AssignAdminRole", new { userId = user.Id })">Gör till Admin</a>
                 }
@@ -21,3 +22,4 @@
         </tr>
     }
 </table>
+
