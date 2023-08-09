@@ -97,6 +97,7 @@ namespace DotNetCoreSqlDb.Controllers
         {
             if (ModelState.IsValid)
             {
+                site.LastUpdatedDate = DateTime.Now;
                 _context.Add(site);
                 await _context.SaveChangesAsync();
                 await _cache.RemoveAsync(_SiteItemsCacheKey);
@@ -137,6 +138,7 @@ namespace DotNetCoreSqlDb.Controllers
             {
                 try
                 {
+                    site.LastUpdatedDate = DateTime.Now;
                     _context.Update(site);
                     await _context.SaveChangesAsync();
                     await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));

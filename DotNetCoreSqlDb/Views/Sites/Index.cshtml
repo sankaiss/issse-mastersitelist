@@ -4,7 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Master Site list</h2>
+<h2>Master Site list - <span class="lastUpdated">Senast uppdaterad: @Model.Max(m => m.LastUpdatedDate)</span></h2>
+
 
 <p>
     <a asp-action="Create">Lägg till en ny site</a>
