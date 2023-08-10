@@ -41,3 +41,7 @@ html {
   background-color: #ffffff; /* Vit bakgrundsfärg */
   min-height: 100vh; /* Minsta höjden av viewport */
 }
+
+.overflow-auto {
+  overflow: auto;
+}
