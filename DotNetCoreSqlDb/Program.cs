@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
 using DotNetCoreSqlDb.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configuration
+builder.Configuration
+    .AddAzureAppConfiguration();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<MyDatabaseContext>();
@@ -31,16 +35,16 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.AddHttpClient();
 
-var keyVaultUrl = builder.Configuration["AzureKeyVaultEndpoint"];
-var client = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
-KeyVaultSecret sendGridKey = client.GetSecret("SendGridApiKey");
-string sendGridApiKey = sendGridKey.Value;
-
 builder.Services.AddSingleton<ISendGridClient>(x => 
-    new SendGridClient(new SendGridClientOptions
+{
+    var configuration = x.GetRequiredService<IConfiguration>();
+    var sendGridApiKey = configuration["SendGridApiKey"];
+    
+    return new SendGridClient(new SendGridClientOptions
     {
         ApiKey = sendGridApiKey
-    }));
+    });
+});
 
 
 builder.Services.AddTransient<IEmailService, EmailService>();

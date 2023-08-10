@@ -1,5 +1,3 @@
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
 using Microsoft.Extensions.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -14,13 +12,7 @@ namespace DotNetCoreSqlDb.Services
 
         public EmailService(IConfiguration configuration)
         {
-            var keyVaultUrl = configuration.GetValue<string>("AzureKeyVaultEndpoint");
-            var managedIdentityCredential = new ManagedIdentityCredential();
-            var client = new SecretClient(new Uri(keyVaultUrl), managedIdentityCredential);
-
-            KeyVaultSecret sendGridKey = client.GetSecret("SendGridApiKey");
-            string sendGridApiKey = sendGridKey.Value;
-
+            string sendGridApiKey = configuration["SendGridApiKey"];
             _sendGridClient = new SendGridClient(sendGridApiKey);
         }
 
