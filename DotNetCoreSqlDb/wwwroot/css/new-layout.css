@@ -1,0 +1,45 @@
+/* Anpassade stilar för den nya layouten */
+
+/* Top section */
+.top-section {
+    background-color: #333;
+    color: white;
+}
+
+/* Middle section */
+.middle-section {
+    background-color: #f0f0f0;
+}
+
+/* Logotyp */
+.navbar-brand {
+    font-size: 24px;
+}
+
+/* Kolumnstilar */
+.left-column,
+.right-column {
+    background-color: blue;
+    color: white;
+}
+
+.middle-column {
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+/* Bottom section */
+.bottom-section {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    padding: 10px 0; /* Lägg till lite mellanrum */
+    text-align: center;
+    color: gray;
+}
+
+/* Övriga stilar (behåll som den var) */
