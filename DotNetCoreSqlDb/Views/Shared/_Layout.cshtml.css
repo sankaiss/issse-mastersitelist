@@ -30,6 +30,7 @@
   overflow-x: auto;
 }
 
+/* Bottom section */
 .bottom-section {
   position: fixed;
   left: 0;
@@ -38,6 +39,7 @@
   background-color: #f0f0f0;
   padding: 10px 0; /* Lägg till lite mellanrum */
   text-align: center;
+  color: gray;
 }
 
 /* Övriga stilar (behåll som den var) */
