@@ -59,12 +59,6 @@ body {
   background-color: #f0f0f0;
 }
 
-.container {
-  display: flex;
-  justify-content: stretch; /* Sträck kolumnerna över hela bredden */
-  background-color: #f0f0f0;
-}
-
 .left-column {
   flex: 0 0 10%; /* Använd en fast bredd för vänster kolumn */
   background-color: blue;
