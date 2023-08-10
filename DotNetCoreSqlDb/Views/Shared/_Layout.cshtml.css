@@ -8,65 +8,36 @@
 
 /* Middle section */
 .middle-section {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   background-color: #f0f0f0;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-}
-
-/* Navigeringsmeny */
-.nav-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-.nav-menu li {
-  margin-right: 20px;
-}
-
 /* Logotyp */
-.logo {
+.navbar-brand {
   font-size: 24px;
 }
 
-main {
-  flex-grow: 1;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-}
-
+/* Kolumnstilar */
 .left-column,
 .right-column {
-  width: 20%;
   background-color: blue;
-  /* Anpassa efter dina behov */
+  color: white;
 }
 
 .middle-column {
-  flex: 1;
   background-color: white;
   padding: 20px;
   box-sizing: border-box;
   overflow-x: auto;
 }
 
-/* Bottom section */
 .bottom-section {
-  position: absolute;
+  position: fixed;
+  left: 0;
   bottom: 0;
   width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+  background-color: #f0f0f0;
+  padding: 10px 0; /* Lägg till lite mellanrum */
+  text-align: center;
 }
 
 /* Övriga stilar (behåll som den var) */

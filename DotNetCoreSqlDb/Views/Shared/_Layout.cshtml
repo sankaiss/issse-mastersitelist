@@ -6,52 +6,53 @@
     <title>@ViewData["Title"] - ISSSE Master Site List</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/_Layout.cshtml.cs" asp-append-version="true" /> <!-- Lägg till den nya CSS-filen -->
+    <link rel="stylesheet" href="~/css/new-layout.css" asp-append-version="true" /> <!-- Lägg till den nya CSS-filen -->
 </head>
 <body>
-    <div class="top-section">
-        <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Logotyp</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-action="Index" asp-controller="Sites">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-controller="Home" asp-action="Info">Info</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="IPPlan" asp-action="Index">IP Planer</a>
-                            </li>
-                        </ul>
-                    </div>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Logotyp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-action="Index" asp-controller="Sites">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Home" asp-action="Info">Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="IPPlan" asp-action="Index">IP Planer</a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-        </header>
-    </div>
-    <div class="middle-section">
-        <main role="main">
-            <div class="left-column">
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 left-column">
                 <!-- Innehåll för vänster kolumn (om du har något) -->
             </div>
-            <div class="middle-column">
+            <div class="col-md-8 middle-column">
                 @RenderBody() <!-- Här kommer din vy att renderas -->
             </div>
-            <div class="right-column">
+            <div class="col-md-2 right-column">
                 <!-- Innehåll för höger kolumn (om du har något) -->
             </div>
-        </main>
+        </div>
     </div>
-    <div class="bottom-section">
-        <footer class="border-top footer text-muted">
+    
+    <footer class="border-top footer text-muted">
+        <div class="container">
             &copy; Sanel Karabegovic 2023 - ISSSE Master Site List 
-        </footer>
-    </div>
+        </div>
+    </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
