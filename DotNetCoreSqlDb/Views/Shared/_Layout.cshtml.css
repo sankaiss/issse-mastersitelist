@@ -50,3 +50,32 @@ button.accept-policy {
   font-size: 0.8em;
   color: gray;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+}
+
+.left-column {
+  width: 10%;
+  background-color: blue;
+}
+
+.middle-column {
+  width: 70%;
+  background-color: white;
+}
+
+.right-column {
+  width: 20%;
+  background-color: blue;
+}

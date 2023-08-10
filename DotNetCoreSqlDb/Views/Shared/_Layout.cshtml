@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DotNetCoreSqlDb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/_Layout.cshtml.css" asp-append-version="true" /> <!-- Lägg till detta -->
 </head>
 <body>
     <header>
@@ -37,12 +38,20 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
+    <div class="container">
+        <div class="left-column">
+            <!-- Innehåll för vänster kolumn (om du har något) -->
+        </div>
+        <div class="middle-column">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+        <div class="right-column">
+            <!-- Innehåll för höger kolumn (om du har något) -->
+        </div>
+    </div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; Sanel Karabegovic 2023 - ISSSE Master Site List 
