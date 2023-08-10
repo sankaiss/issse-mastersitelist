@@ -61,18 +61,17 @@ body {
 
 .container {
   display: flex;
-  margin-left: 0%; /* Ta bort marginalen på vänster sida */
-  margin-right: -20%; /* Ta bort marginalen på höger sida */
+  justify-content: stretch; /* Sträck kolumnerna över hela bredden */
   background-color: #f0f0f0;
 }
 
 .left-column {
-  width: 10%;
+  flex: 0 0 10%; /* Använd en fast bredd för vänster kolumn */
   background-color: blue;
 }
 
 .middle-column {
-  flex-grow: 1;
+  flex: 1; /* Använd all tillgänglig återstående plats */
   background-color: white;
   padding: 20px;
   box-sizing: border-box;
@@ -80,7 +79,7 @@ body {
 }
 
 .right-column {
-  width: 20%;
+  flex: 0 0 20%; /* Använd en fast bredd för höger kolumn */
   background-color: blue;
 }
 
