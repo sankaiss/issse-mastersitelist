@@ -50,3 +50,6 @@ html {
   max-height: calc(100vh - 150px); /* Justera höjden efter behov */
   overflow-y: auto;
 }
+.col-md-2:last-child {
+  margin-right: 0;
+}
