@@ -51,34 +51,6 @@ button.accept-policy {
   color: gray;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  background-color: #f0f0f0;
-}
-
-.container {
-  display: flex;
-  background-color: #f0f0f0;
-  flex: 1; /* Ta upp all tillgänglig höjd */
-}
-
-.left-column,
-.right-column {
-  background-color: blue;
-  flex: 0 0 10%; /* Använd en fast bredd för vänster och höger kolumn */
-}
-
-.middle-column {
-  background-color: white;
-  padding: 20px;
-  box-sizing: border-box;
-  flex: 1; /* Ta upp all tillgänglig bredd */
-  overflow-x: auto;
-}
-
 .table-container {
   overflow-x: auto; /* Tillåt horisontell rullning om tabellen blir bredare än behållaren */
 }
