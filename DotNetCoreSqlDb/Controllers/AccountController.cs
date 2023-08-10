@@ -4,6 +4,7 @@ using DotNetCoreSqlDb.Models;
 using DotNetCoreSqlDb.Services;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetCoreSqlDb.Controllers;
 
 
 public class AccountController : Controller

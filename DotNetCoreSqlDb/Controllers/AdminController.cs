@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using DotNetCoreSqlDb.Controllers;
+using DotNetCoreSqlDb.Models;
 
 [Authorize(Roles = "Admin")]
 public class AdminController : Controller
