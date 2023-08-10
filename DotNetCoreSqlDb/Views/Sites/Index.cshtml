@@ -38,37 +38,122 @@
         </p>
         <br>
         <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Ort
-                    </th>
-                    <th>
-                        Gatuadress
-                    </th>
-                    <!-- ... lägg till de andra kolumnrubrikerna här ... -->
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model) {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Ort)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Gatuadress)
-                        </td>
-                        <!-- ... lägg till de andra tabellcellerna här ... -->
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
-                            <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
-                            <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gatuadress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiteTyp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GammalAdressEfterFlytt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Leverantör)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NätverkskapacitetMbps)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NätverkskapacitetGbps)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KontaktNamn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISSKontorSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobilnr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Epostadress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WANUplink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AntalEnheter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sitestorlek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kommentarer)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gatuadress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiteTyp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GammalAdressEfterFlytt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Leverantör)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NätverkskapacitetMbps)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NätverkskapacitetGbps)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KontaktNamn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISSKontorSite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobilnr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Epostadress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WANUplink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AntalEnheter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sitestorlek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kommentarer)
+            </td>
+            <td>
+            <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
+            <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
+            <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
+</td>
+
+        </tr>
+}
+    </tbody>
+</table>
+
     </div>
     <div class="right-sidebar"></div>
 </div>
