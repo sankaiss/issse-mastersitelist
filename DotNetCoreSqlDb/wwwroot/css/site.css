@@ -50,6 +50,8 @@ html {
   max-height: calc(100vh - 150px); /* Justera höjden efter behov */
   overflow-y: auto;
 }
-.col-md-2:last-child {
-  margin-right: 0;
+
+.bg-primary {
+  background-color: #030037;
+  color: white; /* Om du vill ändra textfärgen för att vara synlig på blå bakgrund */
 }
