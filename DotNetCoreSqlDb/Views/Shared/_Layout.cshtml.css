@@ -61,29 +61,29 @@ body {
 
 .container {
   display: flex;
-  justify-content: space-between;
+  width: 100%; /* Fyll hela sidobredden */
   background-color: #f0f0f0;
+  overflow: hidden; /* Dölj eventuell overflow */
 }
 
 .left-column {
   width: 10%;
   background-color: blue;
+  flex-shrink: 0; /* Förhindra krympning av vänster kolumn */
 }
 
 .middle-column {
-  width: 70%;
+  flex-grow: 1; /* Få mellersta kolumnen att expandera så mycket som möjligt */
   background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-x: auto;
 }
 
 .right-column {
   width: 20%;
   background-color: blue;
-}
-.middle-column {
-  width: 70%;
-  background-color: white;
-  padding: 20px; /* Lägg till en inre utfyllnad för att separera tabellen från kanterna */
-  box-sizing: border-box; /* Se till att padding inte ökar elementets totala bredd */
+  flex-shrink: 0; /* Förhindra krympning av höger kolumn */
 }
 
 .table-container {
