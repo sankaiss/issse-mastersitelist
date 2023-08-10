@@ -9,6 +9,7 @@
 </head>
 <body>
     <header>
+     
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Logotyp</a>
@@ -32,12 +33,12 @@
         </nav>
     </header>
     
-    <div class="container-fluid">
+<div class="container-fluid">
         <div class="row">
             <div class="col-md-2 bg-primary text-white">
                 <!-- Innehåll för vänster kolumn (om du har något) -->
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 bg-light">
                 @RenderBody() <!-- Här kommer din vy att renderas -->
             </div>
             <div class="col-md-2 bg-primary text-white">
@@ -46,7 +47,7 @@
         </div>
     </div>
     
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-light">
         <div class="container">
             &copy; Sanel Karabegovic 2023 - ISSSE Master Site List 
         </div>

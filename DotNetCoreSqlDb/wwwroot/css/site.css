@@ -36,3 +36,8 @@ html {
   text-align: center;
   color: gray;
 }
+
+.col-md-8 {
+  background-color: #ffffff; /* Vit bakgrundsfärg */
+  min-height: 100vh; /* Minsta höjden av viewport */
+}
