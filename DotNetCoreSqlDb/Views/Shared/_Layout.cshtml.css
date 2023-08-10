@@ -79,3 +79,13 @@ body {
   width: 20%;
   background-color: blue;
 }
+.middle-column {
+  width: 70%;
+  background-color: white;
+  padding: 20px; /* Lägg till en inre utfyllnad för att separera tabellen från kanterna */
+  box-sizing: border-box; /* Se till att padding inte ökar elementets totala bredd */
+}
+
+.table-container {
+  overflow-x: auto; /* Tillåt horisontell rullning om tabellen blir bredare än behållaren */
+}
