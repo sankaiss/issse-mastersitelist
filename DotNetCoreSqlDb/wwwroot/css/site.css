@@ -45,3 +45,8 @@ html {
 .overflow-auto {
   overflow: auto;
 }
+
+.scrollable-content {
+  max-height: calc(100vh - 150px); /* Justera höjden efter behov */
+  overflow-y: auto;
+}
