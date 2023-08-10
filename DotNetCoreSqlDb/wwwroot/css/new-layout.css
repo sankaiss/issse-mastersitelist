@@ -21,13 +21,15 @@
 .right-column {
     background-color: blue;
     color: white;
+    padding: 10px; /* Lägg till padding */
 }
 
 .middle-column {
     background-color: white;
-    padding: 20px;
     box-sizing: border-box;
     overflow-x: auto;
+    padding: 20px; /* Lägg till padding */
+    margin: 0; /* Ta bort marginaler */
 }
 
 /* Bottom section */
