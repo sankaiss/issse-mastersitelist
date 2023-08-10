@@ -25,3 +25,14 @@ html {
   font-size: 0.4em;
   color: gray;
 }
+
+.bottom-section {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 10px 0; /* Lägg till lite mellanrum */
+  text-align: center;
+  color: gray;
+}
