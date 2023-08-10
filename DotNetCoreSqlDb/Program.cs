@@ -15,8 +15,7 @@ using Microsoft.Extensions.Hosting;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuration
-builder.Configuration
-    .AddAzureAppConfiguration();
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<MyDatabaseContext>();
