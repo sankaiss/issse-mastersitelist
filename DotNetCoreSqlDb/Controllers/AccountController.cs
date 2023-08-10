@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using DotNetCoreSqlDb.Models;
 using DotNetCoreSqlDb.Services;
+using System.Linq;
+using System.Threading.Tasks;
 
 
 public class AccountController : Controller
@@ -65,6 +67,36 @@ public class AccountController : Controller
     return View(model);
     }
 
+
+    [HttpGet]
+    public IActionResult Login()
+    {
+    return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginViewModel model)
+    {
+    if (ModelState.IsValid)
+    {
+        var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+        if (result.Succeeded)
+        {
+            // Inloggning lyckades
+            return RedirectToAction("Index", "Home"); // Ersätt med önskad vy och controller
+        }
+        ModelState.AddModelError(string.Empty, "Inloggning misslyckades");
+    }
+
+    return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+    await _signInManager.SignOutAsync();
+    return RedirectToAction("Index", "Home"); // Ersätt med önskad vy och controller
+    }
 
 
     [HttpPost]
