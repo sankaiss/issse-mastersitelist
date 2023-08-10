@@ -59,22 +59,24 @@ body {
   background-color: #f0f0f0;
 }
 
-.left-column {
-  flex: 0 0 10%; /* Använd en fast bredd för vänster kolumn */
+.container {
+  display: flex;
+  background-color: #f0f0f0;
+  flex: 1; /* Ta upp all tillgänglig höjd */
+}
+
+.left-column,
+.right-column {
   background-color: blue;
+  flex: 0 0 10%; /* Använd en fast bredd för vänster och höger kolumn */
 }
 
 .middle-column {
-  flex: 1; /* Använd all tillgänglig återstående plats */
   background-color: white;
   padding: 20px;
   box-sizing: border-box;
+  flex: 1; /* Ta upp all tillgänglig bredd */
   overflow-x: auto;
-}
-
-.right-column {
-  flex: 0 0 20%; /* Använd en fast bredd för höger kolumn */
-  background-color: blue;
 }
 
 .table-container {
