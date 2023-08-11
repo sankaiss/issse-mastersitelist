@@ -15,14 +15,16 @@ public class AccountController : Controller
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly IEmailService _emailService;
     private readonly ILogger<AccountController> _logger;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
 
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailService emailService, ILogger<AccountController> logger)
+    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailService emailService, ILogger<AccountController> logger, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _emailService = emailService;
         _logger = logger;
+        _roleManager = roleManager;
     }
 
 public IActionResult Register()
@@ -161,6 +163,18 @@ public IActionResult Register()
 
             if (result.Succeeded)
             {
+                // Efter framgångsrik skapande av användare, tilldela "User" rollen till den nya användaren
+                var addToRoleResult = await _userManager.AddToRoleAsync(user, "User");
+                if (!addToRoleResult.Succeeded)
+                {
+                    // Hantera eventuella fel som kan uppstå när du lägger till en roll till användaren
+                    foreach (var error in addToRoleResult.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View(model);
+                }
+
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("index", "home");
             }
