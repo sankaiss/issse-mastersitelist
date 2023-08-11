@@ -54,44 +54,38 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
     {
-    _logger.LogInformation("Påbörjar återställningsprocessen för lösenord.");
-
     if (!ModelState.IsValid)
     {
-        _logger.LogWarning("ModelState är inte giltig vid återställning av lösenord.");
         return View(model);
     }
 
     var user = await _userManager.FindByIdAsync(model.UserId);
     if (user == null)
     {
-        _logger.LogError("Användare hittades inte vid återställning av lösenord.");
         return View("Error"); 
     }
 
     var resetPasswordResult = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
     if (resetPasswordResult.Succeeded)
-    {
-        _logger.LogInformation("Lösenord återställning lyckades. Försöker omdirigera till ResetPasswordConfirmation vy.");
-        
+    {        
         try 
         {
             return RedirectToAction("PasswordResetSuccess", "Account");
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            _logger.LogError($"Ett undantag inträffade vid omdirigering: {ex.Message}. StackTrace: {ex.StackTrace}");
             return View("Error");
         }
     }
 
     foreach (var error in resetPasswordResult.Errors)
     {
-        _logger.LogError($"Återställningsfel: {error.Description}");
+        // Detta kommer att visa alla fel relaterade till lösenordskravet till användaren.
         ModelState.AddModelError(string.Empty, error.Description);
     }
     return View(model);
     }
+
 
     [HttpGet]
     public IActionResult Login()
