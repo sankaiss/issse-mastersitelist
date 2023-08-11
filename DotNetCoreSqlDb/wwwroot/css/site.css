@@ -22,7 +22,7 @@ html {
  /*} */
 
 .lastUpdated {
-  font-size: 0.4em;
+  font-size: 0.8em;
   color: gray;
 }
 
@@ -60,10 +60,6 @@ html {
   font-size: 12px; /* Justera storleken efter dina preferenser */
 }
 
-.nav-link-custom {
-  color: #030037;
-  font-weight: bold;
-}
 .main_h1 {
 	font-size: 36px;
 	line-height: 40px;
