@@ -118,7 +118,7 @@ public class AccountController : Controller
     public async Task<IActionResult> Logout()
     {
     await _signInManager.SignOutAsync();
-    return RedirectToAction("Index", "Account"); // Ersätt med önskad vy och controller
+    return RedirectToAction("Login", "Account"); // Ersätt med önskad vy och controller
     }
 
 
