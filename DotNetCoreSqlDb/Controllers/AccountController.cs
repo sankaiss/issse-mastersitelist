@@ -93,7 +93,7 @@ public class AccountController : Controller
         if (result.Succeeded)
         {
             // Inloggning lyckades
-            return RedirectToAction("Index", "Home"); // Ersätt med önskad vy och controller
+            return RedirectToAction("Index", "Sites"); 
         }
         ModelState.AddModelError(string.Empty, "Inloggning misslyckades");
     }
