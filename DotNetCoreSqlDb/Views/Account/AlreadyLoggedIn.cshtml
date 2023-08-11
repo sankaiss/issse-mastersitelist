@@ -1,0 +1,11 @@
+@{
+    ViewData["Title"] = "Already Logged In";
+}
+
+<h2>Du är inloggad</h2>
+
+<p>Om du vill logga ut kan du klicka på knappen nedan.</p>
+
+<form asp-action="Logout" asp-controller="Account" method="post">
+    <button type="submit" class="btn btn-danger">Logga ut</button>
+</form>

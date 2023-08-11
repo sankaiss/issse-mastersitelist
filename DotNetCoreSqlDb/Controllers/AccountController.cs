@@ -90,7 +90,11 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Login()
     {
-    return View();
+        if (_signInManager.IsSignedIn(User))
+        {
+            return View("AlreadyLoggedIn");
+        }
+        return View();
     }
 
     [HttpPost]
