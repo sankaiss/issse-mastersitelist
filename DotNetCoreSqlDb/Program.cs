@@ -9,6 +9,8 @@ using SendGrid.Helpers.Mail;
 using DotNetCoreSqlDb.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using DotNetCoreSqlDb.Models;
+
 
 
 
