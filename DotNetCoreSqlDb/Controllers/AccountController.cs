@@ -5,6 +5,8 @@ using DotNetCoreSqlDb.Services;
 using System.Linq;
 using System.Threading.Tasks;
 using DotNetCoreSqlDb.Controllers;
+using Microsoft.Extensions.Logging;
+
 
 
 public class AccountController : Controller
@@ -19,6 +21,7 @@ public class AccountController : Controller
         _userManager = userManager;
         _signInManager = signInManager;
         _emailService = emailService;
+        _logger = logger;
     }
 
     public IActionResult Register()
@@ -44,30 +47,35 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
     {
+    _logger.LogInformation("Påbörjar återställningsprocessen för lösenord.");
+
     if (!ModelState.IsValid)
     {
+        _logger.LogWarning("ModelState är inte giltig vid återställning av lösenord.");
         return View(model);
     }
 
     var user = await _userManager.FindByIdAsync(model.UserId);
     if (user == null)
     {
-        return View("Error"); // Eller någon annan vy som säger att något gick fel
+        _logger.LogError("Användare hittades inte vid återställning av lösenord.");
+        return View("Error"); 
     }
 
     var resetPasswordResult = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
     if (resetPasswordResult.Succeeded)
     {
+        _logger.LogInformation("Lösenord återställning lyckades. Omdirigerar till ResetPasswordConfirmation vy.");
         return RedirectToAction("ResetPasswordConfirmation");
     }
-    
+
     foreach (var error in resetPasswordResult.Errors)
     {
+        _logger.LogError($"Återställningsfel: {error.Description}");
         ModelState.AddModelError(string.Empty, error.Description);
     }
     return View(model);
     }
-
 
     [HttpGet]
     public IActionResult Login()
