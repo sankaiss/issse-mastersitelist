@@ -3,7 +3,9 @@
 <h2>Register</h2>
 
 <form method="post">
+<div class="container">
     <div class="login-form">
+    <div>
         <label>Email</label>
         <input asp-for="Email" />
     </div>
@@ -29,4 +31,6 @@
             <li>@if (ViewBag.RequireNonAlphanumeric) { <span>Innehålla minst ett icke-alfanumeriskt tecken (t.ex. !, $, #, %).</span> }</li>
         </ul>
     </div>
+</div>
+</div>
 </form>
