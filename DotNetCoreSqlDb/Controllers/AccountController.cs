@@ -16,7 +16,7 @@ public class AccountController : Controller
     private readonly IEmailService _emailService;
 
 
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailService emailService)
+    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailService emailService, ILogger<AccountController> logger)
     {
         _userManager = userManager;
         _signInManager = signInManager;
