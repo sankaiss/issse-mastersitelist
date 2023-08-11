@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Configuration
 builder.Configuration.AddEnvironmentVariables();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<MyDatabaseContext>()
     .AddDefaultTokenProviders();
 
