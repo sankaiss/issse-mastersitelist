@@ -42,7 +42,10 @@
                             @if (SignInManager.IsSignedIn(User))
                             {
                                 <span style="color: #030037; font-weight: bold;">Hej, @User.Identity.Name!</span>
-                                <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="Account" asp-action="Logout">Logga ut</a>
+                                <form asp-controller="Account" asp-action="Logout" method="post" style="display: inline;">
+                                    <button type="submit" class="nav-link btn btn-link" style="color: #030037; font-weight: bold; padding: 0;">Logga ut</button>
+                                </form>
+
                             }
                             else
                             {
