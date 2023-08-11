@@ -55,3 +55,7 @@ html {
   background-color: #030037;
   color: white;
 }
+
+.table td, .table th {
+  font-size: 10px; /* Justera storleken efter dina preferenser */
+}
