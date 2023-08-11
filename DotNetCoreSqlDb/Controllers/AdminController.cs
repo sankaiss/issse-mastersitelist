@@ -48,4 +48,23 @@ public class AdminController : Controller
         return BadRequest();
     }
 
+    [HttpPost]
+    public async Task<IActionResult> AssignUserRole(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user != null)
+        {
+        // Ta bort alla roller (Admin och Editor) från användaren
+            var roles = await _userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, roles);
+
+        // Tilldela User-rollen
+            await _userManager.AddToRoleAsync(user, "User");
+
+        return RedirectToAction("UserList");
+        }
+    return BadRequest();
+    }
+
+
 }
