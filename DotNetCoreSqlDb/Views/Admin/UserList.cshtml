@@ -34,15 +34,15 @@
                 <td>
                     @if (!(await UserManager.IsInRoleAsync(user, "Admin")))
                     {
-                        <a href="@Url.Action("AssignAdminRole", new { userId = user.Id })" class="btn btn-warning">Gör till Admin</a>
+                        <a href="@Url.Action("AssignAdminRole", new { userId = user.Id })" class="btn btn-warning btn-sm">Gör till Admin</a>
                     }
                     @if (!(await UserManager.IsInRoleAsync(user, "Editor")))
                     {
-                        <a href="@Url.Action("AssignEditorRole", new { userId = user.Id })" class="btn btn-info">Gör till Editor</a>
+                        <a href="@Url.Action("AssignEditorRole", new { userId = user.Id })" class="btn btn-info btn-sm">Gör till Editor</a>
                     }
                     @if (!(await UserManager.IsInRoleAsync(user, "User")))
                     {
-                        <a href="@Url.Action("AssignUserRole", new { userId = user.Id })" class="btn btn-secondary">Gör till User</a>
+                        <a href="@Url.Action("AssignUserRole", new { userId = user.Id })" class="btn btn-secondary btn-sm">Gör till User</a>
                     }
                 </td>
             </tr>
