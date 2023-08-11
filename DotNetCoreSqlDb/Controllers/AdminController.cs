@@ -35,4 +35,17 @@ public class AdminController : Controller
         }
         return BadRequest();
     }
+
+    [HttpPost]
+    public async Task<IActionResult> AssignEditorRole(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user != null)
+        {
+            await _userManager.AddToRoleAsync(user, "Editor");
+            return RedirectToAction("UserList");
+        }
+        return BadRequest();
+    }
+
 }

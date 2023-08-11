@@ -4,22 +4,45 @@
 
 <h2>Alla användare</h2>
 
-<table>
-    @foreach(var user in Model)
-    {
+<table class="table table-bordered table-striped text-center">
+    <thead>
         <tr>
-            <td>@user.UserName</td>
-            <td>
-                @if(!(await UserManager.IsInRoleAsync(user, "Admin")))
-                {
-                    <a href="@Url.Action("AssignAdminRole", new { userId = user.Id })">Gör till Admin</a>
-                }
-                else
-                {
-                    <span>Admin</span>
-                }
-            </td>
+            <th>Användarnamn</th>
+            <th>Roll</th>
+            <th>Åtgärder</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>
+                    @if(await UserManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        <span>Admin</span>
+                    }
+                    else if(await UserManager.IsInRoleAsync(user, "Editor"))
+                    {
+                        <span>Editor</span>
+                    }
+                    else
+                    {
+                        <span>-</span>
+                    }
+                </td>
+                <td>
+                    @if(!(await UserManager.IsInRoleAsync(user, "Admin")))
+                    {
+                        <a href="@Url.Action("AssignAdminRole", new { userId = user.Id })" class="btn btn-primary btn-sm">Gör till Admin</a>
+                    }
+                    @if(!(await UserManager.IsInRoleAsync(user, "Editor")))
+                    {
+                        <a href="@Url.Action("AssignEditorRole", new { userId = user.Id })" class="btn btn-warning btn-sm">Gör till Editor</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
