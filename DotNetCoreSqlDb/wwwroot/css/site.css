@@ -71,3 +71,12 @@ html {
 	position: relative;
 	color: #030037;
 }
+.login-form {
+  width: 50%;
+  max-width: 400px; /* Du kan justera detta beroende på dina önskemål */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
