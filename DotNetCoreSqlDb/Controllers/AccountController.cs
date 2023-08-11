@@ -66,8 +66,17 @@ public class AccountController : Controller
     var resetPasswordResult = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
     if (resetPasswordResult.Succeeded)
     {
-        _logger.LogInformation("Lösenord återställning lyckades. Omdirigerar till ResetPasswordConfirmation vy.");
-        return RedirectToAction("ResetPasswordConfirmation");
+        _logger.LogInformation("Lösenord återställning lyckades. Försöker omdirigera till ResetPasswordConfirmation vy.");
+        
+        try 
+        {
+            return RedirectToAction("ResetPasswordConfirmation");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Ett undantag inträffade vid omdirigering: {ex.Message}. StackTrace: {ex.StackTrace}");
+            return View("Error");
+        }
     }
 
     foreach (var error in resetPasswordResult.Errors)
