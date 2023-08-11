@@ -25,10 +25,20 @@ public class AccountController : Controller
         _logger = logger;
     }
 
-    public IActionResult Register()
-    {
-        return View();
-    }
+public IActionResult Register()
+{
+    // Hämta lösenordskraven från UserManager
+    var passwordPolicy = _userManager.Options.Password;
+
+    // Lägg till kraven i ViewBag för att skicka dem till vyn
+    ViewBag.PasswordLengthRequirement = passwordPolicy.RequiredLength;
+    ViewBag.RequireDigit = passwordPolicy.RequireDigit;
+    ViewBag.RequireUppercase = passwordPolicy.RequireUppercase;
+    ViewBag.RequireLowercase = passwordPolicy.RequireLowercase;
+    ViewBag.RequireNonAlphanumeric = passwordPolicy.RequireNonAlphanumeric;
+
+    return View();
+}
 
     public IActionResult ForgotPassword()
     {

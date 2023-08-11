@@ -10,6 +10,27 @@
     <div>
         <label>Password</label>
         <input asp-for="Password" />
+
+        <div class="password-requirements">
+            <p>Password must be at least @ViewBag.PasswordLengthRequirement characters long.</p>
+            @if (ViewBag.RequireDigit)
+            {
+                <p>Password must contain at least one digit.</p>
+            }
+            @if (ViewBag.RequireUppercase)
+            {
+                <p>Password must contain at least one uppercase letter.</p>
+            }
+            @if (ViewBag.RequireLowercase)
+            {
+                <p>Password must contain at least one lowercase letter.</p>
+            }
+            @if (ViewBag.RequireNonAlphanumeric)
+            {
+                <p>Password must contain at least one non-alphanumeric character (e.g., !, $, #, %).</p>
+            }
+        </div>
+
     </div>
     <div>
         <label>Confirm Password</label>
