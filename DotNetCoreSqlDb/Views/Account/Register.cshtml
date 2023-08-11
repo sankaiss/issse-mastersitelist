@@ -6,15 +6,19 @@
 <div class="container">
     <div class="login-form">
     <div>
-        <label>Email</label>
+    <label>Ditt Namn:</label>
+    <input asp-for="FullName" required />
+    </div>
+    <div>
+        <label>Email:</label>
         <input asp-for="Email" />
     </div>
     <div>
-        <label>Password</label>
+        <label>Password:</label>
         <input asp-for="Password" />
     </div>
     <div>
-        <label>Confirm Password</label>
+        <label>Confirm Password:</label>
         <input asp-for="ConfirmPassword" />
     </div>
     <div>

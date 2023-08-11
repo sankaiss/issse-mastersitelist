@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DotNetCoreSqlDb.Data
 {
-    public class MyDatabaseContext : IdentityDbContext
+    public class MyDatabaseContext : IdentityDbContext<ApplicationUser>
     {
         public MyDatabaseContext (DbContextOptions<MyDatabaseContext> options)
             : base(options)
