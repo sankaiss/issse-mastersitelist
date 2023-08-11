@@ -51,7 +51,7 @@ html {
   overflow-y: auto;
 }
 
-.bg-primary {
+.left-column, .right-column {
   background-color: #030037;
-  color: white; /* Om du vill ändra textfärgen för att vara synlig på blå bakgrund */
+  color: white;
 }

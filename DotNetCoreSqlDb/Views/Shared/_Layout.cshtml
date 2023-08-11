@@ -12,7 +12,7 @@
      
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Logotyp</a>
+                <img src="~/images/issse-logo.jpg" alt="ISS logo" style="vertical-align: middle;">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -35,7 +35,7 @@
     
 <div class="container-fluid d-flex flex-column" style="height: 100vh;">
         <div class="row flex-grow-1">
-            <div class="col-md-1 bg-primary text-white">
+            <div class="col-md-1 left-column">
                 <!-- Innehåll för vänster kolumn (om du har något) -->
             </div>
             <div class="col-md-10 bg-light">
@@ -43,7 +43,7 @@
                     @RenderBody() <!-- Här kommer din vy att renderas -->
                 </div>
             </div>
-            <div class="col-md-1 bg-primary text-white">
+            <div class="col-md-1 right-column">
                 <!-- Innehåll för höger kolumn (om du har något) -->
             </div>
         </div>
