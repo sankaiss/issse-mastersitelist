@@ -40,6 +40,12 @@ public class AccountController : Controller
     return View();
     }
 
+    public IActionResult PasswordResetSuccess()
+    {
+    return View();
+    }
+
+
     public IActionResult ResetPassword(string userId, string token)
     {
     return View();
@@ -70,7 +76,7 @@ public class AccountController : Controller
         
         try 
         {
-            return RedirectToAction("ResetPasswordConfirmation");
+            return RedirectToAction("PasswordResetSuccess", "Account");
         }
         catch (Exception ex)
         {
