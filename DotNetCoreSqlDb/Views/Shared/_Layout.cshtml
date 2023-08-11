@@ -50,6 +50,13 @@
                         <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="Account" asp-action="Login">Logga in</a>
                     }
                 </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="Admin" asp-action="UserList">Användarlista</a>
+                        </li>
+                    }
+
             </ul>
         </div>
     </div>
