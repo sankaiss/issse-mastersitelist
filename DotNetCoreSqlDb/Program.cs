@@ -19,6 +19,7 @@ builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<MyDatabaseContext>();
+    .AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
