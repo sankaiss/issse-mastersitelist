@@ -3,34 +3,13 @@
 <h2>Register</h2>
 
 <form method="post">
-    <div>
+    <div class="login-form">
         <label>Email</label>
         <input asp-for="Email" />
     </div>
     <div>
         <label>Password</label>
         <input asp-for="Password" />
-
-        <div class="password-requirements">
-            <p>Password must be at least @ViewBag.PasswordLengthRequirement characters long.</p>
-            @if (ViewBag.RequireDigit)
-            {
-                <p>Password must contain at least one digit.</p>
-            }
-            @if (ViewBag.RequireUppercase)
-            {
-                <p>Password must contain at least one uppercase letter.</p>
-            }
-            @if (ViewBag.RequireLowercase)
-            {
-                <p>Password must contain at least one lowercase letter.</p>
-            }
-            @if (ViewBag.RequireNonAlphanumeric)
-            {
-                <p>Password must contain at least one non-alphanumeric character (e.g., !, $, #, %).</p>
-            }
-        </div>
-
     </div>
     <div>
         <label>Confirm Password</label>
@@ -38,5 +17,16 @@
     </div>
     <div>
         <button type="submit">Register</button>
+    </div>
+    
+    <div class="password-requirements">
+        <p>Lösenordskrav:</p>
+        <ul>
+            <li>Minst @ViewBag.PasswordLengthRequirement tecken långt.</li>
+            <li>@if (ViewBag.RequireDigit) { <span>Innehålla minst en siffra.</span> }</li>
+            <li>@if (ViewBag.RequireUppercase) { <span>Innehålla minst en versal.</span> }</li>
+            <li>@if (ViewBag.RequireLowercase) { <span>Innehålla minst en gemen.</span> }</li>
+            <li>@if (ViewBag.RequireNonAlphanumeric) { <span>Innehålla minst ett icke-alfanumeriskt tecken (t.ex. !, $, #, %).</span> }</li>
+        </ul>
     </div>
 </form>

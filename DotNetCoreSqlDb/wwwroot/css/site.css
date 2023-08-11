@@ -80,3 +80,23 @@ html {
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+
+.password-requirements {
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.password-requirements p {
+  margin-bottom: 5px;
+}
+
+.password-requirements ul {
+  padding-left: 20px;
+}
+
+.password-requirements li:before {
+  content: '•';
+  margin-right: 5px;
+}
