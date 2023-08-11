@@ -59,3 +59,8 @@ html {
 .table td, .table th {
   font-size: 12px; /* Justera storleken efter dina preferenser */
 }
+
+.nav-link-custom {
+  color: #030037;
+  font-weight: bold;
+}
