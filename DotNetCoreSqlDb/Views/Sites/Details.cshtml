@@ -106,8 +106,8 @@
 <div>
     @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
         {
-            <a asp-action="Edit" asp-route-id="@Model?.ID">Redigera</a> |
+            <a asp-action="Edit" asp-route-id="@Model?.ID">Redigera</a>  
         }
-
+        | 
             <a asp-action="Index">Tillbaka</a>
 </div>
