@@ -9,9 +9,12 @@ using DotNetCoreSqlDb;
 using DotNetCoreSqlDb.Data;
 using DotNetCoreSqlDb.Models;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetCoreSqlDb.Controllers
 {
+    [ActionTimerFilter]
+    [Authorize]
     [ActionTimerFilter]
     public class SitesController : Controller
     {

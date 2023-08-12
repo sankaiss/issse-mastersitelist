@@ -11,9 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using DotNetCoreSqlDb.Models;
 
-
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuration
@@ -48,7 +45,6 @@ builder.Services.AddSingleton<ISendGridClient>(x =>
     });
 });
 
-
 builder.Services.AddTransient<IEmailService, EmailService>();
 
 // Add database context and cache
@@ -81,6 +77,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// IMPORTANT ADDITIONS
+app.UseAuthentication();
 app.UseAuthorization();
 
 using var serviceScope = app.Services.CreateScope();
