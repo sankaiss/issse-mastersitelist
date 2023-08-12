@@ -6,14 +6,16 @@
     ViewData["Title"] = "IP Planer";
 }
 
-<h1>IP Planer</h1>
+<h1 class="main_h1">IP Planer</h1>
+<br>
 
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
 {
 <p>
-    <a asp-action="Create">Lägg till</a>
+    <a asp-action="Create" class="add-new-site-btn">Lägg till</a>
 </p>
 }
+<br>
 <table class="table">
     <thead>
         <tr>

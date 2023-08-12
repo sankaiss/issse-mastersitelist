@@ -4,8 +4,6 @@
     ViewData["Title"] = "Ta bort IP Plan";
 }
 
-<h2>Ta bort</h2>
-
 <h3>Är du säker på att du vill radera?</h3>
 <div>
     <h4>IP Plan</h4>
@@ -59,6 +57,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Radera" class="btn btn-danger" /> |
-        <a asp-action="Index">Tillbaka</a>
+        <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
     </form>
 </div>
