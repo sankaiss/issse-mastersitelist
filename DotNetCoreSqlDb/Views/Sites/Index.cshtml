@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<DotNetCoreSqlDb.Models.Site>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -12,10 +14,12 @@
 </span>
 <br>
 <br>
-
+@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+{
 <p>
     <a asp-action="Create">Lägg till en ny site</a>
 </p>
+}
 <br>
 <table class="table">
     <thead>
@@ -118,9 +122,13 @@
                 @Html.DisplayFor(modelItem => item.Kommentarer)
             </td>
             <td>
-            <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
             <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
-            <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
+
+            @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+            {
+                <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
+            }
 </td>
 
         </tr>

@@ -4,49 +4,52 @@
 
 <h2>Alla användare</h2>
 
-<table class="table table-bordered table-striped text-center">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
+            <th>Ditt Namn</th>
             <th>Användarnamn</th>
-            <th>Rolle</th>
+            <th>Roller</th>
             <th>Ändra roll</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in Model)
+        @foreach(var user in Model)
         {
             <tr>
+                <td>@user.FullName</td>
                 <td>@user.UserName</td>
                 <td>
-                    @if (await UserManager.IsInRoleAsync(user, "Admin"))
+                    @if(await UserManager.IsInRoleAsync(user, "Admin"))
                     {
-                        <span>Admin</span>
+                        <span class="badge bg-success">Admin</span>
                     }
-                    else if (await UserManager.IsInRoleAsync(user, "Editor"))
+                    else if(await UserManager.IsInRoleAsync(user, "Editor"))
                     {
-                        <span>Editor</span>
+                        <span class="badge bg-warning">Editor</span>
                     }
                     else
                     {
-                        <span>User</span>
+                        <span class="badge bg-secondary">User</span>
                     }
                 </td>
                 <td>
-                    @if (!(await UserManager.IsInRoleAsync(user, "Admin")))
+                    @if(!(await UserManager.IsInRoleAsync(user, "Admin")))
                     {
-                        <a href="@Url.Action("AssignAdminRole", new { userId = user.Id })" class="btn btn-warning btn-sm">Gör till Admin</a>
+                        <a onclick="return confirm('Är du säker på att du vill tilldela Admin rollen?');" href="@Url.Action("AssignAdminRole", new { userId = user.Id })" class="btn btn-primary btn-sm">Gör till Admin</a>
                     }
-                    @if (!(await UserManager.IsInRoleAsync(user, "Editor")))
+
+                    @if(!(await UserManager.IsInRoleAsync(user, "Editor")))
                     {
-                        <a href="@Url.Action("AssignEditorRole", new { userId = user.Id })" class="btn btn-info btn-sm">Gör till Editor</a>
+                        <a onclick="return confirm('Är du säker på att du vill tilldela Editor rollen?');" href="@Url.Action("AssignEditorRole", new { userId = user.Id })" class="btn btn-warning btn-sm">Gör till Editor</a>
                     }
-                    @if (!(await UserManager.IsInRoleAsync(user, "User")))
+
+                    @if(!(await UserManager.IsInRoleAsync(user, "User")))
                     {
-                        <a href="@Url.Action("AssignUserRole", new { userId = user.Id })" class="btn btn-secondary btn-sm">Gör till User</a>
+                        <a onclick="return confirm('Är du säker på att du vill tilldela User rollen?');" href="@Url.Action("AssignUserRole", new { userId = user.Id })" class="btn btn-secondary btn-sm">Gör till User</a>
                     }
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
