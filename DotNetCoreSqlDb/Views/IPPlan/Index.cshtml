@@ -6,76 +6,67 @@
     ViewData["Title"] = "IP Planer";
 }
 
-<h1>IP Planer</h1>
+<!-- Header with a modern look -->
+<span class="main_h1"> IP Planer </span>
 
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
 {
-<p>
-    <a asp-action="Create">Lägg till</a>
-</p>
+    <!-- Stylish button to add an IP Plan -->
+    <p class="add-button-container">
+        <a asp-action="Create" class="add-button">Lägg till</a>
+    </p>
 }
-<table class="table">
+
+<!-- Table with modern and compact design -->
+<table class="styled-table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nät)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mask)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MGMT)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WLAN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LAN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Site)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GammalSite)
-            </th>
-         
+            <th>@Html.DisplayNameFor(model => model.Nät)</th>
+            <th>@Html.DisplayNameFor(model => model.Mask)</th>
+            <th>@Html.DisplayNameFor(model => model.MGMT)</th>
+            <th>@Html.DisplayNameFor(model => model.WLAN)</th>
+            <th>@Html.DisplayNameFor(model => model.LAN)</th>
+            <th>@Html.DisplayNameFor(model => model.Site)</th>
+            <th>@Html.DisplayNameFor(model => model.GammalSite)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nät)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mask)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MGMT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WLAN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LAN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Site)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GammalSite)
-            </td>
-            
-            <td>
-                <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
-             @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-                {   
-                    <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
-                }
-            </td>
-        </tr>
-}
+        @foreach (var item in Model) 
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Nät)</td>
+                <td>@Html.DisplayFor(modelItem => item.Mask)</td>
+                <td>@Html.DisplayFor(modelItem => item.MGMT)</td>
+                <td>@Html.DisplayFor(modelItem => item.WLAN)</td>
+                <td>@Html.DisplayFor(modelItem => item.LAN)</td>
+                <td>@Html.DisplayFor(modelItem => item.Site)</td>
+                <td>@Html.DisplayFor(modelItem => item.GammalSite)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                    {   
+                        <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<!-- DataTable Initialization script as before -->
+<script>
+    $(document).ready(function () {
+        $('.styled-table').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "compact": true
+        });
+    });
+</script>
