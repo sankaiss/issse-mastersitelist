@@ -1,112 +1,81 @@
 @model IEnumerable<DotNetCoreSqlDb.Models.IPPlan>
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
 
 @{
     ViewData["Title"] = "IP Planer";
 }
 
-<!-- Direct Styles -->
-<style>
-    .add-new-site-btn {
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: #FFF;
-        border: none;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-    }
-
-    .add-new-site-btn:hover {
-        background-color: #0056b3;
-        text-decoration: none;
-        color: #FFF;
-    }
-
-    .table {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: auto;
-        border-collapse: collapse;
-        background-color: #fff;
-    }
-
-    .table th, .table td {
-        border: 1px solid #e5e5e5;
-        padding: 8px 12px;
-        text-align: center;
-    }
-
-    .table thead {
-        background-color: #f7f7f7;
-    }
-</style>
-
-
-
-<!-- Header with a modern look -->
-<span class="main_h1"> IP Planer </span>
+<h1>IP Planer</h1>
 
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
 {
-    <!-- Stylish button to add an IP Plan -->
-    <p class="add-button-container">
-        <a asp-action="Create" class="add-button">Lägg till</a>
-    </p>
+<p>
+    <a asp-action="Create">Lägg till</a>
+</p>
 }
-
-<!-- Table with modern and compact design -->
-<table class="styled-table">
+<table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Nät)</th>
-            <th>@Html.DisplayNameFor(model => model.Mask)</th>
-            <th>@Html.DisplayNameFor(model => model.MGMT)</th>
-            <th>@Html.DisplayNameFor(model => model.WLAN)</th>
-            <th>@Html.DisplayNameFor(model => model.LAN)</th>
-            <th>@Html.DisplayNameFor(model => model.Site)</th>
-            <th>@Html.DisplayNameFor(model => model.GammalSite)</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nät)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mask)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MGMT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WLAN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LAN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Site)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GammalSite)
+            </th>
+         
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) 
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Nät)</td>
-                <td>@Html.DisplayFor(modelItem => item.Mask)</td>
-                <td>@Html.DisplayFor(modelItem => item.MGMT)</td>
-                <td>@Html.DisplayFor(modelItem => item.WLAN)</td>
-                <td>@Html.DisplayFor(modelItem => item.LAN)</td>
-                <td>@Html.DisplayFor(modelItem => item.Site)</td>
-                <td>@Html.DisplayFor(modelItem => item.GammalSite)</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
-                    @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-                    {   
-                        <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
-                        <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
-                    }
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nät)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mask)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MGMT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WLAN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LAN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Site)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GammalSite)
+            </td>
+            
+            <td>
+                <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
+             @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                {   
+                    <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                }
+            </td>
+        </tr>
+}
     </tbody>
 </table>
-
-<!-- DataTable Initialization script as before -->
-<script>
-    $(document).ready(function () {
-        $('.styled-table').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "compact": true
-        });
-    });
-</script>
