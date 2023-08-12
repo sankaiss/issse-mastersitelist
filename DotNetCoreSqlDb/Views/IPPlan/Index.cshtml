@@ -1,11 +1,14 @@
 @model IEnumerable<DotNetCoreSqlDb.Models.IPPlan>
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 
 @{
     ViewData["Title"] = "IP Planer";
 }
-<link rel="stylesheet" href="/css/site.css" />
+<link rel="stylesheet" asp-append-version="true" asp-href="~/css/site.css" />
+
 
 
 <!-- Header with a modern look -->
