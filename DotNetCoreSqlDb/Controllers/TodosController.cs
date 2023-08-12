@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetCoreSqlDb.Controllers
 {
-    [ActionTimerFilter]
+  
     [Authorize]
     [ActionTimerFilter]
     public class SitesController : Controller
