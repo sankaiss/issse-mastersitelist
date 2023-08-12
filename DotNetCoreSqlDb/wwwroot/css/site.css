@@ -73,7 +73,7 @@ html {
 }
 .login-form {
   width: 70%;
-  max-width: 400px; /* Du kan justera detta beroende på dina önskemål */
+  max-width: 500px; /* Du kan justera detta beroende på dina önskemål */
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
