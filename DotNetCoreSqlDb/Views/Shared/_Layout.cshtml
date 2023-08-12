@@ -34,9 +34,14 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="Home" asp-action="Info">Info</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="IPPlan" asp-action="Index">IP Planer</a>
-                </li>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="IPPlan" asp-action="Index">IP Planer</a>
+                    </li>
+                }
+
                 <li class="nav-item" style="display: flex; align-items: center;">
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -49,17 +54,18 @@
                         <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="Account" asp-action="Login">Logga in</a>
                     }
                 </li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="Admin" asp-action="UserList">Användarlista</a>
-                        </li>
-                    }
 
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="Admin" asp-action="UserList">Användarlista</a>
+                    </li>
+                }
             </ul>
         </div>
     </div>
 </nav>
+
 
 
 
