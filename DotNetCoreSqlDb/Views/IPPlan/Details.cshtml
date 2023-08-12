@@ -1,4 +1,6 @@
 @model DotNetCoreSqlDb.Models.IPPlan
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Detaljer";
@@ -56,6 +58,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ID">Redigera</a> |
+@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+{
+    <a asp-action="Edit" asp-route-id="@Model?.ID">Redigera</a>
+}
     <a asp-action="Index">Tillbaka</a>
 </div>
