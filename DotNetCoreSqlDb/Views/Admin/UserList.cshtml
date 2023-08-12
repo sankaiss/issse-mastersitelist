@@ -38,22 +38,37 @@
                 <td>
                     @if(!(await UserManager.IsInRoleAsync(user, "Admin")))
                     {
-                        <a onclick="return confirm('Är du säker på att du vill tilldela Admin rollen?');" href="@Url.Action("AssignAdminRole", new { userId = user.Id })" class="btn btn-primary btn-sm">Gör till Admin</a>
+                        <form method="post" action="@Url.Action("AssignAdminRole")">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Är du säker på att du vill tilldela Admin rollen?');">
+                                Gör till Admin
+                            </button>
+                        </form>
                     }
 
                     @if(!(await UserManager.IsInRoleAsync(user, "Editor")))
                     {
-                        <a onclick="return confirm('Är du säker på att du vill tilldela Editor rollen?');" href="@Url.Action("AssignEditorRole", new { userId = user.Id })" class="btn btn-warning btn-sm">Gör till Editor</a>
+                        <form method="post" action="@Url.Action("AssignEditorRole")">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Är du säker på att du vill tilldela Editor rollen?');">
+                                Gör till Editor
+                            </button>
+                        </form>
                     }
 
                     @if(!(await UserManager.IsInRoleAsync(user, "User")))
                     {
-                        <a onclick="return confirm('Är du säker på att du vill tilldela User rollen?');" href="@Url.Action("AssignUserRole", new { userId = user.Id })" class="btn btn-secondary btn-sm">Gör till User</a>
+                        <form method="post" action="@Url.Action("AssignUserRole")">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-secondary btn-sm" onclick="return confirm('Är du säker på att du vill tilldela User rollen?');">
+                                Gör till User
+                            </button>
+                        </form>
                     }
                 </td>
                 <td>
-                <a onclick="return confirm('Är du säker på att du vill radera denna användare?');" href="@Url.Action("DeleteUser", "Admin", new { userId = user.Id })" class="btn btn-danger btn-sm">Radera</a>
-            </td>
+                    <a onclick="return confirm('Är du säker på att du vill radera denna användare?');" href="@Url.Action("DeleteUser", "Admin", new { userId = user.Id })" class="btn btn-danger btn-sm">Radera</a>
+                </td>
             </tr>
         }
     </tbody>
