@@ -2,21 +2,22 @@
 @inject UserManager<ApplicationUser> UserManager
 @model IEnumerable<ApplicationUser>
 
-<h2>Alla användare</h2>
+<h2>Användarlista</h2>
 
 <table class="table table-bordered table-striped">
     <thead>
-        <tr>
+        <tr class="text-center">
             <th>Ditt Namn</th>
             <th>Användarnamn</th>
             <th>Roller</th>
             <th>Ändra roll</th>
+            <th>Åtgärder</th>
         </tr>
     </thead>
     <tbody>
         @foreach(var user in Model)
         {
-            <tr>
+            <tr class="text-center">
                 <td>@user.FullName</td>
                 <td>@user.UserName</td>
                 <td>
@@ -49,6 +50,9 @@
                         <a onclick="return confirm('Är du säker på att du vill tilldela User rollen?');" href="@Url.Action("AssignUserRole", new { userId = user.Id })" class="btn btn-secondary btn-sm">Gör till User</a>
                     }
                 </td>
+                <td>
+                <a onclick="return confirm('Är du säker på att du vill radera denna användare?');" href="@Url.Action("DeleteUser", "Admin", new { userId = user.Id })" class="btn btn-danger btn-sm">Radera</a>
+            </td>
             </tr>
         }
     </tbody>

@@ -1,4 +1,6 @@
 ﻿@model DotNetCoreSqlDb.Models.Site
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Siteinfo";
@@ -102,6 +104,10 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ID">Redigera</a> |
-    <a asp-action="Index">Tillbaka</a>
+    @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model?.ID">Redigera</a> |
+        }
+
+            <a asp-action="Index">Tillbaka</a>
 </div>

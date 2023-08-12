@@ -1,4 +1,6 @@
 @model IEnumerable<DotNetCoreSqlDb.Models.IPPlan>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "IP Planer";
@@ -6,9 +8,12 @@
 
 <h1>IP Planer</h1>
 
+@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+{
 <p>
     <a asp-action="Create">Lägg till</a>
 </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -63,9 +68,12 @@
             </td>
             
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
                 <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
-                <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
+             @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                {   
+                    <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                }
             </td>
         </tr>
 }

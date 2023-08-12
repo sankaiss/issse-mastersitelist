@@ -49,6 +49,26 @@ public class AdminController : Controller
     }
 
     [HttpPost]
+    public async Task<IActionResult> DeleteUser(string userId)
+    {
+    var user = await _userManager.FindByIdAsync(userId);
+    if (user != null)
+    {
+        var result = await _userManager.DeleteAsync(user);
+        if (result.Succeeded)
+        {
+            return RedirectToAction("UserList");
+        }
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError("", error.Description);
+        }
+    }
+    return RedirectToAction("UserList");
+    }
+
+
+    [HttpPost]
     public async Task<IActionResult> AssignUserRole(string userId)
     {
         var user = await _userManager.FindByIdAsync(userId);
