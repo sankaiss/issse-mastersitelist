@@ -19,6 +19,11 @@
     @inject SignInManager<ApplicationUser> SignInManager
     @inject UserManager<ApplicationUser> UserManager
 
+    @{
+    var user = await UserManager.GetUserAsync(User);
+    var fullName = user?.FullName;
+    }
+
     <header>
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-light">
     <div class="container-fluid">
@@ -62,6 +67,14 @@
                     </li>
                 }
             </ul>
+
+             @if (SignInManager.IsSignedIn(User))
+                {
+                    <span class="navbar-text" style="color: #030037; font-weight: bold;">
+                Välkommen, @fullName
+                    </span>
+                }
+
         </div>
     </div>
 </nav>
