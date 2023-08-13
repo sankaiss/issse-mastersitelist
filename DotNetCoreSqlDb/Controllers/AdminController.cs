@@ -30,6 +30,9 @@ public class AdminController : Controller
         var user = await _userManager.FindByIdAsync(userId);
         if (user != null)
         {
+            var roles = await _userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, roles);
+
             await _userManager.AddToRoleAsync(user, "Admin");
             return RedirectToAction("UserList");
         }
@@ -42,7 +45,25 @@ public class AdminController : Controller
         var user = await _userManager.FindByIdAsync(userId);
         if (user != null)
         {
+            var roles = await _userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, roles);
+
             await _userManager.AddToRoleAsync(user, "Editor");
+            return RedirectToAction("UserList");
+        }
+        return BadRequest();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AssignUserRole(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user != null)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, roles);
+
+            await _userManager.AddToRoleAsync(user, "User");
             return RedirectToAction("UserList");
         }
         return BadRequest();
@@ -51,40 +72,19 @@ public class AdminController : Controller
     [HttpPost]
     public async Task<IActionResult> DeleteUser(string userId)
     {
-    var user = await _userManager.FindByIdAsync(userId);
-    if (user != null)
-    {
-        var result = await _userManager.DeleteAsync(user);
-        if (result.Succeeded)
-        {
-            return RedirectToAction("UserList");
-        }
-        foreach (var error in result.Errors)
-        {
-            ModelState.AddModelError("", error.Description);
-        }
-    }
-    return RedirectToAction("UserList");
-    }
-
-
-    [HttpPost]
-    public async Task<IActionResult> AssignUserRole(string userId)
-    {
         var user = await _userManager.FindByIdAsync(userId);
         if (user != null)
         {
-        // Ta bort alla roller (Admin och Editor) från användaren
-            var roles = await _userManager.GetRolesAsync(user);
-            await _userManager.RemoveFromRolesAsync(user, roles);
-
-        // Tilldela User-rollen
-            await _userManager.AddToRoleAsync(user, "User");
-
-        return RedirectToAction("UserList");
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("UserList");
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
         }
-    return BadRequest();
+        return RedirectToAction("UserList");
     }
-
-
 }
