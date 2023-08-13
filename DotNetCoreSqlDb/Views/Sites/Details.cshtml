@@ -6,108 +6,77 @@
     ViewData["Title"] = "Siteinfo";
 }
 
-<h2>Siteinfo</h2>
+<h2 class="main_h1">Siteinfo</h2>
+
+<table class="table table-bordered table-striped" style="width: 50%; margin: auto;">
+    <tbody>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Ort)</th>
+            <td>@Html.DisplayFor(model => model.Ort)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Gatuadress)</th>
+            <td>@Html.DisplayFor(model => model.Gatuadress)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.SiteTyp)</th>
+            <td>@Html.DisplayFor(model => model.SiteTyp)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.GammalAdressEfterFlytt)</th>
+            <td>@Html.DisplayFor(model => model.GammalAdressEfterFlytt)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Leverantör)</th>
+            <td>@Html.DisplayFor(model => model.Leverantör)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <td>@Html.DisplayFor(model => model.Status)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.NätverkskapacitetMbps)</th>
+            <td>@Html.DisplayFor(model => model.NätverkskapacitetMbps)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.KontaktNamn)</th>
+            <td>@Html.DisplayFor(model => model.KontaktNamn)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ISSKontorSite)</th>
+            <td>@Html.DisplayFor(model => model.ISSKontorSite)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Mobilnr)</th>
+            <td>@Html.DisplayFor(model => model.Mobilnr)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Epostadress)</th>
+            <td>@Html.DisplayFor(model => model.Epostadress)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.WANUplink)</th>
+            <td>@Html.DisplayFor(model => model.WANUplink)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.AntalEnheter)</th>
+            <td>@Html.DisplayFor(model => model.AntalEnheter)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Sitestorlek)</th>
+            <td>@Html.DisplayFor(model => model.Sitestorlek)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Kommentarer)</th>
+            <td>@Html.DisplayFor(model => model.Kommentarer)</td>
+        </tr>
+    </tbody>
+</table>
 
 <div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ort)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ort)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gatuadress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gatuadress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SiteTyp)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SiteTyp)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GammalAdressEfterFlytt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GammalAdressEfterFlytt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Leverantör)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Leverantör)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NätverkskapacitetMbps)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NätverkskapacitetMbps)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KontaktNamn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KontaktNamn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ISSKontorSite)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ISSKontorSite)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Mobilnr)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Mobilnr)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Epostadress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Epostadress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WANUplink)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WANUplink)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AntalEnheter)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AntalEnheter)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Sitestorlek)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Sitestorlek)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Kommentarer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Kommentarer)
-        </dd>
-    </dl>
-</div>
-<div>
     @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-        {
-            <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.ID">Redigera</a>  
-        }
-         
-            <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
+    {
+        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.ID">Redigera</a>
+    }
+    <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
 </div>
