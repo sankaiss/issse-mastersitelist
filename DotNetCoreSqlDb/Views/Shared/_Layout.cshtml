@@ -57,6 +57,7 @@
                     else
                     {
                         <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="Account" asp-action="Login">Logga in</a>
+                        <a class="nav-link" style="color: #030037; font-weight: bold;" asp-controller="Account" asp-action="Register">Registrera</a>
                     }
                 </li>
 
@@ -68,16 +69,16 @@
                 }
             </ul>
 
-             @if (SignInManager.IsSignedIn(User))
-                {
-                    <span class="navbar-text" style="color: #030037; font-weight: bold;">
-                Välkommen, @fullName
-                    </span>
-                }
-
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <span class="navbar-text" style="color: #030037; font-weight: bold;">
+                    Välkommen, @fullName
+                </span>
+            }
         </div>
     </div>
 </nav>
+
 
 
 
