@@ -58,7 +58,9 @@
                     </form>
                 </td>
                 <td>
-                    <a onclick="return confirm('Är du säker på att du vill radera denna användare?');" href="@Url.Action("DeleteUser", "Admin", new { userId = user.Id })" class="btn btn-danger btn-sm">Radera</a>
+                    <form method="post" action="@Url.Action("DeleteUser", "Admin", new { userId = user.Id })" onsubmit="return confirm('Är du säker på att du vill radera denna användare?');">
+                        <button type="submit" class="btn btn-danger btn-sm">Radera</button>
+                    </form>
                 </td>
             </tr>
         }
