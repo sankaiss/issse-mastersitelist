@@ -1,7 +1,7 @@
 @model DotNetCoreSqlDb.Models.IPPlan
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Redigera";
 }
 
 <h2 class="main_h1">Redigera</h2>
@@ -11,55 +11,57 @@
 <div class="container">
     <div class="login-form">
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
-            <div class="form-group">
-                <label asp-for="Nät" class="control-label"></label>
-                <input asp-for="Nät" class="form-control" />
-                <span asp-validation-for="Nät" class="text-danger"></span>
+        <div class="row">
+            <div class="col-md-6"> 
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ID" />
+                    <div class="form-group">
+                        <label asp-for="Nät" class="control-label"></label>
+                        <input asp-for="Nät" class="form-control" style="width:100%;" />
+                        <span asp-validation-for="Nät" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Mask" class="control-label"></label>
+                        <input asp-for="Mask" class="form-control" style="width:100%;" />
+                        <span asp-validation-for="Mask" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MGMT" class="control-label"></label>
+                        <input asp-for="MGMT" class="form-control" style="width:100%;" />
+                        <span asp-validation-for="MGMT" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WLAN" class="control-label"></label>
+                        <input asp-for="WLAN" class="form-control" style="width:100%;" />
+                        <span asp-validation-for="WLAN" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LAN" class="control-label"></label>
+                        <input asp-for="LAN" class="form-control" style="width:100%;" />
+                        <span asp-validation-for="LAN" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Site" class="control-label"></label>
+                        <input asp-for="Site" class="form-control" style="width:100%;" />
+                        <span asp-validation-for="Site" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="GammalSite" class="control-label"></label>
+                        <input asp-for="GammalSite" class="form-control" style="width:100%;" />
+                        <span asp-validation-for="GammalSite" class="text-danger"></span>
+                    </div>
+                  
+                    <div class="form-group mb-3">
+                        <input type="submit" value="Spara" class="btn btn-primary mr-2" />
+                        <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Mask" class="control-label"></label>
-                <input asp-for="Mask" class="form-control" />
-                <span asp-validation-for="Mask" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MGMT" class="control-label"></label>
-                <input asp-for="MGMT" class="form-control" />
-                <span asp-validation-for="MGMT" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WLAN" class="control-label"></label>
-                <input asp-for="WLAN" class="form-control" />
-                <span asp-validation-for="WLAN" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LAN" class="control-label"></label>
-                <input asp-for="LAN" class="form-control" />
-                <span asp-validation-for="LAN" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Site" class="control-label"></label>
-                <input asp-for="Site" class="form-control" />
-                <span asp-validation-for="Site" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="GammalSite" class="control-label"></label>
-                <input asp-for="GammalSite" class="form-control" />
-                <span asp-validation-for="GammalSite" class="text-danger"></span>
-            </div>
-          
-            <div class="form-group mb-3">
-                <input type="submit" value="Spara" class="btn btn-primary" /><a asp-action="Index" class="btn btn-primary">Tillbaka</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-</div>
-</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

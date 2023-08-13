@@ -8,57 +8,39 @@
 
 <h2 class="main_h1">Plan info</h2>
 
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Nät)</th>
+            <td>@Html.DisplayFor(model => model.Nät)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Mask)</th>
+            <td>@Html.DisplayFor(model => model.Mask)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.MGMT)</th>
+            <td>@Html.DisplayFor(model => model.MGMT)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.WLAN)</th>
+            <td>@Html.DisplayFor(model => model.WLAN)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.LAN)</th>
+            <td>@Html.DisplayFor(model => model.LAN)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Site)</th>
+            <td>@Html.DisplayFor(model => model.Site)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.GammalSite)</th>
+            <td>@Html.DisplayFor(model => model.GammalSite)</td>
+        </tr>
+    </tbody>
+</table>
 
-
-<div>
-
- 
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nät)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nät)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Mask)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Mask)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MGMT)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MGMT)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WLAN)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WLAN)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LAN)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LAN)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Site)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Site)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GammalSite)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GammalSite)
-        </dd>
-       
-    </dl>
-</div>
 <div>
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
 {

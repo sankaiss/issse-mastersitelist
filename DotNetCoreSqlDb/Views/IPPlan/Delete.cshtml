@@ -4,59 +4,49 @@
     ViewData["Title"] = "Ta bort IP Plan";
 }
 
-<h3>Är du säker på att du vill radera?</h3>
+<h3 class="main_h1">Är du säker på att du vill radera?</h3>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <tbody>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Nät)</th>
+                <td>@Html.DisplayFor(model => model.Nät)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Mask)</th>
+                <td>@Html.DisplayFor(model => model.Mask)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.MGMT)</th>
+                <td>@Html.DisplayFor(model => model.MGMT)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.WLAN)</th>
+                <td>@Html.DisplayFor(model => model.WLAN)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.LAN)</th>
+                <td>@Html.DisplayFor(model => model.LAN)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Site)</th>
+                <td>@Html.DisplayFor(model => model.Site)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.GammalSite)</th>
+                <td>@Html.DisplayFor(model => model.GammalSite)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 <div>
-    <h4>IP Plan</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nät)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nät)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Mask)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Mask)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MGMT)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MGMT)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WLAN)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WLAN)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LAN)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LAN)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Site)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Site)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GammalSite)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GammalSite)
-        </dd>
-  
-    </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
-        <input type="submit" value="Radera" class="btn btn-danger" />
-        <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
+        <div class="mt-2">
+            <input type="submit" value="Radera" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-primary ml-2">Tillbaka</a>
+        </div>
     </form>
 </div>
