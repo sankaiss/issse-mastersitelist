@@ -141,3 +141,7 @@ html {
 .wide-input {
   width: 100%;
 }
+
+.custom-navbar-color {
+  background-color: #030037 !important; 
+}
