@@ -17,29 +17,20 @@ html {
   min-height: 100%;
 }
 
- /*body { */
-   /*margin-bottom: 60px; */
- /*} */
-
-.lastUpdated {
-  font-size: 0.8em;
-  color: gray;
-}
-
 .footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   background-color: #f0f0f0;
-  padding: 10px 0; /* Lägg till lite mellanrum */
+  padding: 10px 0; 
   text-align: center;
   color: gray;
 }
 
 .col-md-8 {
-  background-color: #ffffff; /* Vit bakgrundsfärg */
-  min-height: 100vh; /* Minsta höjden av viewport */
+  background-color: #ffffff; 
+  min-height: 100vh;
 }
 
 .overflow-auto {
@@ -47,7 +38,7 @@ html {
 }
 
 .scrollable-content {
-  max-height: calc(100vh - 150px); /* Justera höjden efter behov */
+  max-height: calc(100vh - 150px);
   overflow-y: auto;
 }
 
@@ -57,12 +48,12 @@ html {
 }
 
 .table td, .table th {
-  font-size: 12px; /* Justera storleken efter dina preferenser */
+  font-size: 12px; 
 }
 
 .login-form {
   width: 70%;
-  max-width: 500px; /* Du kan justera detta beroende på dina önskemål */
+  max-width: 500px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -92,11 +83,11 @@ html {
   margin-right: 5px;
 }
 .main_h1 {
-  font-size: 24px; /* Öka storlek om nödvändigt */
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #333; /* Du kan ändra till önskad färg */
-  display: inline-block; /* Lägg till detta */
+  color: #333; 
+  display: inline-block;
 }
 
 .lastUpdated {
@@ -122,21 +113,21 @@ html {
 }
 
 .table {
-  width: 100%; /* Se till att den tar hela bredden */
-  max-width: 100%; /* Begränsa bredden till förälderns bredd */
-  overflow-x: auto; /* Lägg till horisontell scrollbar om nödvändigt */
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
   border-collapse: collapse;
   background-color: #fff;
 }
 
 .table th, .table td {
-  border: 1px solid #e5e5e5; /* Diskret grå border */
-  padding: 8px 12px; /* Minskar vaddering för kompakt utseende */
-  text-align: center; /* Centrerar innehållet */
+  border: 1px solid #e5e5e5; 
+  padding: 8px 12px; 
+  text-align: center; 
 }
 
 .table thead {
-  background-color: #f7f7f7; /* Ljusgrå bakgrund i tabellhuvud */
+  background-color: #f7f7f7;
 }
 .wide-input {
   width: 100%;
