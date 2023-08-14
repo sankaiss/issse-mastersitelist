@@ -136,3 +136,9 @@ html {
 .custom-navbar-color {
   background-color: #030037 !important; 
 }
+
+.fixed-form {
+  position: relative; 
+  left: 0; 
+  margin-left: 20px; 
+}
