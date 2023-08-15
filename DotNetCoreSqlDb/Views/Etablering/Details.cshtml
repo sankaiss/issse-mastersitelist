@@ -1,0 +1,90 @@
+@model DotNetCoreSqlDb.Models.Etablering
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Etablering</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KontorSite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KontorSite)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AteaKonsult)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AteaKonsult)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gatuadress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gatuadress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Postnr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Postnr)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ort)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ort)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ISSKontaktperson)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ISSKontaktperson)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EpostISSKontaktperson)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TelefonISSKontaktperson)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TeliaUppkoppling)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeliaUppkoppling)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OvrigInfo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OvrigInfo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KlartSenast)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KlartSenast)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

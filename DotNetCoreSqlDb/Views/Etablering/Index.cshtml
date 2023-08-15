@@ -1,0 +1,101 @@
+@model IEnumerable<DotNetCoreSqlDb.Models.Etablering>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KontorSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AteaKonsult)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gatuadress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Postnr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISSKontaktperson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeliaUppkoppling)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OvrigInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KlartSenast)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KontorSite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AteaKonsult)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gatuadress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postnr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISSKontaktperson)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EpostISSKontaktperson)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelefonISSKontaktperson)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeliaUppkoppling)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OvrigInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KlartSenast)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

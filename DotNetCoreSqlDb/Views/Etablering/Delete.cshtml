@@ -1,0 +1,93 @@
+@model DotNetCoreSqlDb.Models.Etablering
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Etablering</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KontorSite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KontorSite)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AteaKonsult)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AteaKonsult)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gatuadress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gatuadress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Postnr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Postnr)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ort)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ort)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ISSKontaktperson)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ISSKontaktperson)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EpostISSKontaktperson)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TelefonISSKontaktperson)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TeliaUppkoppling)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TeliaUppkoppling)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OvrigInfo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OvrigInfo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KlartSenast)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KlartSenast)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
