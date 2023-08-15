@@ -2,197 +2,151 @@
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
 
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ISS SE Network MasterSite list</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ISS SE Network</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Hem</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Integritetspolicy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            <h1 class="main_h1">ISS SE Network MasterSite list</h1>
-            @{
-                var localLastUpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(Model.Max(m => m.LastUpdatedDate), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
-            }
-            <span class="lastUpdated"> - Senast uppdaterad: @localLastUpdatedDate.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE"))</span>
-            <br>
-            <br>
+@{
+    var localLastUpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(Model.Max(m => m.LastUpdatedDate), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
+}
+
+<h1 class="main_h1">ISS SE Network MasterSite list</h1>
+<span class="lastUpdated"> - Senast uppdaterad: @localLastUpdatedDate.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE"))</span>
+<br>
+<br>
+@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+{
+    <p>
+        <a asp-action="Create" class="add-new-site-btn">Lägg till en ny site</a>
+    </p>
+}
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gatuadress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiteTyp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GammalAdressEfterFlytt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Leverantör)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NätverkskapacitetMbps)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KontaktNamn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISSKontorSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobilnr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Epostadress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WANUplink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AntalEnheter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sitestorlek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kommentarer)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gatuadress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiteTyp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GammalAdressEfterFlytt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Leverantör)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NätverkskapacitetMbps)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KontaktNamn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISSKontorSite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobilnr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Epostadress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WANUplink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AntalEnheter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sitestorlek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kommentarer)
+            </td>
+            <td>
+            <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
+
             @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
             {
-                <p>
-                    <a asp-action="Create" class="add-new-site-btn">Lägg till en ny site</a>
-                </p>
+                <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
             }
-            <br>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            <a href="#" class="sort-link" data-column="Ort">Ort</a>
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Gatuadress)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.SiteTyp)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.GammalAdressEfterFlytt)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Leverantör)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Status)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NätverkskapacitetMbps)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.KontaktNamn)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ISSKontorSite)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Mobilnr)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Epostadress)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.WANUplink)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.AntalEnheter)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Sitestorlek)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Kommentarer)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model) {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Ort)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Gatuadress)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SiteTyp)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.GammalAdressEfterFlytt)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Leverantör)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NätverkskapacitetMbps)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.KontaktNamn)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ISSKontorSite)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Mobilnr)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Epostadress)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.WANUplink)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AntalEnheter)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Sitestorlek)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Kommentarer)
-                            </td>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
-                                @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-                                {
-                                    <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </main>
-    </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - ISS SE Network - <a asp-area="" asp-controller="Home" asp-action="Privacy">Integritetspolicy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.table').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-                "compact": true
-            });
+</td>
 
-            $('.sort-link').on('click', function () {
-                var column = $(this).data('column');
-                $('.table').DataTable().order([[$('.table th').index($(this).parent()), 'asc']]).draw();
-            });
+        </tr>
+}
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $('.table').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "compact": true
         });
-    </script>
-</body>
-</html>
+    });
+</script>
