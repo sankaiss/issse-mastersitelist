@@ -3,16 +3,16 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Pågående Etableringar";
 }
 
-<h1 class="main_h1">Index</h1>
+<h1 class="main_h1">Pågående Etableringar</h1>
 <br>
 <br>
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
 {
 <p>
-    <a asp-action="Create">Skapa en ny</a>
+    <a asp-action="Create" class="add-new-site-btn">Skapa en ny</a>
 </p>
 }
 <br>
