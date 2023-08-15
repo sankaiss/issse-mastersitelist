@@ -1,14 +1,14 @@
 @model DotNetCoreSqlDb.Models.Etablering
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detaljer pågående etablering";
 }
 
-<h1>Details</h1>
+<h2 class="main_h1">Etablering</h2>
 
 <div>
-    <h4>Etablering</h4>
-    <hr />
+    
+
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.KontorSite)
@@ -85,6 +85,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+{
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Redigera</a> 
+}
+    <a asp-action="Index">Tillbaka</a>
 </div>
