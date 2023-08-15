@@ -26,7 +26,7 @@
     <thead>
         <tr>
             <th>
-                <a href="#" class="sort-link" data-column="Ort">Ort</a>
+                @Html.DisplayNameFor(model => model.Ort)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Gatuadress)
@@ -148,11 +148,5 @@
             "responsive": true,
             "compact": true
         });
-
-        $('.sort-link').on('click', function () {
-            var column = $(this).data('column');
-            $('.table').DataTable().order([[$('.table th').index($(this).parent()), 'asc']]).draw();
-        });
-
     });
 </script>
