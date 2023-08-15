@@ -1,15 +1,22 @@
 @model IEnumerable<DotNetCoreSqlDb.Models.Etablering>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<h1 class="main_h1">Index</h1>
+<br>
+<br>
+@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+{
 <p>
     <a asp-action="Create">Skapa en ny</a>
 </p>
-<table class="table">
+}
+<br>
+<table class="table" id="myTable">
     <thead>
         <tr>
             <th>
@@ -99,3 +106,20 @@
 }
     </tbody>
 </table>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Swedish.json"
+            },
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "compact": true
+        });
+    });
+</script>
