@@ -11,8 +11,13 @@
     var localLastUpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(Model.Max(m => m.LastUpdatedDate), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
 }
 
+@{
+    int totalCount = Model.Count();
+}
+
+
 <h1 class="main_h1">ISS SE Network MasterSite list</h1>
-<span class="lastUpdated"> - Senast uppdaterad: @localLastUpdatedDate.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE"))</span>
+<span class="lastUpdated"> - Senast uppdaterad: @localLastUpdatedDate.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE"))</span><span class="totalCount"> - Totalt antal siter: @totalCount</span>
 <br>
 <br>
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
