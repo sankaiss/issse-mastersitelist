@@ -136,8 +136,10 @@ namespace DotNetCoreSqlDb.Controllers
                 Gatuadress = site.Gatuadress,
                 Ort = site.Ort,
                 ISSKontaktperson = site.KontaktNamn,
-                EpostISSKontaktperson = site.Epostadress
-        
+                EpostISSKontaktperson = site.Epostadress,
+                KontorSite = site.SiteTyp,
+                TelefonISSKontaktperson = site.Mobilnr,
+                TeliaUppkoppling = site.WANUplink
             });
         }
 
