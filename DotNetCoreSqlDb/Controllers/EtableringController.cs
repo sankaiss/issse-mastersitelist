@@ -134,7 +134,7 @@ namespace DotNetCoreSqlDb.Controllers
             return Json(new
             {
                 Gatuadress = site.Gatuadress,
-                Ort = site.Ort
+                Ort = site.Ort,
                 ISSKontaktperson = site.KontaktNamn
         
             });
