@@ -147,3 +147,6 @@ html {
   margin-left: auto;
   margin-right: auto;
 }
+.custom-label-space {
+  padding-right: 0;
+}
