@@ -103,8 +103,8 @@
                         data: { id: siteId },
                         success: function(data) {
                             if(data) {
-                                $('#Gatuadress').val(data.Gatuadress);
-                                $('#Ort').val(data.Ort);
+                                $('#Gatuadress').val(data.gatuadress);
+                                $('#Ort').val(data.ort);
                                 // Fortsätt och sätt alla andra fält baserat på den returnerade datan
                             } else {
                                 alert('Ingen data hittades för angiven Site ID.');
