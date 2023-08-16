@@ -135,7 +135,8 @@ namespace DotNetCoreSqlDb.Controllers
             {
                 Gatuadress = site.Gatuadress,
                 Ort = site.Ort,
-                ISSKontaktperson = site.KontaktNamn
+                ISSKontaktperson = site.KontaktNamn,
+                ISSKontaktperson = site.Epostadress
         
             });
         }
