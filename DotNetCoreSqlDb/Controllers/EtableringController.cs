@@ -119,6 +119,25 @@ namespace DotNetCoreSqlDb.Controllers
             return View(etablering);
         }
 
+        [HttpGet]
+        public IActionResult GetSiteData(int id)
+        {
+            var site = _context.Sites.FirstOrDefault(s => s.ID == id);
+
+            if (site == null)
+            {
+                return NotFound();
+            }
+
+            return Json(new
+            {
+                Gatuadress = site.Gatuadress,
+                Ort = site.Ort
+        
+            });
+}
+
+
         // GET: Etablering/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
