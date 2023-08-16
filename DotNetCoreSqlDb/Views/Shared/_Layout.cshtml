@@ -81,16 +81,18 @@
                 }
             </ul>
 
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    var user = await UserManager.GetUserAsync(User);
-                    var roleNames = await UserManager.GetRolesAsync(user);
-                    var roleName = roleNames.FirstOrDefault();
-                    <span class="navbar-text" style="color: #ffffff; font-weight: bold;">
-                        Välkommen, @fullName - Inloggad som: @roleName
-                    </span>
-                }
+            @{
+                var userRoles = await UserManager.GetRolesAsync(await UserManager.GetUserAsync(User));
+                var userRole = userRoles.FirstOrDefault(); 
+            }
 
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <span class="navbar-text" style="color: #ffffff; font-weight: bold;">
+                    Välkommen, @fullName
+                </span>
+            }
         </div>
     </div>
 </nav>
