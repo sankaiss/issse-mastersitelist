@@ -122,7 +122,7 @@ namespace DotNetCoreSqlDb.Controllers
         [HttpGet]
         public IActionResult GetSiteData(int id)
         {
-            var site = _context.Sites.FirstOrDefault(s => s.ID == id);
+            var site = _context.Site.FirstOrDefault(s => s.ID == id);
 
             if (site == null)
             {
@@ -135,7 +135,7 @@ namespace DotNetCoreSqlDb.Controllers
                 Ort = site.Ort
         
             });
-}
+        }
 
 
         // GET: Etablering/Delete/5
