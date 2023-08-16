@@ -129,6 +129,8 @@ namespace DotNetCoreSqlDb.Controllers
                 return NotFound();
             }
 
+            Response.Headers["Cache-Control"] = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0";
+            Response.Headers["X-Content-Type-Options"] = "nosniff";
             return Json(new
             {
                 Gatuadress = site.Gatuadress,
