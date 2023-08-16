@@ -81,12 +81,6 @@
                 }
             </ul>
 
-            @{
-                var userRoles = await UserManager.GetRolesAsync(await UserManager.GetUserAsync(User));
-                var userRole = userRoles.FirstOrDefault(); 
-            }
-
-
             @if (SignInManager.IsSignedIn(User))
             {
                 <span class="navbar-text" style="color: #ffffff; font-weight: bold;">
