@@ -93,8 +93,9 @@
     <script>
         $(document).ready(function() {
             $('#fetchSiteData').click(function() {
+                console.log("Knappklick detekterat");
                 var siteId = $('#SiteId').val();
-                
+                console.log("Site ID: " + siteId);
                 if(siteId) {
                     $.ajax({
                         url: '/Etablering/GetSiteData',
