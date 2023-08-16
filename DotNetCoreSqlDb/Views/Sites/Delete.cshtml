@@ -74,7 +74,7 @@
     </table>
     <div class="form-group mb-4"></div>
     <div>
-        <form asp-action="Delete">
+        <form asp-action="Delete" onsubmit="return confirm('Är du säker på att du vill radera?');">
             <input type="hidden" asp-for="ID" />
             <input type="submit" value="Delete" class="btn btn-danger" />
             <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
