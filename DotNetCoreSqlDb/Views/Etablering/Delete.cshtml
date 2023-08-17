@@ -82,7 +82,7 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="Delete" onsubmit="return confirm('Är du säker på att du vill radera?');">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Radera" class="btn btn-danger" /> |
         <a asp-action="Index">Tillbaka</a>
