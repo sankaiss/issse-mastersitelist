@@ -20,19 +20,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.KontorSite)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AteaKonsult)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Gatuadress)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Postnr)
+                @Html.DisplayNameFor(model => model.Ort)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ort)
+                @Html.DisplayNameFor(model => model.KontorSite)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ISSKontaktperson)
@@ -47,13 +41,19 @@
                 @Html.DisplayNameFor(model => model.TeliaUppkoppling)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OvrigInfo)
+                @Html.DisplayNameFor(model => model.AteaKonsult)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.KlartSenast)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.OvrigInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Postnr)
             </th>
             <th>Test</th>
         </tr>
@@ -62,19 +62,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.KontorSite)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AteaKonsult)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Gatuadress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Postnr)
+                @Html.DisplayFor(modelItem => item.Ort)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ort)
+                @Html.DisplayFor(modelItem => item.KontorSite)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ISSKontaktperson)
@@ -89,13 +83,19 @@
                 @Html.DisplayFor(modelItem => item.TeliaUppkoppling)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OvrigInfo)
+                @Html.DisplayFor(modelItem => item.AteaKonsult)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.KlartSenast)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.OvrigInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postnr)
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="fas fa-info-circle"></i></a>
