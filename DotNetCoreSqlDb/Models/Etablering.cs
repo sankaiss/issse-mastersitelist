@@ -11,13 +11,13 @@ namespace DotNetCoreSqlDb.Models
         public string? KontorSite { get; set; }
         public string? AteaKonsult { get; set; }
         public string? Gatuadress { get; set; }
-        public string? Postnr { get; set; }
+        public string? ÄrendeNrISS { get; set; }
         public string? Ort { get; set; }
         public string? ISSKontaktperson { get; set; }
         public string? EpostISSKontaktperson { get; set; }
         public string? TelefonISSKontaktperson { get; set; }
         public string? TeliaUppkoppling { get; set; }
-        public string? OvrigInfo { get; set; }
+        public string? ÖvrigInfo { get; set; }
         public string? KlartSenast { get; set; }
         public string? Status { get; set; }
     }
