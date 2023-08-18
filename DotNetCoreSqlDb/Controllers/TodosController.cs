@@ -262,7 +262,7 @@ namespace DotNetCoreSqlDb.Controllers
                 await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
                 await _cache.RemoveAsync(_SiteItemsCacheKey);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Archived));
         }
 
 
