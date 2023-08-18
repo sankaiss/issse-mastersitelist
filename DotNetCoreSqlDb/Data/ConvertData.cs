@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace DotNetCoreSqlDb.Data
@@ -10,7 +11,7 @@ namespace DotNetCoreSqlDb.Data
             var deserializedList = JsonSerializer.Deserialize<List<T>>(inputByteArray);
             if(deserializedList == null) 
             {
-                throw new Exception();
+                throw new InvalidOperationException("Failed to deserialize byte array to List<T>.");
             }
             return deserializedList;
         }
@@ -18,26 +19,24 @@ namespace DotNetCoreSqlDb.Data
         public static byte[] ObjectListToByteArray(List<T> inputList)
         {
             var bytes = JsonSerializer.SerializeToUtf8Bytes(inputList);
-
             return bytes;
         }
 
         public static T ByteArrayToObject(byte[] inputByteArray)
         {
-            var deserializedList = JsonSerializer.Deserialize<T>(inputByteArray);
-            if (deserializedList == null)
+            var deserializedObject = JsonSerializer.Deserialize<T>(inputByteArray);
+            if (deserializedObject == null)
             {
-                throw new Exception();
+                throw new InvalidOperationException("Failed to deserialize byte array to object.");
             }
-            return deserializedList;
+            return deserializedObject;
         }
 
         public static byte[] ObjectToByteArray(T input)
         {
             var bytes = JsonSerializer.SerializeToUtf8Bytes(input);
-
             return bytes;
         }
-
     }
 }
+
