@@ -2,16 +2,13 @@
 
 @{
     ViewData["Title"] = "Arkiverade Siter";
-}
+    DateTime? localLastUpdatedDate = null;
 
-DateTime? localLastUpdatedDate = null;
-
-if (Model.Any())
-{
-    localLastUpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(Model.Max(m => m.LastUpdatedDate), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
-}
-
-@{
+    if (Model.Any())
+    {
+        localLastUpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(Model.Max(m => m.LastUpdatedDate), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
+    }
+    
     int totalCount = Model.Count();
 }
 
