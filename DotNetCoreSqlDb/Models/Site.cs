@@ -23,6 +23,8 @@ namespace DotNetCoreSqlDb.Models
         public string? Sitestorlek { get; set; }
         public string? Kommentarer { get; set; }
         public DateTime LastUpdatedDate { get; set; }
+        public bool IsArchived { get; set; } = false;
+
 
     }
 }
