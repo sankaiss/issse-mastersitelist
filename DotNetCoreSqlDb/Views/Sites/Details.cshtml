@@ -71,3 +71,42 @@
     </tbody>
 </table>
 
+
+<div>
+    @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+    {
+        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.ID">Redigera</a>
+    }
+    <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
+</div>
+<h2>Historik</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ändringsdatum</th>
+            <th>Fält Namn</th>
+            <th>Gammalt Värde</th>
+            <th>Nytt Värde</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (Model.History != null && Model.History.Any())
+    {
+        @foreach (var entry in Model.History)
+        {
+            <tr>
+                <td>@entry.ChangedDate</td>
+                <td>@entry.FieldName</td>
+                <td>@entry.OldValue</td>
+                <td>@entry.NewValue</td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="4">Ingen historik tillgänglig</td>
+        </tr>
+    }
+    </tbody>
+</table>
