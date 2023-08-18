@@ -1,0 +1,82 @@
+@model IEnumerable<DotNetCoreSqlDb.Models.Site>
+
+@{
+    ViewData["Title"] = "Arkiverade Siter";
+}
+
+@{
+    var localLastUpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(Model.Max(m => m.LastUpdatedDate), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
+}
+
+@{
+    int totalCount = Model.Count();
+}
+
+<h1 class="main_h1">Arkiverade Siter</h1>
+<span class="lastUpdated"> - Senast uppdaterad: @localLastUpdatedDate.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE"))</span>
+<span class="lastUpdated"> - Total antal siter: @totalCount</span>
+<br>
+<br>
+
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+            Site ID
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gatuadress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiteTyp)
+            </th>
+            <th>
+                Återställ
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gatuadress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiteTyp)
+            </td>
+            <td>
+                @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                {
+                    <a asp-action="Restore" asp-route-id="@item.ID" title="Återställ" class="btn btn-primary">Återställ</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Swedish.json"
+            },
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "compact": true
+        });
+    });
+</script>

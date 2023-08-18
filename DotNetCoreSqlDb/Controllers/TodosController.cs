@@ -37,7 +37,7 @@ namespace DotNetCoreSqlDb.Controllers
             SiteListByteArray = await _cache.GetAsync(_SiteItemsCacheKey);
             if (SiteListByteArray != null && SiteListByteArray.Length > 0)
             { 
-                sites = ConvertData<Site>.ByteArrayToObjectList(SiteListByteArray);
+                sites = await _context.Site.Where(s => !s.IsArchived).ToListAsync();
             }
             else 
             {
@@ -189,13 +189,15 @@ namespace DotNetCoreSqlDb.Controllers
             var site = await _context.Site.FindAsync(id);
             if (site != null)
             {
-                _context.Site.Remove(site);
+                site.IsArchived = true;
+                _context.Update(site);
                 await _context.SaveChangesAsync();
                 await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
                 await _cache.RemoveAsync(_SiteItemsCacheKey);
             }
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool SiteExists(int id)
         {
@@ -205,7 +207,50 @@ namespace DotNetCoreSqlDb.Controllers
         private string GetSiteItemCacheKey(int? id)
         {
             return _SiteItemsCacheKey+"_&_"+id;
+            
         }
+        // GET: Sites/Archive
+        public async Task<IActionResult> Archived()
+        {
+            var archivedSites = await _context.Site.Where(s => s.IsArchived).ToListAsync();
+            return View(archivedSites);
+        }
+        
+        // GET: Sites/Restore/5
+        public async Task<IActionResult> Restore(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var site = await _context.Site.FindAsync(id);
+            if (site == null || !site.IsArchived)
+            {
+                return NotFound();
+            }
+
+            return View(site);
+        }
+
+        // POST: Sites/Restore/5
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreConfirmed(int id)
+        {
+            var site = await _context.Site.FindAsync(id);
+            if (site != null)
+            {
+                site.IsArchived = false;
+                _context.Update(site);
+                await _context.SaveChangesAsync();
+                await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
+                await _cache.RemoveAsync(_SiteItemsCacheKey);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 
     
