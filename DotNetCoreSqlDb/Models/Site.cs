@@ -24,7 +24,7 @@ namespace DotNetCoreSqlDb.Models
         public string? Kommentarer { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public bool IsArchived { get; set; } = false;
-       // public virtual ICollection<SiteHistory> History { get; set; }
+        public virtual ICollection<SiteHistory> History { get; set; }
 
 
     }
