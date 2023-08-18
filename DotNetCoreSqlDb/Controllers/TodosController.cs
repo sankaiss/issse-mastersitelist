@@ -249,7 +249,7 @@ namespace DotNetCoreSqlDb.Controllers
 
 
         // POST: Sites/Restore/5
-        [HttpPost, ActionName("Restore")]
+        [HttpPost, ActionName]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RestoreConfirmed(int id)
         {
