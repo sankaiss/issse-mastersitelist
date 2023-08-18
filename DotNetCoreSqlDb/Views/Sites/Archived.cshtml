@@ -4,8 +4,11 @@
     ViewData["Title"] = "Arkiverade Siter";
 }
 
-@{
-    var localLastUpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(Model.Max(m => m.LastUpdatedDate), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
+DateTime? localLastUpdatedDate = null;
+
+if (Model.Any())
+{
+    localLastUpdatedDate = TimeZoneInfo.ConvertTimeFromUtc(Model.Max(m => m.LastUpdatedDate), TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time"));
 }
 
 @{
@@ -13,7 +16,10 @@
 }
 
 <h1 class="main_h1">Arkiverade Siter</h1>
-<span class="lastUpdated"> - Senast uppdaterad: @localLastUpdatedDate.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE"))</span>
+<span class="lastUpdated">
+    - Senast uppdaterad: 
+    @(localLastUpdatedDate.HasValue ? localLastUpdatedDate.Value.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE")) : "Ingen uppdatering tillgänglig")
+</span>
 <span class="lastUpdated"> - Total antal siter: @totalCount</span>
 <br>
 <br>
