@@ -187,16 +187,25 @@ namespace DotNetCoreSqlDb.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var site = await _context.Site.FindAsync(id);
-            if (site != null)
+            if (site == null)
             {
-                site.IsArchived = true;
-                _context.Update(site);
-                await _context.SaveChangesAsync();
-                await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
-                await _cache.RemoveAsync(_SiteItemsCacheKey);
+                return View("Error", new ErrorViewModel { ErrorMessage = "Site hittades inte." });
             }
+
+            if (site.IsArchived)
+            {
+                return View("Error", new ErrorViewModel { ErrorMessage = "Site är redan arkiverad." });
+            }
+
+            site.IsArchived = true;
+            _context.Update(site);
+            await _context.SaveChangesAsync();
+            await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
+            await _cache.RemoveAsync(_SiteItemsCacheKey);
+
             return RedirectToAction(nameof(Index));
         }
+
 
 
         private bool SiteExists(int id)
@@ -221,17 +230,23 @@ namespace DotNetCoreSqlDb.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return View("Error", new ErrorViewModel { ErrorMessage = "Site ID är obligatoriskt." });
             }
 
             var site = await _context.Site.FindAsync(id);
-            if (site == null || !site.IsArchived)
+            if (site == null)
             {
-                return NotFound();
+                return View("Error", new ErrorViewModel { ErrorMessage = "Site hittades inte." });
+            }
+
+            if (!site.IsArchived)
+            {
+                return View("Error", new ErrorViewModel { ErrorMessage = "Site är inte arkiverad och kan inte återställas." });
             }
 
             return View(site);
         }
+
 
         // POST: Sites/Restore/5
         [HttpPost, ActionName("Restore")]
