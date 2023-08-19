@@ -122,7 +122,7 @@ namespace DotNetCoreSqlDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer")] Site site)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,IsArchived")] Site site)
         {
             if (id != site.ID)
             {
@@ -166,14 +166,6 @@ namespace DotNetCoreSqlDb.Controllers
                         _context.SiteHistories.Add(history);
                     }
                 }
-
-                        _context.SiteHistories.Add(new SiteHistory { 
-                            SiteId = site.ID, 
-                            ChangedOn = DateTime.UtcNow, 
-                            PropertyName = "Test", 
-                            OldValue = "TestOld", 
-                            NewValue = "TestNew" 
-                        });
 
                 site.LastUpdatedDate = DateTime.UtcNow;
                 _context.Update(site);
