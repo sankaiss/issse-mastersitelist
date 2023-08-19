@@ -167,6 +167,14 @@ namespace DotNetCoreSqlDb.Controllers
                     }
                 }
 
+                        _context.SiteHistories.Add(new SiteHistory { 
+                            SiteId = site.ID, 
+                            ChangedOn = DateTime.UtcNow, 
+                            PropertyName = "Test", 
+                            OldValue = "TestOld", 
+                            NewValue = "TestNew" 
+                        });
+
                 site.LastUpdatedDate = DateTime.UtcNow;
                 _context.Update(site);
 
