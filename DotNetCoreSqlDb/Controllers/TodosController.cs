@@ -141,19 +141,27 @@ namespace DotNetCoreSqlDb.Controllers
                     if (property.Name == "LastUpdatedDate" || !property.GetCustomAttributes(typeof(BindAttribute), false).Any())
                         continue;
 
-                    var oldValue = property.GetValue(originalSite)?.ToString();
-                    var newValue = property.GetValue(site)?.ToString();
+                    var oldValue = property.GetValue(originalSite);
+                    var newValue = property.GetValue(site);
 
-                    // Om det finns en ändring, skapa en ny post i SiteHistory
-                    if (oldValue != newValue)
+                    bool hasChanged = false;
+
+                    if (oldValue == null && newValue != null)
+                        hasChanged = true;
+                    else if (oldValue != null && newValue == null)
+                        hasChanged = true;
+                    else if (oldValue?.ToString() != newValue?.ToString())
+                        hasChanged = true;
+
+                    if (hasChanged)
                     {
                         var history = new SiteHistory
                         {
                             SiteId = site.ID,
                             ChangedOn = DateTime.UtcNow,
                             PropertyName = property.Name,
-                            OldValue = oldValue,
-                            NewValue = newValue
+                            OldValue = oldValue?.ToString(),
+                            NewValue = newValue?.ToString()
                         };
                         _context.SiteHistories.Add(history);
                     }
