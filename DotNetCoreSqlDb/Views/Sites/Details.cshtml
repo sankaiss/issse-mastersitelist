@@ -79,3 +79,27 @@
     }
     <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
 </div>
+<br>
+<h3>Ändringshistorik:</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ändrat Datum</th>
+            <th>Egenskap</th>
+            <th>Gammalt Värde</th>
+            <th>Nytt Värde</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var history in (List<DotNetCoreSqlDb.Models.SiteHistory>)ViewData["SiteHistories"])
+        {
+            <tr>
+                <td>@history.ChangedOn</td>
+                <td>@history.PropertyName</td>
+                <td>@history.OldValue</td>
+                <td>@history.NewValue</td>
+            </tr>
+        }
+    </tbody>
+</table>
