@@ -13,7 +13,6 @@ namespace DotNetCoreSqlDb.Models
         public DateTime ChangedOn { get; set; }
         public string OldValue { get; set; }
         public string NewValue { get; set; }
-        public DateTime ChangedDate { get; set; }
     }
 
 }
