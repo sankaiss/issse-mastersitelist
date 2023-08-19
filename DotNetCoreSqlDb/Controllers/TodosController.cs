@@ -71,21 +71,14 @@ namespace DotNetCoreSqlDb.Controllers
 
                 todoItemByteArray = ConvertData<Site>.ObjectToByteArray(site);
                 await _cache.SetAsync(GetSiteItemCacheKey(id), todoItemByteArray);
-
-                // Hämta historiken för den specifika Site
-                var siteHistories = await _context.SiteHistories.Where(h => h.SiteId == site.ID).OrderByDescending(h => h.ChangedOn).ToListAsync();
-
-                // Cacha historiken (Om du vill)
-                var siteHistoriesByteArray = ConvertData<List<SiteHistory>>.ObjectToByteArray(siteHistories);
-                await _cache.SetAsync(GetSiteHistoryCacheKey(id), siteHistoriesByteArray);
-
-                // Skicka data till vyn
-                ViewData["SiteHistories"] = siteHistories;
             }
+
+            // Hämta historiken för den specifika Site OCH Sätt SiteHistories oavsett om Site var i cachen eller ej
+            var siteHistories = await _context.SiteHistories.Where(h => h.SiteId == site.ID).OrderByDescending(h => h.ChangedOn).ToListAsync();
+            ViewData["SiteHistories"] = siteHistories;
 
             return View(site);
         }
-
         private string GetSiteHistoryCacheKey(int? id) => $"SiteHistory-{id}";
 
         // GET: Sites/Create

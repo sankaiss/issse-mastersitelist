@@ -92,6 +92,8 @@
         </tr>
     </thead>
     <tbody>
+    @if(ViewData["SiteHistories"] != null)
+    {
         @foreach (var history in (List<DotNetCoreSqlDb.Models.SiteHistory>)ViewData["SiteHistories"])
         {
             <tr>
@@ -101,5 +103,7 @@
                 <td>@history.NewValue</td>
             </tr>
         }
+
+    }
     </tbody>
 </table>
