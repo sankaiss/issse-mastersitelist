@@ -107,30 +107,42 @@ namespace DotNetCoreSqlDb.Controllers
             }
             return View(site);
         }
- 
+        // POST: Sites/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer")] Site updatedSite)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer")] Site site)
         {
-            if (id != updatedSite.ID)
+            if (id != site.ID)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
-                var originalSite = await _context.Site.AsNoTracking().FirstOrDefaultAsync(s => s.ID == id);
-                // Log changes
-                LogChangesIfAny(originalSite, updatedSite);
-                updatedSite.LastUpdatedDate = DateTime.UtcNow;
-                _context.Update(updatedSite);
-                await _context.SaveChangesAsync();
-                await _cache.RemoveAsync(GetSiteItemCacheKey(updatedSite.ID));
-                await _cache.RemoveAsync(_SiteItemsCacheKey);
+                try
+                {
+                    site.LastUpdatedDate = DateTime.UtcNow;
+                    _context.Update(site);
+                    await _context.SaveChangesAsync();
+                    await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
+                    await _cache.RemoveAsync(_SiteItemsCacheKey);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SiteExists(site.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(updatedSite);
+            return View(site);
         }
-
         // GET: Sites/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -203,6 +215,7 @@ namespace DotNetCoreSqlDb.Controllers
             }
             return View(site);
         }
+
         // POST: Sites/Restore/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -219,38 +232,7 @@ namespace DotNetCoreSqlDb.Controllers
             }
             return RedirectToAction(nameof(Archived));
         }
-        private void LogChangesIfAny(Site original, Site updated)
-        {
-            if (original.Ort != updated.Ort) LogChange(original.ID, "Ort", original.Ort, updated.Ort);
-            if (original.Gatuadress != updated.Gatuadress) LogChange(original.ID, "Gatuadress", original.Gatuadress, updated.Gatuadress);
-            if (original.SiteTyp != updated.SiteTyp) LogChange(original.ID, "SiteTyp", original.SiteTyp, updated.SiteTyp);
-            if (original.GammalAdressEfterFlytt != updated.GammalAdressEfterFlytt) LogChange(original.ID, "GammalAdressEfterFlytt", original.GammalAdressEfterFlytt, updated.GammalAdressEfterFlytt);
-            if (original.Leverantör != updated.Leverantör) LogChange(original.ID, "Leverantör", original.Leverantör, updated.Leverantör);
-            if (original.Status != updated.Status) LogChange(original.ID, "Status", original.Status, updated.Status);
-            if (original.NätverkskapacitetMbps != updated.NätverkskapacitetMbps) LogChange(original.ID, "NätverkskapacitetMbps", original.NätverkskapacitetMbps.ToString(), updated.NätverkskapacitetMbps.ToString());
-            if (original.NätverkskapacitetGbps != updated.NätverkskapacitetGbps) LogChange(original.ID, "NätverkskapacitetGbps", original.NätverkskapacitetGbps.ToString(), updated.NätverkskapacitetGbps.ToString());
-            if (original.KontaktNamn != updated.KontaktNamn) LogChange(original.ID, "KontaktNamn", original.KontaktNamn, updated.KontaktNamn);
-            if (original.ISSKontorSite != updated.ISSKontorSite) LogChange(original.ID, "ISSKontorSite", original.ISSKontorSite.ToString(), updated.ISSKontorSite.ToString());
-            if (original.Mobilnr != updated.Mobilnr) LogChange(original.ID, "Mobilnr", original.Mobilnr, updated.Mobilnr);
-            if (original.Epostadress != updated.Epostadress) LogChange(original.ID, "Epostadress", original.Epostadress, updated.Epostadress);
-            if (original.WANUplink != updated.WANUplink) LogChange(original.ID, "WANUplink", original.WANUplink, updated.WANUplink);
-            if (original.AntalEnheter != updated.AntalEnheter) LogChange(original.ID, "AntalEnheter", original.AntalEnheter.ToString(), updated.AntalEnheter.ToString());
-            if (original.Sitestorlek != updated.Sitestorlek) LogChange(original.ID, "Sitestorlek", original.Sitestorlek, updated.Sitestorlek);
-            if (original.Kommentarer != updated.Kommentarer) LogChange(original.ID, "Kommentarer", original.Kommentarer, updated.Kommentarer);
-        }
 
-        private void LogChange(int siteId, string fieldName, string oldValue, string newValue)
-        {
-            var history = new SiteHistory
-            {
-                SiteId = siteId,
-                ChangedDate = DateTime.UtcNow,
-                FieldName = fieldName,
-                OldValue = oldValue,
-                NewValue = newValue
-            };
-            _context.SiteHistories.Add(history);
-        }
     }
     
 }
