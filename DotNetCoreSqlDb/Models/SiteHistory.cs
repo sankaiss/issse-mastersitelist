@@ -10,6 +10,7 @@ namespace DotNetCoreSqlDb.Models
         public int SiteId { get; set; }
         public Site Site { get; set; } // Foreign key relation
         public string PropertyName { get; set; }
+        public DateTime ChangedOn { get; set; }
         public string OldValue { get; set; }
         public string NewValue { get; set; }
         public DateTime ChangedDate { get; set; }
