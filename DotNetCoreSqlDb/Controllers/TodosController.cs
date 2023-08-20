@@ -155,6 +155,8 @@ namespace DotNetCoreSqlDb.Controllers
 
                     if (hasChanged)
                     {
+                        Console.WriteLine($"Property '{property.Name}' has changed from '{oldValue}' to '{newValue}'.");
+
                         var history = new SiteHistory
                         {
                             SiteId = site.ID,
