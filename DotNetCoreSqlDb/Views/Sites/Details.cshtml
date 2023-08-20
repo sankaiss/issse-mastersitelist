@@ -79,14 +79,17 @@
     <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
 </div>
 <br>
-<h2>Ändringslogg</h2>
-<table class="table">
+<h2 class="main_h1">Ändringslogg</h2>
+<br>
+<br>
+<table class="table table-bordered table-striped" style="width: 50%;">
     <thead>
         <tr>
             <th>Ändringsdatum</th>
             <th>Egenskap</th>
             <th>Gammalt värde</th>
             <th>Nytt värde</th>
+            <th>Ändrat av</th>
         </tr>
     </thead>
     <tbody>
@@ -97,6 +100,7 @@
                 <td>@log.PropertyName</td>
                 <td>@log.OldValue</td>
                 <td>@log.NewValue</td>
+                <td>@log.UserName</td>
             </tr>
         }
     </tbody>

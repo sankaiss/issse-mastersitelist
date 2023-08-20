@@ -10,6 +10,7 @@ using DotNetCoreSqlDb.Data;
 using DotNetCoreSqlDb.Models;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 namespace DotNetCoreSqlDb.Controllers
 {
   
@@ -20,10 +21,12 @@ namespace DotNetCoreSqlDb.Controllers
         private readonly MyDatabaseContext _context;
         private readonly IDistributedCache _cache;
         private readonly string _SiteItemsCacheKey = "SiteItemsList";
-        public SitesController(MyDatabaseContext context, IDistributedCache cache)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public SitesController(MyDatabaseContext context, IDistributedCache cache, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _cache = cache;
+            _userManager = userManager;
         }
         // GET: Sites
         public async Task<IActionResult> Index()
@@ -183,13 +186,18 @@ namespace DotNetCoreSqlDb.Controllers
 
         private void LogChange(int siteId, string propertyName, string oldValue, string newValue)
         {
+
+            var userId = _userManager.GetUserId(User); 
+            var userName = _userManager.GetUserName(User);
             var log = new SiteLog 
             {
                 SiteId = siteId,
                 PropertyName = propertyName,
                 OldValue = oldValue,
                 NewValue = newValue,
-                ChangeDate = DateTime.UtcNow
+                ChangeDate = DateTime.UtcNow,
+                UserId = userId,
+                UserName = userName
             };
 
             _context.Sitelogs.Add(log);
