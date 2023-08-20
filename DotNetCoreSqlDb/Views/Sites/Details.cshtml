@@ -1,6 +1,6 @@
-﻿@model DotNetCoreSqlDb.Models.Site
-@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
+@model (DotNetCoreSqlDb.Models.Site Site, List<DotNetCoreSqlDb.Models.SiteLog> Logs)
 
 @{
     ViewData["Title"] = "Siteinfo";
@@ -13,70 +13,91 @@
 <table class="table table-bordered table-striped" style="width: 50%;">
     <tbody>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Ort)</th>
-            <td>@Html.DisplayFor(model => model.Ort)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.Ort)</th>
+            <td>@Html.DisplayFor(model => model.Site.Ort)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Gatuadress)</th>
-            <td>@Html.DisplayFor(model => model.Gatuadress)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.Gatuadress)</th>
+            <td>@Html.DisplayFor(model => model.Site.Gatuadress)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.SiteTyp)</th>
-            <td>@Html.DisplayFor(model => model.SiteTyp)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.SiteTyp)</th>
+            <td>@Html.DisplayFor(model => model.Site.SiteTyp)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.GammalAdressEfterFlytt)</th>
-            <td>@Html.DisplayFor(model => model.GammalAdressEfterFlytt)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.GammalAdressEfterFlytt)</th>
+            <td>@Html.DisplayFor(model => model.Site.GammalAdressEfterFlytt)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Leverantör)</th>
-            <td>@Html.DisplayFor(model => model.Leverantör)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.Leverantör)</th>
+            <td>@Html.DisplayFor(model => model.Site.Leverantör)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Status)</th>
-            <td>@Html.DisplayFor(model => model.Status)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.Status)</th>
+            <td>@Html.DisplayFor(model => model.Site.Status)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.NätverkskapacitetMbps)</th>
-            <td>@Html.DisplayFor(model => model.NätverkskapacitetMbps)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.NätverkskapacitetMbps)</th>
+            <td>@Html.DisplayFor(model => model.Site.NätverkskapacitetMbps)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.KontaktNamn)</th>
-            <td>@Html.DisplayFor(model => model.KontaktNamn)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.KontaktNamn)</th>
+            <td>@Html.DisplayFor(model => model.Site.KontaktNamn)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Mobilnr)</th>
-            <td>@Html.DisplayFor(model => model.Mobilnr)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.Mobilnr)</th>
+            <td>@Html.DisplayFor(model => model.Site.Mobilnr)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Epostadress)</th>
-            <td>@Html.DisplayFor(model => model.Epostadress)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.Epostadress)</th>
+            <td>@Html.DisplayFor(model => model.Site.Epostadress)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.WANUplink)</th>
-            <td>@Html.DisplayFor(model => model.WANUplink)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.WANUplink)</th>
+            <td>@Html.DisplayFor(model => model.Site.WANUplink)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.AntalEnheter)</th>
-            <td>@Html.DisplayFor(model => model.AntalEnheter)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.AntalEnheter)</th>
+            <td>@Html.DisplayFor(model => model.Site.AntalEnheter)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Sitestorlek)</th>
-            <td>@Html.DisplayFor(model => model.Sitestorlek)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.Sitestorlek)</th>
+            <td>@Html.DisplayFor(model => model.Site.Sitestorlek)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Kommentarer)</th>
-            <td>@Html.DisplayFor(model => model.Kommentarer)</td>
+            <th>@Html.DisplayNameFor(model => model.Site.Kommentarer)</th>
+            <td>@Html.DisplayFor(model => model.Site.Kommentarer)</td>
         </tr>
     </tbody>
 </table>
 
-
 <div>
     @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
     {
-        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.ID">Redigera</a>
+        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.Site.ID">Redigera</a>
     }
     <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
 </div>
 <br>
+<h2>Ändringslogg</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ändringsdatum</th>
+            <th>Egenskap</th>
+            <th>Gammalt värde</th>
+            <th>Nytt värde</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var log in Model.Logs)
+        {
+            <tr>
+                <td>@log.ChangeDate</td>
+                <td>@log.PropertyName</td>
+                <td>@log.OldValue</td>
+                <td>@log.NewValue</td>
+            </tr>
+        }
+    </tbody>
+</table>

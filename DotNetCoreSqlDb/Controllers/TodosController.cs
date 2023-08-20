@@ -68,8 +68,12 @@ namespace DotNetCoreSqlDb.Controllers
                 todoItemByteArray = ConvertData<Site>.ObjectToByteArray(site);
                 await _cache.SetAsync(GetSiteItemCacheKey(id), todoItemByteArray);
             }
+
+            // Steg 1: Hämta ändringsloggarna för den specifika Site
+            var logs = await _context.Sitelogs.Where(l => l.SiteId == id).OrderByDescending(l => l.ChangeDate).ToListAsync();
+    
             
-            return View(site);
+            return View((Site: site, Logs: logs));
         }
         // GET: Sites/Create
         public IActionResult Create()
@@ -118,10 +122,32 @@ namespace DotNetCoreSqlDb.Controllers
             {
                 return NotFound();
             }
+
+            var originalSite = await _context.Site.AsNoTracking().FirstOrDefaultAsync(s => s.ID == id);
+
+
             if (ModelState.IsValid)
             {
                 try
                 {
+
+                    CheckAndLogChange(originalSite, site, "Ort");
+                    CheckAndLogChange(originalSite, site, "Gatuadress");
+                    CheckAndLogChange(originalSite, site, "SiteTyp");
+                    CheckAndLogChange(originalSite, site, "GammalAdressEfterFlytt");
+                    CheckAndLogChange(originalSite, site, "Leverantör");
+                    CheckAndLogChange(originalSite, site, "Status");
+                    CheckAndLogChange(originalSite, site, "NätverkskapacitetMbps");
+                    CheckAndLogChange(originalSite, site, "KontaktNamn");
+                    CheckAndLogChange(originalSite, site, "ISSKontorSite");
+                    CheckAndLogChange(originalSite, site, "Mobilnr");
+                    CheckAndLogChange(originalSite, site, "Epostadress");
+                    CheckAndLogChange(originalSite, site, "WANUplink");
+                    CheckAndLogChange(originalSite, site, "AntalEnheter");
+                    CheckAndLogChange(originalSite, site, "Sitestorlek");
+                    CheckAndLogChange(originalSite, site, "Kommentarer");
+
+
                     site.LastUpdatedDate = DateTime.UtcNow;
                     _context.Update(site);
                     await _context.SaveChangesAsync();
@@ -143,6 +169,35 @@ namespace DotNetCoreSqlDb.Controllers
             }
             return View(site);
         }
+
+        private void CheckAndLogChange(Site original, Site updated, string propertyName)
+        {
+            var originalValue = original.GetType().GetProperty(propertyName).GetValue(original)?.ToString();
+            var updatedValue = updated.GetType().GetProperty(propertyName).GetValue(updated)?.ToString();
+
+            if (originalValue != updatedValue)
+            {
+                LogChange(updated.ID, propertyName, originalValue, updatedValue);
+            }
+        }
+
+        private void LogChange(int siteId, string propertyName, string oldValue, string newValue)
+        {
+            var log = new SiteLog 
+            {
+                SiteId = siteId,
+                PropertyName = propertyName,
+                OldValue = oldValue,
+                NewValue = newValue,
+                ChangeDate = DateTime.UtcNow
+            };
+
+            _context.Sitelogs.Add(log);
+        }
+
+
+
+
         // GET: Sites/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
