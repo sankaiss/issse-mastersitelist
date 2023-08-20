@@ -20,6 +20,7 @@ namespace DotNetCoreSqlDb.Controllers
         private readonly MyDatabaseContext _context;
         private readonly IDistributedCache _cache;
         private readonly string _SiteItemsCacheKey = "SiteItemsList";
+        private readonly ILogger<SitesController> _logger;
    
         public SitesController(MyDatabaseContext context, ILogger<SitesController> logger, IDistributedCache cache)
         {
