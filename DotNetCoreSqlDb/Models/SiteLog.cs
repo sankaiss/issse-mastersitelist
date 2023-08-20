@@ -7,11 +7,14 @@ namespace DotNetCoreSqlDb.Models
 public class SiteLog
 {
     public int ID { get; set; }
-    public int SiteId { get; set; } // Referens till den Site som ändrades
-    public string? PropertyName { get; set; } // Namnet på egenskapen som ändrades
-    public string? OldValue { get; set; } // Tidigare värde
-    public string? NewValue { get; set; } // Nytt värde
-    public DateTime ChangeDate { get; set; } // Datum/tid för ändringen
+    public int SiteId { get; set; } 
+    public string? PropertyName { get; set; } 
+    public string? OldValue { get; set; } 
+    public string? NewValue { get; set; } 
+    public DateTime ChangeDate { get; set; } 
+    public string? UserId { get; set; }
+    public string? UserName { get; set; }  
+
 }
 
 }
