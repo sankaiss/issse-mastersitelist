@@ -20,13 +20,10 @@ namespace DotNetCoreSqlDb.Controllers
         private readonly MyDatabaseContext _context;
         private readonly IDistributedCache _cache;
         private readonly string _SiteItemsCacheKey = "SiteItemsList";
-        private readonly ILogger<SitesController> _logger;
-   
-        public SitesController(MyDatabaseContext context, ILogger<SitesController> logger, IDistributedCache cache)
+        public SitesController(MyDatabaseContext context, IDistributedCache cache)
         {
             _context = context;
             _cache = cache;
-            _logger = logger;
         }
         // GET: Sites
         public async Task<IActionResult> Index()
@@ -49,41 +46,31 @@ namespace DotNetCoreSqlDb.Controllers
         // GET: Sites/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            byte[]? todoItemByteArray;
+            Site? site;
             if (id == null)
             {
                 return NotFound();
             }
-
-            byte[]? todoItemByteArray;
-            Site? site;
-
-            // Försök att hämta Site från cachen
             todoItemByteArray = await _cache.GetAsync(GetSiteItemCacheKey(id));
-
             if (todoItemByteArray != null && todoItemByteArray.Length > 0)
             {
                 site = ConvertData<Site>.ByteArrayToObject(todoItemByteArray);
             }
-            else
+            else 
             {
-                site = await _context.Site.FirstOrDefaultAsync(m => m.ID == id);
-                if (site == null)
-                {
-                    return NotFound();
-                }
-
+                site = await _context.Site
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (site == null)
+            {
+                return NotFound();
+            }
                 todoItemByteArray = ConvertData<Site>.ObjectToByteArray(site);
                 await _cache.SetAsync(GetSiteItemCacheKey(id), todoItemByteArray);
             }
-
-            // Hämta historiken för den specifika Site OCH Sätt SiteHistories oavsett om Site var i cachen eller ej
-            var siteHistories = await _context.SiteHistories.Where(h => h.SiteId == site.ID).OrderByDescending(h => h.ChangedOn).ToListAsync();
-            ViewData["SiteHistories"] = siteHistories;
-
+            
             return View(site);
         }
-        private string GetSiteHistoryCacheKey(int? id) => $"SiteHistory-{id}";
-
         // GET: Sites/Create
         public IActionResult Create()
         {
@@ -125,61 +112,19 @@ namespace DotNetCoreSqlDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,IsArchived")] Site site)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer")] Site site)
         {
             if (id != site.ID)
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
-                // Hämta den ursprungliga posten för 'Site'
-                var originalSite = await _context.Site.AsNoTracking().FirstOrDefaultAsync(s => s.ID == id);
-
-                // Kontrollera varje fält för att se om det har ändrats
-                foreach (var property in typeof(Site).GetProperties())
-                {
-                    // Kontrollera att vi endast jämför de bindade egenskaperna
-                    if (property.Name == "LastUpdatedDate" || !property.GetCustomAttributes(typeof(BindAttribute), false).Any())
-                        continue;
-
-                    var oldValue = property.GetValue(originalSite);
-                    var newValue = property.GetValue(site);
-
-                    bool hasChanged = false;
-
-                    if (oldValue == null && newValue != null)
-                        hasChanged = true;
-                    else if (oldValue != null && newValue == null)
-                        hasChanged = true;
-                    else if (oldValue?.ToString() != newValue?.ToString())
-                        hasChanged = true;
-
-                    if (hasChanged)
-                    {
-                        Console.WriteLine($"Property '{property.Name}' has changed from '{oldValue}' to '{newValue}'.");
-
-                        var history = new SiteHistory
-                        {
-                            SiteId = site.ID,
-                            ChangedOn = DateTime.UtcNow,
-                            PropertyName = property.Name,
-                            OldValue = oldValue?.ToString(),
-                            NewValue = newValue?.ToString()
-                        };
-                        _context.SiteHistories.Add(history);
-                        _logger.LogInformation($"Added history for {property.Name} from {oldValue?.ToString()} to {newValue?.ToString()}");
-                    }
-                }
-
-                site.LastUpdatedDate = DateTime.UtcNow;
-                _context.Update(site);
-
                 try
                 {
+                    site.LastUpdatedDate = DateTime.UtcNow;
+                    _context.Update(site);
                     await _context.SaveChangesAsync();
-                    _logger.LogInformation("Changes saved to database.");
                     await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
                     await _cache.RemoveAsync(_SiteItemsCacheKey);
                 }
@@ -194,13 +139,10 @@ namespace DotNetCoreSqlDb.Controllers
                         throw;
                     }
                 }
-
                 return RedirectToAction(nameof(Index));
             }
-
             return View(site);
         }
-
         // GET: Sites/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
