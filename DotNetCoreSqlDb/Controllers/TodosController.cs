@@ -20,6 +20,14 @@ namespace DotNetCoreSqlDb.Controllers
         private readonly MyDatabaseContext _context;
         private readonly IDistributedCache _cache;
         private readonly string _SiteItemsCacheKey = "SiteItemsList";
+        private readonly ILogger<SitesController> _logger;
+
+        public SitesController(MyDatabaseContext context, ILogger<SitesController> logger)
+        {
+            _context = context;
+            _logger = logger;
+        }
+   
         public SitesController(MyDatabaseContext context, IDistributedCache cache)
         {
             _context = context;
@@ -129,8 +137,6 @@ namespace DotNetCoreSqlDb.Controllers
                 return NotFound();
             }
 
-            throw new Exception("Just testing if we reach this point.");
-
             if (ModelState.IsValid)
             {
                 // Hämta den ursprungliga posten för 'Site'
@@ -168,6 +174,7 @@ namespace DotNetCoreSqlDb.Controllers
                             NewValue = newValue?.ToString()
                         };
                         _context.SiteHistories.Add(history);
+                        _logger.LogInformation($"Added history for {property.Name} from {oldValue?.ToString()} to {newValue?.ToString()}");
                     }
                 }
 
@@ -177,6 +184,7 @@ namespace DotNetCoreSqlDb.Controllers
                 try
                 {
                     await _context.SaveChangesAsync();
+                    _logger.LogInformation("Changes saved to database.");
                     await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
                     await _cache.RemoveAsync(_SiteItemsCacheKey);
                 }
