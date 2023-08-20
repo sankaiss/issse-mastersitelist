@@ -129,6 +129,8 @@ namespace DotNetCoreSqlDb.Controllers
                 return NotFound();
             }
 
+            throw new Exception("Just testing if we reach this point.");
+
             if (ModelState.IsValid)
             {
                 // Hämta den ursprungliga posten för 'Site'
