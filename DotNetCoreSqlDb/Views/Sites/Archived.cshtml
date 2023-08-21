@@ -64,6 +64,12 @@
                 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
                 {
                     <a asp-action="Restore" asp-route-id="@item.ID" title="Återställ" class="btn btn-primary">Återställ</a>
+                
+
+                }
+
+                @if (User.IsInRole("Admin"))
+                {
                     <form asp-controller="Sites" asp-action="RealDelete" asp-route-id="@item.ID" method="post" onsubmit="return confirm('Är du säker på att du vill radera?')" style="display: inline;">
                         @Html.AntiForgeryToken()
                         <button type="submit" class="btn btn-danger">Radera</button>
