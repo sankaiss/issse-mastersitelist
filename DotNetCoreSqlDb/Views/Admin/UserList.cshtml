@@ -5,7 +5,7 @@
 <h2>Användarlista</h2>
 <br>
 
-<table class="table table-bordered table-striped" id="myTable" style="width: 55%;">
+<table class="table table-bordered table-striped" id="myTable">
     <thead>
         <tr class="text-center">
             <th>Användare</th>
@@ -79,7 +79,11 @@
             "info": true,
             "autoWidth": false,
             "responsive": true,
-            "compact": true
+            "compact": true,
+            "columnDefs": [
+                { "width": "60%", "targets": "_all" }, 
+                { "className": "dt-left", "targets": "_all" } 
+            ]
         });
     });
 </script>
