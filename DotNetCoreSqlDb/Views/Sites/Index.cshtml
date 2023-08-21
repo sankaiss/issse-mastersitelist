@@ -128,12 +128,12 @@
                 @Html.DisplayFor(modelItem => item.Kommentarer)
             </td>
             <td>
-            <a asp-action="Details" asp-route-id="@item.ID" title="Details"><i class="fas fa-info-circle"></i></a>
+            <a asp-action="Details" asp-route-id="@item.ID" title="Detaljer"><i class="fas fa-info-circle"></i></a>
 
             @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
             {
-                <a asp-action="Edit" asp-route-id="@item.ID" title="Edit"><i class="fas fa-edit"></i></a>
-                <a asp-action="Delete" asp-route-id="@item.ID" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                <a asp-action="Edit" asp-route-id="@item.ID" title="Redigera"><i class="fas fa-edit"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.ID" title="Radera"><i class="fas fa-trash-alt"></i></a>
             }
 </td>
 
