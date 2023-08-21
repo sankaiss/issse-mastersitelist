@@ -36,14 +36,15 @@ namespace DotNetCoreSqlDb.Controllers
             SiteListByteArray = await _cache.GetAsync(_SiteItemsCacheKey);
             if (SiteListByteArray != null && SiteListByteArray.Length > 0)
             { 
-                sites = await _context.Site.Where(s => !s.IsArchived).ToListAsync();
+                sites = ConvertData<Site>.ByteArrayToObjectList(SiteListByteArray);
             }
             else 
             {
-                sites = await _context.Site.ToListAsync();
+                sites = await _context.Site.Where(s => !s.IsArchived).ToListAsync();
                 SiteListByteArray = ConvertData<Site>.ObjectListToByteArray(sites);
                 await _cache.SetAsync(_SiteItemsCacheKey, SiteListByteArray);
             }
+
             return View(sites);
         }
         // GET: Sites/Details/5
