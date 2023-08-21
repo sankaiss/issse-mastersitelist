@@ -6,6 +6,7 @@
     ViewData["Title"] = "Siteinfo";
 }
 
+
 <h2 class="main_h1">Siteinfo</h2><span class="lastUpdated"> - @Model.Site.Ort @Model.Site.Gatuadress</span>
 <br>
 <br>
@@ -96,23 +97,30 @@
         </tr>
     </thead>
     <tbody>
-@if (Model.Logs.Any())
-        @foreach (var log in Model.Logs)
+        @if (Model.Logs.Any())
         {
-            <tr>
-                <td>@log.ChangeDate</td>
-                <td>@log.PropertyName</td>
-                <td>@log.OldValue</td>
-                <td>@log.NewValue</td>
-                <td>@log.UserName</td>
-            </tr>
+            TimeZoneInfo cetZone = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
+
+            @foreach (var log in Model.Logs)
+            {
+                DateTime cetDateTime = TimeZoneInfo.ConvertTimeFromUtc(log.ChangeDate, cetZone);
+                string formattedDate = cetDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+                
+                <tr>
+                    <td>@formattedDate</td>
+                    <td>@log.PropertyName</td>
+                    <td>@log.OldValue</td>
+                    <td>@log.NewValue</td>
+                    <td>@log.UserName</td>
+                </tr>
+            }
         }
-    else
-    {
-        <tr>
-            <td colspan="5">Ingen historik tillgänglig</td>
-        </tr>
-    }
+            else
+            {
+                <tr>
+                    <td colspan="5">Ingen historik tillgänglig</td>
+                </tr>
+        }
 
     </tbody>
 </table>
