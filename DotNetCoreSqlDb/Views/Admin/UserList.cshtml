@@ -66,6 +66,12 @@
         }
     </tbody>
 </table>
+<style>
+    #myTable_wrapper {
+        width: 60%;
+        float: left;
+    }
+</style>
 <script>
     $(document).ready(function () {
         $('#myTable').DataTable({
@@ -81,13 +87,5 @@
             "responsive": true,
             "compact": true            
         });
-
-        
-        $('#myTable_wrapper').css("width", "60%");
-
-     
-        $('#myTable_wrapper').css("float", "left");
-
-
     });
 </script>
