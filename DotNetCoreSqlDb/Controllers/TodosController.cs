@@ -178,7 +178,7 @@ namespace DotNetCoreSqlDb.Controllers
             var originalValue = original.GetType().GetProperty(propertyName).GetValue(original)?.ToString();
             var updatedValue = updated.GetType().GetProperty(propertyName).GetValue(updated)?.ToString();
 
-            if (originalValue != updatedValue)
+            if (originalValue != updatedValue && !(string.IsNullOrEmpty(originalValue) && string.IsNullOrEmpty(updatedValue)))
             {
                 LogChange(updated.ID, propertyName, originalValue, updatedValue);
             }
