@@ -10,6 +10,7 @@ using DotNetCoreSqlDb.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using DotNetCoreSqlDb.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +30,17 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = true;
     options.Password.RequireLowercase = true;
 
-    // Andra inställningar kan också läggas till här
+
+    
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Set the timeout for the cookie
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+    
+    // Renew the cookie before it expires if the user is active.
+    options.SlidingExpiration = true;
 });
 
 builder.Services.AddHttpClient();
