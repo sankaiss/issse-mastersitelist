@@ -37,7 +37,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     // Set the timeout for the cookie
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+    options.ExpireTimeSpan = TimeSpan.FromHours(1);
     
     // Renew the cookie before it expires if the user is active.
     options.SlidingExpiration = true;
