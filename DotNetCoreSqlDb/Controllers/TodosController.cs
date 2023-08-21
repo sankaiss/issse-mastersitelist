@@ -296,6 +296,19 @@ namespace DotNetCoreSqlDb.Controllers
             return RedirectToAction(nameof(Archived));
         }
 
+        [HttpPost, ActionName("RealDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RealDeleteConfirmed(int id)
+        {
+            var site = await _context.Site.FindAsync(id);
+            _context.Site.Remove(site);
+            await _context.SaveChangesAsync();
+            await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
+            await _cache.RemoveAsync(_SiteItemsCacheKey);
+            return RedirectToAction(nameof(Archived));
+        }
+
+
     }
     
 }
