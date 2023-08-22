@@ -151,3 +151,9 @@ html {
 .custom-label-space {
   padding-right: 0;
 }
+.locked-left {
+  float: left;
+  width: 70%; /* Justera bredden efter dina preferenser */
+  max-width: 500px; /* Justera maxbredden efter dina preferenser */
+  margin-right: 20px; /* Skapa utrymme mellan "login-form" och andra element */
+}
