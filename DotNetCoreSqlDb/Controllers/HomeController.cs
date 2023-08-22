@@ -14,7 +14,7 @@ namespace DotNetCoreSqlDb.Controllers
             _logger = logger;
         }
 
-        // Denna metod returnerar Index-vyn från Views/Home/
+        
         public IActionResult Index()
         {
             return View();

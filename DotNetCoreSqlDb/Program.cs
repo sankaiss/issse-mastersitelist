@@ -36,10 +36,10 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    // Set the timeout for the cookie
-    options.ExpireTimeSpan = TimeSpan.FromHours(1);
+   
+    options.ExpireTimeSpan = TimeSpan.FromHours(4);
     
-    // Renew the cookie before it expires if the user is active.
+    
     options.SlidingExpiration = true;
 });
 
@@ -67,20 +67,19 @@ options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
 options.InstanceName = "SampleInstance";
 });
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
-// Add App Service logging
+
 builder.Logging.AddAzureWebAppDiagnostics();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    // app.UseHsts();
+  
 }
 
 app.UseHttpsRedirection();
@@ -105,7 +104,7 @@ static async Task EnsureRolesCreated(IServiceProvider serviceProvider)
 {
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-    var roles = new List<string> { "Admin", "User", "Editor" };  // Lägg till fler roller om det behövs
+    var roles = new List<string> { "Admin", "User", "Editor" }; 
 
     foreach (var role in roles)
     {

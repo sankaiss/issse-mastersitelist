@@ -52,9 +52,7 @@ namespace DotNetCoreSqlDb.Controllers
             return View();
         }
 
-        // POST: Etablering/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,KontorSite,AteaKonsult,Gatuadress,Postnr,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,TeliaUppkoppling,OvrigInfo,KlartSenast,Status")] Etablering etablering)
@@ -85,8 +83,6 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // POST: Etablering/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,KontorSite,AteaKonsult,Gatuadress,Postnr,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,TeliaUppkoppling,OvrigInfo,KlartSenast,Status")] Etablering etablering)

@@ -32,7 +32,7 @@ public IActionResult Register()
     // Hämta lösenordskraven från UserManager
     var passwordPolicy = _userManager.Options.Password;
 
-    // Lägg till kraven i ViewBag för att skicka dem till vyn
+   
     ViewBag.PasswordLengthRequirement = passwordPolicy.RequiredLength;
     ViewBag.RequireDigit = passwordPolicy.RequireDigit;
     ViewBag.RequireUppercase = passwordPolicy.RequireUppercase;
@@ -92,7 +92,7 @@ public IActionResult Register()
 
     foreach (var error in resetPasswordResult.Errors)
     {
-        // Detta kommer att visa alla fel relaterade till lösenordskravet till användaren.
+       
         ModelState.AddModelError(string.Empty, error.Description);
     }
     return View(model);
@@ -130,7 +130,7 @@ public IActionResult Register()
     public async Task<IActionResult> Logout()
     {
     await _signInManager.SignOutAsync();
-    return RedirectToAction("Login", "Account"); // Ersätt med önskad vy och controller
+    return RedirectToAction("Login", "Account"); 
     }
 
 
@@ -138,11 +138,11 @@ public IActionResult Register()
     public async Task<IActionResult> ForgotPassword(string email)
     {
     if (string.IsNullOrEmpty(email))
-        return View();  // du kan lägga till ett felmeddelande här om du vill
+        return View();  
 
     var user = await _userManager.FindByEmailAsync(email);
     if (user == null)
-        return View();  // av säkerhetsskäl, visa inte ett felmeddelande om e-posten inte finns
+        return View();  
 
     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
     var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = token }, protocol: HttpContext.Request.Scheme);
@@ -171,7 +171,7 @@ public async Task<IActionResult> Register(RegisterViewModel model)
             var addToRoleResult = await _userManager.AddToRoleAsync(user, "User");
             if (!addToRoleResult.Succeeded)
             {
-                // Hantera eventuella fel som kan uppstå när du lägger till en roll till användaren
+                
                 foreach (var error in addToRoleResult.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);

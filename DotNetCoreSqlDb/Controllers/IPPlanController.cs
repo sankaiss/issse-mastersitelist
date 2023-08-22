@@ -55,9 +55,6 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // POST: IPPlan/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Nät,Mask,MGMT,WLAN,LAN,Site,GammalSite,LastUpdatedDate")] IPPlan iPPlan)
         {
@@ -87,8 +84,6 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // POST: IPPlan/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Nät,Mask,MGMT,WLAN,LAN,Site,GammalSite,LastUpdatedDate")] IPPlan iPPlan)
