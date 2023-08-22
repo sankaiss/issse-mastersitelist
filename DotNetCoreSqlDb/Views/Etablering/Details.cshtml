@@ -1,4 +1,6 @@
 @model DotNetCoreSqlDb.Models.Etablering
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Detaljer pågående etablering";
@@ -6,7 +8,7 @@
 
 <h2 class="main_h1">Detaljer</h2>
 
-<div>
+<div style="max-width: 600px;">
     <table class="table table-bordered table-striped">
         <tbody>
             <tr>
@@ -53,7 +55,7 @@
 <div>
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
 {
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Redigera</a> 
+    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.Id">Redigera</a> 
 }
-    <a asp-action="Index">Tillbaka</a>
+    <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
 </div>
