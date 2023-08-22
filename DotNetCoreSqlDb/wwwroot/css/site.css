@@ -151,8 +151,13 @@ html {
 .custom-label-space {
   padding-right: 0;
 }
-.container {
-  display: flex;
-  justify-content: flex-start; 
-  align-items: flex-start;
+.scrollable-content {
+  height: calc(100vh - 56px); 
+  overflow-y: auto;
+}
+
+.col-md-10.bg-light {
+  width: 70%; 
+  max-width: 70%;
+  padding: 20px;
 }
