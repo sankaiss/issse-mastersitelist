@@ -5,82 +5,54 @@
 }
 
 <h3 class="main_h1">Är du säker på att du vill radera?</h3>
-<div>
+
+<div style="max-width: 600px;">
    
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KontorSite)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KontorSite)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AteaKonsult)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AteaKonsult)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gatuadress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gatuadress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ÄrendeNrISS)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ÄrendeNrISS)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ort)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ort)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ISSKontaktperson)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ISSKontaktperson)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EpostISSKontaktperson)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TelefonISSKontaktperson)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TeliaUppkoppling)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TeliaUppkoppling)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ÖvrigInfo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ÖvrigInfo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KlartSenast)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KlartSenast)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <tbody>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.KontorSite)</th>
+                <td>@Html.DisplayFor(model => model.KontorSite)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.AteaKonsult)</th>
+                <td>@Html.DisplayFor(model => model.AteaKonsult)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.Gatuadress)</th>
+                <td>@Html.DisplayFor(model => model.Gatuadress)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.ÄrendeNrISS)</th>
+                <td>@Html.DisplayFor(model => model.ÄrendeNrISS)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.Ort)</th>
+                <td>@Html.DisplayFor(model => model.Ort)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.ISSKontaktperson)</th>
+                <td>@Html.DisplayFor(model => model.ISSKontaktperson)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.EpostISSKontaktperson)</th>
+                <td>@Html.DisplayFor(model => model.EpostISSKontaktperson)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.TelefonISSKontaktperson)</th>
+                <td>@Html.DisplayFor(model => model.TelefonISSKontaktperson)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.TeliaUppkoppling)</th>
+                <td>@Html.DisplayFor(model => model.TeliaUppkoppling)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.ÖvrigInfo)</th>
+                <td>@Html.DisplayFor(model => model.ÖvrigInfo)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.KlartSenast)</th>
+                <td>@Html.DisplayFor(model => model.KlartSenast)</td>
+                <tr>
+                <th>@Html.DisplayNameFor(model => model.Status)</th>
+                <td>@Html.DisplayFor(model => model.Status)</td>
+
+        </tbody>
+    </table>
+</div>
+</div>
+<div>
     
     <form asp-action="Delete" onsubmit="return confirm('Är du säker på att du vill radera?');">
         <input type="hidden" asp-for="Id" />
