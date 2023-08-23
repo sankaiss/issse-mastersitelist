@@ -1,0 +1,95 @@
+@model IEnumerable<DotNetCoreSqlDb.Models.Kassa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KontorSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gatuadress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ÄrendeNrISS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISSKontaktperson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KassaTyp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Uppkopling)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Leveraantör)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Övrigt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KontorSite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gatuadress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ÄrendeNrISS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISSKontaktperson)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EpostISSKontaktperson)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelefonISSKontaktperson)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KassaTyp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Uppkopling)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Leveraantör)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Övrigt)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
