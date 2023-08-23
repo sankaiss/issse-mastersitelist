@@ -62,6 +62,14 @@
                     </li>
                 }
 
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Home" asp-action="Lathund">Lathund</a>
+                    </li>
+                }
+
+
                 @if (User.IsInRole("Admin"))
                 {
                     <li class="nav-item">
