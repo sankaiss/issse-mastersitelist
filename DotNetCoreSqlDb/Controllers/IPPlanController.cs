@@ -55,6 +55,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // POST: IPPlan/Create
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateIPPlan([Bind("ID,Nät,Mask,MGMT,WLAN,LAN,Site,GammalSite,LastUpdatedDate")] IPPlan iPPlan)
         {
