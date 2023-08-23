@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetCoreSqlDb.Controllers
 {
+    [Authorize]
     public class EtableringController : Controller
     {
         private readonly MyDatabaseContext _context;
