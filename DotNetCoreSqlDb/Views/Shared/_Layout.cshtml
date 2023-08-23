@@ -36,6 +36,13 @@
             <ul class="navbar-nav flex-grow-1">
                 @if (SignInManager.IsSignedIn(User))
                 {
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Home" asp-action="Lathund">Lathund</a>
+                    </li>
+                }
+
+                @if (SignInManager.IsSignedIn(User))
+                {
                 <li class="nav-item">
                     <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-action="Index" asp-controller="Sites">MSL</a>
                 </li>
@@ -61,14 +68,6 @@
                         <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Sites" asp-action="Archived">Arkiv</a>
                     </li>
                 }
-
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Home" asp-action="Lathund">Lathund</a>
-                    </li>
-                }
-
 
                 @if (User.IsInRole("Admin"))
                 {
