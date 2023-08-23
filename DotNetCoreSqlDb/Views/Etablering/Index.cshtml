@@ -3,10 +3,10 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Pågående Etableringar";
+    ViewData["Title"] = "Pågående förändringar";
 }
 
-<h1 class="main_h1">Pågående Etableringar</h1>
+<h1 class="main_h1">Pågående förändringar</h1>
 <br>
 <br>
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
