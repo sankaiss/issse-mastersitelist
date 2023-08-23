@@ -49,14 +49,14 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: IPPlan/Create
-        public IActionResult Create()
+        public IActionResult CreateIPPlan()
         {
             return View();
         }
 
         // POST: IPPlan/Create
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Nät,Mask,MGMT,WLAN,LAN,Site,GammalSite,LastUpdatedDate")] IPPlan iPPlan)
+        public async Task<IActionResult> CreateIPPlan([Bind("ID,Nät,Mask,MGMT,WLAN,LAN,Site,GammalSite,LastUpdatedDate")] IPPlan iPPlan)
         {
             if (ModelState.IsValid)
             {
