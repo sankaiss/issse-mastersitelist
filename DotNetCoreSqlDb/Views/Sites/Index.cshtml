@@ -81,7 +81,9 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        var cellClass = item.Status == "Pågående" ? "pågående-text" : "";
+        var cellClass = item.Status == "Pågående" ? "pågående-text" : 
+                item.Status == "Avvecklad" ? "avvecklad-text" : "";
+
         <tr>
             <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.ID)

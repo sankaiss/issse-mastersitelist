@@ -44,27 +44,28 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+        var cellClass = item.Status == "Avvecklad" ? "avvecklad-text" : "";
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.ID)</td>
-            <td>@Html.DisplayFor(modelItem => item.Ort)</td>
-            <td>@Html.DisplayFor(modelItem => item.Gatuadress)</td>
-            <td>@Html.DisplayFor(modelItem => item.SiteTyp)</td>
-            <td>@Html.DisplayFor(modelItem => item.GammalAdressEfterFlytt)</td>
-            <td>@Html.DisplayFor(modelItem => item.Leverantör)</td>
-            <td>@Html.DisplayFor(modelItem => item.Status)</td>
-            <td>@Html.DisplayFor(modelItem => item.NätverkskapacitetMbps)</td>
-            <td>@Html.DisplayFor(modelItem => item.KontaktNamn)</td>
-            <td>@Html.DisplayFor(modelItem => item.Mobilnr)</td>
-            <td>@Html.DisplayFor(modelItem => item.Epostadress)</td>
-            <td>@Html.DisplayFor(modelItem => item.WANUplink)</td>
-            <td>@Html.DisplayFor(modelItem => item.AntalEnheter)</td>
-            <td>@Html.DisplayFor(modelItem => item.Sitestorlek)</td>
-            <td>@Html.DisplayFor(modelItem => item.Kommentarer)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.ID)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Ort)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Gatuadress)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.SiteTyp)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.GammalAdressEfterFlytt)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Leverantör)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Status)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.NätverkskapacitetMbps)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.KontaktNamn)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Mobilnr)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Epostadress)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.WANUplink)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.AntalEnheter)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Sitestorlek)</td>
+            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Kommentarer)</td>
             <td>
                 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
                 {
                     <a asp-action="Restore" asp-route-id="@item.ID" title="Återställ" class="btn btn-primary">Återställ</a>
-                
+                    <a asp-action="Edit" asp-route-id="@item.ID" title="Redigera" class="btn btn-warning">Redigera</a>
 
                 }
 

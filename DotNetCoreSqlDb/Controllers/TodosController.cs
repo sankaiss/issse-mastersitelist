@@ -130,6 +130,7 @@ namespace DotNetCoreSqlDb.Controllers
             {
                 try
                 {
+                    site.IsArchived = originalSite.IsArchived;
 
                     CheckAndLogChange(originalSite, site, "Ort");
                     CheckAndLogChange(originalSite, site, "Gatuadress");
