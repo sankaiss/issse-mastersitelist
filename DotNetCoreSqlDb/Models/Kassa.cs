@@ -8,9 +8,8 @@ namespace DotNetCoreSqlDb.Models
     public class Kassa
     {
         public int Id { get; set; }
-        public string? KontorSite { get; set; }
         public string? Gatuadress { get; set; }
-        public string? ÄrendeNrISS { get; set; }
+        public string? Status { get; set; }
         public string? Ort { get; set; }
         public string? ISSKontaktperson { get; set; }
         public string? EpostISSKontaktperson { get; set; }

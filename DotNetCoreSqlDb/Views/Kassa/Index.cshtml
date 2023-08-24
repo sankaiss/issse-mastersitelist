@@ -1,28 +1,33 @@
 @model IEnumerable<DotNetCoreSqlDb.Models.Kassa>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="main_h1">ISS Sverige Kassa siter</h1>
+<br>
+<br>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+{
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="add-new-site-btn">Lägg till</a>
 </p>
-<table class="table">
+}
+<table class="table" id="myTable">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.KontorSite)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Gatuadress)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ÄrendeNrISS)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Ort)
+            </th>
+                        <th>
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ISSKontaktperson)
@@ -52,13 +57,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.KontorSite)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Gatuadress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ÄrendeNrISS)
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ort)
@@ -84,12 +86,32 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Övrigt)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+           <td>
+                <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="fas fa-info-circle"></i></a>
+             @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                {   
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="fas fa-edit"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                }
             </td>
         </tr>
 }
     </tbody>
 </table>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Swedish.json"
+            },
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "compact": true
+        });
+    });
+</script>
