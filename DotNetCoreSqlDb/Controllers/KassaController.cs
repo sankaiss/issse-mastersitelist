@@ -59,7 +59,7 @@ namespace DotNetCoreSqlDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,KontorSite,Gatuadress,ÄrendeNrISS,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,KassaTyp,Uppkopling,Leveraantör,Övrigt")] Kassa kassa)
+        public async Task<IActionResult> Create([Bind("Id,KontorSite,Gatuadress,Status,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,KassaTyp,Uppkopling,Leveraantör,Övrigt")] Kassa kassa)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace DotNetCoreSqlDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,KontorSite,Gatuadress,ÄrendeNrISS,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,KassaTyp,Uppkopling,Leveraantör,Övrigt")] Kassa kassa)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,KontorSite,Gatuadress,Status,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,KassaTyp,Uppkopling,Leveraantör,Övrigt")] Kassa kassa)
         {
             if (id != kassa.Id)
             {
