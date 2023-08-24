@@ -81,50 +81,51 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+        var cellClass = item.Status == "Pågående" ? "pågående-text" : "";
         <tr>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.ID)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.Ort)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.Gatuadress)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.SiteTyp)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.GammalAdressEfterFlytt)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.Leverantör)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.NätverkskapacitetMbps)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.KontaktNamn)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.Mobilnr)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.Epostadress)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.WANUplink)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.AntalEnheter)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.Sitestorlek)
             </td>
-            <td>
+            <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.Kommentarer)
             </td>
             <td>
