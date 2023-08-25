@@ -52,28 +52,28 @@
 @foreach (var item in Model) {
         var rowClass = item.Status == "Ledig" ? "ledig-text" : "";
         <tr>
-            <td>
+            <td class = "@rowClass">
                 @Html.DisplayFor(modelItem => item.Nät)
             </td>
-            <td>
+            <td class = "@rowClass">
                 @Html.DisplayFor(modelItem => item.Mask)
             </td>
-            <td>
+            <td class = "@rowClass">
                 @Html.DisplayFor(modelItem => item.MGMT)
             </td>
-            <td>
+            <td class = "@rowClass">
                 @Html.DisplayFor(modelItem => item.WLAN)
             </td>
-            <td>
+            <td class = "@rowClass">
                 @Html.DisplayFor(modelItem => item.LAN)
             </td>
-            <td>
+            <td class = "@rowClass">
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
-            <td>
+            <td class = "@rowClass">
                 @Html.DisplayFor(modelItem => item.Site)
             </td>
-            <td>
+            <td class = "@rowClass">
                 @Html.DisplayFor(modelItem => item.GammalSite)
             </td>
             

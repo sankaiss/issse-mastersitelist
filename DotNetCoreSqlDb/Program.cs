@@ -37,7 +37,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
    
-    options.ExpireTimeSpan = TimeSpan.FromHours(4);
+    options.ExpireTimeSpan = TimeSpan.FromHours(8);
     
     
     options.SlidingExpiration = true;
