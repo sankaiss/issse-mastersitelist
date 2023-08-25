@@ -50,6 +50,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+        var rowClass = item.Status == "Ledig" ? "ledig-text" : "";
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nät)
