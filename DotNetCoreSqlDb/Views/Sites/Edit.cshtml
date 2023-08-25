@@ -4,44 +4,38 @@
     ViewData["Title"] = "Redigera en Site";
 }
 
-<h2 class="main_h1">Redigera en Site</h2>
+<h2 class="main_h1">Redigera Site</h2>
 <br>
 <br>
-<div class="container">
-    <div class="login-form">
-
-
-<div class="row">
-    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Ort" class="control-label"></label>
                 <input asp-for="Ort" class="form-control" />
                 <span asp-validation-for="Ort" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Gatuadress" class="control-label"></label>
                 <input asp-for="Gatuadress" class="form-control" />
                 <span asp-validation-for="Gatuadress" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="SiteTyp" class="control-label"></label>
                 <input asp-for="SiteTyp" class="form-control" />
                 <span asp-validation-for="SiteTyp" class="text-danger"></span>
                 </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="GammalAdressEfterFlytt" class="control-label"></label>
                 <input asp-for="GammalAdressEfterFlytt" class="form-control" />
                 <span asp-validation-for="GammalAdressEfterFlytt" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Leverantör" class="control-label"></label>
                 <input asp-for="Leverantör" class="form-control" />
                 <span asp-validation-for="Leverantör" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" class="form-control">
                     <option value="Aktiv">Aktiv</option>
@@ -49,54 +43,51 @@
                     <option value="Avvecklad">Avvecklad</option>
                 </select>
                 </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="NätverkskapacitetMbps" class="control-label"></label>
                 <input asp-for="NätverkskapacitetMbps" class="form-control" />
                 <span asp-validation-for="NätverkskapacitetMbps" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="KontaktNamn" class="control-label"></label>
                 <input asp-for="KontaktNamn" class="form-control" />
                 <span asp-validation-for="KontaktNamn" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Mobilnr" class="control-label"></label>
                 <input asp-for="Mobilnr" class="form-control" />
                 <span asp-validation-for="Mobilnr" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Epostadress" class="control-label"></label>
                 <input asp-for="Epostadress" class="form-control" />
                 <span asp-validation-for="Epostadress" class="text-danger"></span>
                 </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="WANUplink" class="control-label"></label>
                 <input asp-for="WANUplink" class="form-control" />
                 <span asp-validation-for="WANUplink" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="AntalEnheter" class="control-label"></label>
                 <input asp-for="AntalEnheter" class="form-control" />
                 <span asp-validation-for="AntalEnheter" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Sitestorlek" class="control-label"></label>
                 <input asp-for="Sitestorlek" class="form-control" />
                 <span asp-validation-for="Sitestorlek" class="text-danger"></span>
             </div>
-               <div class="form-group mb-3">
+               <div class="col-md-3 mb-1">
                 <label asp-for="Kommentarer" class="control-label"></label>
                 <input asp-for="Kommentarer" class="form-control" />
                 <span asp-validation-for="Kommentarer" class="text-danger"></span>
             </div>
-            <div class="form-group mb-3">
+            <br>
+            <div class="col-md-3 mb-1">
                 <input type="submit" value="Spara" class="btn btn-primary mr-2" /> <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
             </div>
         </form>
-    </div>
-</div>
-</div>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

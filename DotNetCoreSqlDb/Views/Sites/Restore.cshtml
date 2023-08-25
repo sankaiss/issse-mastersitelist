@@ -1,13 +1,26 @@
 @model DotNetCoreSqlDb.Models.Site
 
-<h2>Återställ</h2>
 
-<h3>Är du säker på att du vill återställa följande webbplats?</h3>
+<h2 class="main_h1">Är du säker på att du vill återställa följande webbplats?</h2>
 <div>
-    <h4>Site</h4>
+    <br>
+    <h2 class="main_h1">Site</h2>
     <hr />
+    <br>
     <dl class="row">
-        
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID)
+        </dd>        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gatuadress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gatuadress)
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ort)
         </dt>
@@ -20,6 +33,6 @@
     <form asp-action="RestoreConfirmed">
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Återställ" class="btn btn-success" /> |
-        <a asp-action="Index">Avbryt</a>
+        <a asp-action="Index" class="btn btn-warning">Avbryt</a>
     </form>
 </div>

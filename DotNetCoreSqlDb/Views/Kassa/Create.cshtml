@@ -5,69 +5,66 @@
 }
 
 <h2 class="main_h1">Lägg till</h2>
+<br>
 
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Gatuadress" class="control-label"></label>
                 <input asp-for="Gatuadress" class="form-control" />
                 <span asp-validation-for="Gatuadress" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Ort" class="control-label"></label>
                 <input asp-for="Ort" class="form-control" />
                 <span asp-validation-for="Ort" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Status" class="control-label"></label>
                 <input asp-for="Status" class="form-control" />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="ISSKontaktperson" class="control-label"></label>
                 <input asp-for="ISSKontaktperson" class="form-control" />
                 <span asp-validation-for="ISSKontaktperson" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="EpostISSKontaktperson" class="control-label"></label>
                 <input asp-for="EpostISSKontaktperson" class="form-control" />
                 <span asp-validation-for="EpostISSKontaktperson" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="TelefonISSKontaktperson" class="control-label"></label>
                 <input asp-for="TelefonISSKontaktperson" class="form-control" />
                 <span asp-validation-for="TelefonISSKontaktperson" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="KassaTyp" class="control-label"></label>
                 <input asp-for="KassaTyp" class="form-control" />
                 <span asp-validation-for="KassaTyp" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Uppkopling" class="control-label"></label>
                 <input asp-for="Uppkopling" class="form-control" />
                 <span asp-validation-for="Uppkopling" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Leveraantör" class="control-label"></label>
                 <input asp-for="Leveraantör" class="form-control" />
                 <span asp-validation-for="Leveraantör" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-3 mb-1">
                 <label asp-for="Övrigt" class="control-label"></label>
                 <input asp-for="Övrigt" class="form-control" />
                 <span asp-validation-for="Övrigt" class="text-danger"></span>
             </div>
-            <div class="form-group mb-3">
+            <br>
+            <div class="col-md-3 mb-1">
                 <input type="submit" value="Spara" class="btn btn-primary mr-2" />
                 <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
             </div>
         </form>
-    </div>
-</div>
-
 
 
 @section Scripts {

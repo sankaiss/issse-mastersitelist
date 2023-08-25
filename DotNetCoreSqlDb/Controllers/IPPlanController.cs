@@ -57,7 +57,7 @@ namespace DotNetCoreSqlDb.Controllers
         // POST: IPPlan/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateIPPlan([Bind("ID,Nät,Mask,MGMT,WLAN,LAN,Site,GammalSite,LastUpdatedDate")] IPPlan iPPlan)
+        public async Task<IActionResult> CreateIPPlan([Bind("ID,Nät,Mask,MGMT,WLAN,LAN,Site,GammalSite,Status,LastUpdatedDate")] IPPlan iPPlan)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace DotNetCoreSqlDb.Controllers
         // POST: IPPlan/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Nät,Mask,MGMT,WLAN,LAN,Site,GammalSite,LastUpdatedDate")] IPPlan iPPlan)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Nät,Mask,MGMT,WLAN,LAN,Site,GammalSite,Status,LastUpdatedDate")] IPPlan iPPlan)
         {
             if (id != iPPlan.ID)
             {

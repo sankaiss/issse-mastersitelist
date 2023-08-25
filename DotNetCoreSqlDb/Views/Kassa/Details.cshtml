@@ -1,4 +1,6 @@
 @model DotNetCoreSqlDb.Models.Kassa
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Details";
@@ -6,71 +8,95 @@
 
 <h2 class="main_h1">Detaljer</h2>
 
-<div>
+<div style="max-width: 600px;">
 
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gatuadress)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gatuadress)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ort)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ort)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ISSKontaktperson)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ISSKontaktperson)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EpostISSKontaktperson)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TelefonISSKontaktperson)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KassaTyp)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KassaTyp)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Uppkopling)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Uppkopling)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Leveraantör)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Leveraantör)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Övrigt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Övrigt)
-        </dd>
-    </dl>
+    <table class="table table-bordered table-striped">
+        <tbody>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Gatuadress)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Gatuadress)
+                    </td>                
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Status)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ort)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Ort)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ISSKontaktperson)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.ISSKontaktperson)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.EpostISSKontaktperson)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.TelefonISSKontaktperson)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KassaTyp)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.KassaTyp)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Uppkopling)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Uppkopling)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveraantör)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Leveraantör)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Övrigt)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Övrigt)
+                    </td>                
+                </tr>
+        </tbody>
+    </table>
 </div>
+
+
 <div>
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
 {

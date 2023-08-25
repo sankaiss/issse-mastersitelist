@@ -13,6 +13,7 @@ namespace DotNetCoreSqlDb.Models
         public string? LAN { get; set; }
         public string? Site { get; set; }
         public string? GammalSite { get; set; }
+        public string? Status { get; set; }
     
 
         public DateTime LastUpdatedDate { get; set; } 
