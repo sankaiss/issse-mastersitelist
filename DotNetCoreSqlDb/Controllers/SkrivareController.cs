@@ -11,6 +11,7 @@ using DotNetCoreSqlDb.Data;
 
 namespace DotNetCoreSqlDb.Controllers
 {
+    [Authorize]
     public class SkrivareController : Controller
     {
         private readonly MyDatabaseContext _context;
