@@ -7,7 +7,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="main_h1">ISS Sverige Skrivare</h1>
+@{
+    int totalCount = Model.Count();
+}
+
+
+<h1 class="main_h1">ISS Sverige Skrivare</h1><span class="lastUpdated"> - Total antal skrivare: @totalCount</span>
 <br>
 <br>
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
