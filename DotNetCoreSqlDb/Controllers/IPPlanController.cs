@@ -49,6 +49,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: IPPlan/Create
+        [Authorize(Roles = "Admin,Editor")]
         public IActionResult CreateIPPlan()
         {
             return View();

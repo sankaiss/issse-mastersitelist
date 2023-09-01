@@ -48,6 +48,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: Etablering/Create
+        [Authorize(Roles = "Admin,Editor")]
         public IActionResult Create()
         {
             return View();

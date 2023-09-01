@@ -49,6 +49,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: Kassa/Create
+        [Authorize(Roles = "Admin,Editor")]
         public IActionResult Create()
         {
             return View();
@@ -71,6 +72,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: Kassa/Edit/5
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Kassas == null)
