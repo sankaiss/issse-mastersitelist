@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 namespace DotNetCoreSqlDb.Controllers
 {
   
-    [Authorize]
+    [Authorize (Roles = "Admin,Editor")]
     [ActionTimerFilter]
     public class SitesController : Controller
     {

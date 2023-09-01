@@ -63,7 +63,7 @@
             </td>
             <td>
                <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="fas fa-info-circle"></i></a>
-             @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+             @if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("PrinterAdmin"))
                 {   
                     <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="fas fa-edit"></i></a>
                     <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="fas fa-trash-alt"></i></a>
