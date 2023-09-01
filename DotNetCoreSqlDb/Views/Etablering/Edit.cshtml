@@ -66,8 +66,10 @@
             </div>
             <div class="col-md-3 mb-1">
                 <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
+                    <select asp-for="Status" class="form-control">
+                    <option value="Pågående">Pågående</option>
+                    <option value="Avvecklad">Klar</option>
+                </select>
             </div>
             <br>
             <div class="col-md-3 mb-1">
