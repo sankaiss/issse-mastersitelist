@@ -255,7 +255,6 @@ namespace DotNetCoreSqlDb.Controllers
             
         }
         // GET: Sites/Archive
-        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Archived()
         {
             var archivedSites = await _context.Site.Where(s => s.IsArchived).ToListAsync();
