@@ -101,6 +101,7 @@ namespace DotNetCoreSqlDb.Controllers
             return View(site);
         }
         // GET: Sites/Edit/5
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -206,6 +207,7 @@ namespace DotNetCoreSqlDb.Controllers
 
 
         // GET: Sites/Delete/5
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -253,6 +255,7 @@ namespace DotNetCoreSqlDb.Controllers
             
         }
         // GET: Sites/Archive
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Archived()
         {
             var archivedSites = await _context.Site.Where(s => s.IsArchived).ToListAsync();

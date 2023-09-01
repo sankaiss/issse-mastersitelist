@@ -70,6 +70,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: IPPlan/Edit/5
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.IPPlan == null)
@@ -119,6 +120,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: IPPlan/Delete/5
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.IPPlan == null)

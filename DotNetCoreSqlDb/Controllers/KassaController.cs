@@ -124,6 +124,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: Kassa/Delete/5
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Kassas == null)

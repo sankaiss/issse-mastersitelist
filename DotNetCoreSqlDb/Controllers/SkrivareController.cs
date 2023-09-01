@@ -48,6 +48,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: Skrivare/Create
+        [Authorize(Roles = "Admin,Editor,PrinterAdmin")]
         public IActionResult Create()
         {
             return View();
@@ -70,6 +71,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: Skrivare/Edit/5
+        [Authorize(Roles = "Admin,Editor,PrinterAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Skrivare == null)
@@ -121,6 +123,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: Skrivare/Delete/5
+        [Authorize(Roles = "Admin,Editor,PrinterAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Skrivare == null)

@@ -69,6 +69,7 @@ namespace DotNetCoreSqlDb.Controllers
         }
 
         // GET: Etablering/Edit/5
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Etableringar == null)
@@ -143,6 +144,7 @@ namespace DotNetCoreSqlDb.Controllers
 
 
         // GET: Etablering/Delete/5
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Etableringar == null)
