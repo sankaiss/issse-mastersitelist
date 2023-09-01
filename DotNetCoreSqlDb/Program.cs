@@ -38,6 +38,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
    
     options.ExpireTimeSpan = TimeSpan.FromHours(8);
+
+    options.AccessDeniedPath = "/Account/AccessDenied";
     
     
     options.SlidingExpiration = true;

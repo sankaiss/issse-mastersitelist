@@ -46,7 +46,10 @@ public IActionResult Register()
     {
         return View();
     }
-
+    public IActionResult AccessDenied()
+    {
+        return View();
+    }
     public IActionResult ForgotPasswordConfirmation()
     {
     return View();
