@@ -40,30 +40,30 @@
                     }
                 </td>
                 <td>
-                    <form method="post" action="@Url.Action("AssignAdminRole")">
+                    <form method="post" action="@Url.Action("AssignAdminRole")" style="display:inline-block; margin-right: 5px;">
                         <input type="hidden" name="userId" value="@user.Id" />
                         <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Är du säker på att du vill tilldela Admin rollen?');" @(await UserManager.IsInRoleAsync(user, "Admin") ? "disabled" : "")>
-                            Gör till Admin
+                            Admin
                         </button>
                     </form>
 
-                    <form method="post" action="@Url.Action("AssignEditorRole")">
+                    <form method="post" action="@Url.Action("AssignEditorRole")" style="display:inline-block; margin-right: 5px;">
                         <input type="hidden" name="userId" value="@user.Id" />
                         <button type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Är du säker på att du vill tilldela Editor rollen?');" @(await UserManager.IsInRoleAsync(user, "Editor") ? "disabled" : "")>
-                            Gör till Editor
+                            Editor
                         </button>
                     </form>
 
-                    <form method="post" action="@Url.Action("AssignUserRole")">
+                    <form method="post" action="@Url.Action("AssignUserRole")" style="display:inline-block; margin-right: 5px;">
                         <input type="hidden" name="userId" value="@user.Id" />
                         <button type="submit" class="btn btn-secondary btn-sm" onclick="return confirm('Är du säker på att du vill tilldela User rollen?');" @(await UserManager.IsInRoleAsync(user, "User") ? "disabled" : "")>
-                            Gör till User
+                            User
                         </button>
                     </form>
-                    <form method="post" action="@Url.Action("AssignPrinterAdminRole")">
+                    <form method="post" action="@Url.Action("AssignPrinterAdminRole")" style="display:inline-block; margin-right: 5px;">
                         <input type="hidden" name="userId" value="@user.Id" />
                         <button type="submit" class="btn btn-info btn-sm" onclick="return confirm('Är du säker på att du vill tilldela PrinterAdmin rollen?');" @(await UserManager.IsInRoleAsync(user, "PrinterAdmin") ? "disabled" : "")>
-                            Gör till PrinterAdmin
+                            PrinterAdmin
                         </button>
                     </form>
                 </td>
