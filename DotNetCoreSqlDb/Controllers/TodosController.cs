@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 namespace DotNetCoreSqlDb.Controllers
 {
   
-    [Authorize (Roles = "Admin,Editor")]
+    [Authorize]
     [ActionTimerFilter]
     public class SitesController : Controller
     {
@@ -80,6 +80,7 @@ namespace DotNetCoreSqlDb.Controllers
             return View((Site: site, Logs: logs));
         }
         // GET: Sites/Create
+        [Authorize(Roles = "Admin,Editor")]
         public IActionResult Create()
         {
             return View();
