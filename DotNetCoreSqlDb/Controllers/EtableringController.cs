@@ -56,7 +56,7 @@ namespace DotNetCoreSqlDb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,KontorSite,AteaKonsult,Gatuadress,Postnr,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,TeliaUppkoppling,OvrigInfo,KlartSenast,Status")] Etablering etablering)
+        public async Task<IActionResult> Create([Bind("Id,KontorSite,AteaKonsult,Gatuadress,Postnr,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,TeliaUppkoppling,ÖvrigInfo,KlartSenast,Status,ÄrendeNrISS")] Etablering etablering)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace DotNetCoreSqlDb.Controllers
         // POST: Etablering/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,KontorSite,AteaKonsult,Gatuadress,Postnr,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,TeliaUppkoppling,OvrigInfo,KlartSenast,Status")] Etablering etablering)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,KontorSite,AteaKonsult,Gatuadress,Postnr,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,TeliaUppkoppling,ÖvrigInfo,KlartSenast,Status,ÄrendeNrISS")] Etablering etablering)
         {
             if (id != etablering.Id)
             {
