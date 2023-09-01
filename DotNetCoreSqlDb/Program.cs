@@ -104,7 +104,7 @@ static async Task EnsureRolesCreated(IServiceProvider serviceProvider)
 {
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-    var roles = new List<string> { "Admin", "User", "Editor" }; 
+    var roles = new List<string> { "Admin", "User", "Editor", "PrinterAdmin"}; 
 
     foreach (var role in roles)
     {

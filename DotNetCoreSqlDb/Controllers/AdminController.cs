@@ -87,4 +87,20 @@ public class AdminController : Controller
         }
         return RedirectToAction("UserList");
     }
+
+    [HttpPost]
+    public async Task<IActionResult> AssignPrinterAdminRole(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user != null)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            await _userManager.RemoveFromRolesAsync(user, roles);
+
+            await _userManager.AddToRoleAsync(user, "PrinterAdmin");
+            return RedirectToAction("UserList");
+        }
+        return BadRequest();
+    }
+
 }

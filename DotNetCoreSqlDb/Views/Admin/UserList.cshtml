@@ -30,6 +30,10 @@
                     {
                         <span class="badge bg-warning">Editor</span>
                     }
+                    else if(await UserManager.IsInRoleAsync(user, "PrinterAdmin"))
+                    {
+                        <span class="badge bg-info">PrinterAdmin</span>
+                    }
                     else
                     {
                         <span class="badge bg-secondary">User</span>
@@ -54,6 +58,12 @@
                         <input type="hidden" name="userId" value="@user.Id" />
                         <button type="submit" class="btn btn-secondary btn-sm" onclick="return confirm('Är du säker på att du vill tilldela User rollen?');" @(await UserManager.IsInRoleAsync(user, "User") ? "disabled" : "")>
                             Gör till User
+                        </button>
+                    </form>
+                    <form method="post" action="@Url.Action("AssignPrinterAdminRole")">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <button type="submit" class="btn btn-info btn-sm" onclick="return confirm('Är du säker på att du vill tilldela PrinterAdmin rollen?');" @(await UserManager.IsInRoleAsync(user, "PrinterAdmin") ? "disabled" : "")>
+                            Gör till PrinterAdmin
                         </button>
                     </form>
                 </td>
