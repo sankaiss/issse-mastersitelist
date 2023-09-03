@@ -22,6 +22,7 @@ namespace DotNetCoreSqlDb.Controllers
         public SkrivareController(MyDatabaseContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Skrivare
@@ -47,7 +48,8 @@ namespace DotNetCoreSqlDb.Controllers
                 return NotFound();
             }
 
-            return View(skrivare);
+            var logs = await _context.PrinterLogs.Where(l => l.PrinterId == id).OrderByDescending(l => l.ChangeDate).ToListAsync();
+            return View((Skrivare: skrivare, Logs: logs));
         }
 
         // GET: Skrivare/Create
@@ -97,6 +99,8 @@ namespace DotNetCoreSqlDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Gatuadress,Ort,ShareName,Port,Modell")] Skrivare skrivare)
         {
+            var originalPrinter = await _context.Skrivare.AsNoTracking().FirstOrDefaultAsync(s => s.Id == id);
+
             if (id != skrivare.Id)
             {
                 return NotFound();
@@ -107,6 +111,14 @@ namespace DotNetCoreSqlDb.Controllers
                 try
                 {
                     _context.Update(skrivare);
+
+                    // Log changes here
+                    CheckAndLogChange(originalPrinter, skrivare, "Gatuadress");
+                    CheckAndLogChange(originalPrinter, skrivare, "Ort");
+                    CheckAndLogChange(originalPrinter, skrivare, "ShareName");
+                    CheckAndLogChange(originalPrinter, skrivare, "Port");
+                    CheckAndLogChange(originalPrinter, skrivare, "Modell");
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -123,7 +135,7 @@ namespace DotNetCoreSqlDb.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(skrivare);
-        }
+}
 
         // GET: Skrivare/Delete/5
         [Authorize(Roles = "Admin,Editor,PrinterAdmin")]

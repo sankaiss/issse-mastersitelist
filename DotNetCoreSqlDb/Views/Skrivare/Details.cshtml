@@ -1,6 +1,6 @@
-@model DotNetCoreSqlDb.Models.Skrivare
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
+@model (DotNetCoreSqlDb.Models.Skrivare Skrivare, List<DotNetCoreSqlDb.Models.PrinterLog> Logs)
 
 @{
     ViewData["Title"] = "Details";
@@ -12,24 +12,24 @@
     <table class="table table-bordered table-striped">
         <tbody>
             <tr>
-            <th>@Html.DisplayNameFor(model => model.Gatuadress)</th>
-            <td>@Html.DisplayFor(model => model.Gatuadress)</td>
+            <th>@Html.DisplayNameFor(model => model.Skrivare.Gatuadress)</th>
+            <td>@Html.DisplayFor(model => model.Skrivare.Gatuadress)</td>
             </tr>
             <tr>
-            <th>@Html.DisplayNameFor(model => model.Ort)</th>
-            <td>@Html.DisplayFor(model => model.Ort)</td>
+            <th>@Html.DisplayNameFor(model => model.Skrivare.Ort)</th>
+            <td>@Html.DisplayFor(model => model.Skrivare.Ort)</td>
             </tr>
             <tr>
-            <th>@Html.DisplayNameFor(model => model.ShareName)</th>
-            <td>@Html.DisplayFor(model => model.ShareName)</td>
+            <th>@Html.DisplayNameFor(model => model.Skrivare.ShareName)</th>
+            <td>@Html.DisplayFor(model => model.Skrivare.ShareName)</td>
             </tr>
             <tr>
-            <th>@Html.DisplayNameFor(model => model.Port)</th>
-            <td>@Html.DisplayFor(model => model.Port)</td>
+            <th>@Html.DisplayNameFor(model => model.Skrivare.Port)</th>
+            <td>@Html.DisplayFor(model => model.Skrivare.Port)</td>
             </tr>
             <tr>
-            <th>@Html.DisplayNameFor(model => model.Modell)</th>
-            <td>@Html.DisplayFor(model => model.Modell)</td>
+            <th>@Html.DisplayNameFor(model => model.Skrivare.Modell)</th>
+            <td>@Html.DisplayFor(model => model.Skrivare.Modell)</td>
             </tr>
 
         </tbody>
@@ -39,7 +39,57 @@
 <div>
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
 {
-    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.Id">Redigera</a> 
+    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.Skrivare.Id">Redigera</a> 
 }
     <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
 </div>
+
+<br>
+<br>
+<br>
+<h2 class="main_h1">Ändringslogg</h2>
+<br>
+<br>
+<br>
+<table class="table table-bordered table-striped" style="width: 35%;">
+    <thead>
+        <tr>
+            <th>Ändringsdatum</th>
+            <th>Egenskap</th>
+            <th>Gammalt värde</th>
+            <th>Nytt värde</th>
+            <th>Ändrat av</th>
+        </tr>
+    </thead>
+
+    <tbody>
+       @if (Model.Logs.Any())
+        {
+
+        TimeZoneInfo cetZone = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
+
+        @foreach (var log in Model.Logs)
+            {
+                DateTime cetDateTime = TimeZoneInfo.ConvertTimeFromUtc(log.ChangeDate, cetZone);
+                string formattedDate = cetDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+                <tr>
+                    <td>@formattedDate</td>
+                    <td>@log.PropertyName</td>
+                    <td>@log.OldValue</td>
+                    <td>@log.NewValue</td>   
+                    <td>@log.UserName</td>
+                </tr>
+
+            }
+    }
+
+       else
+            {
+                <tr>
+                    <td colspan="5">Ingen historik tillgänglig</td>
+                </tr>
+        }
+  </tbody>
+</table>
+
