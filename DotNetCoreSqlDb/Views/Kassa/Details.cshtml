@@ -1,4 +1,4 @@
-@model DotNetCoreSqlDb.Models.Kassa
+@model (DotNetCoreSqlDb.Models.Kassa Kassa, List<DotNetCoreSqlDb.Models.KassaLog> Logs)
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
 
@@ -14,82 +14,82 @@
         <tbody>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Gatuadress)
+                        @Html.DisplayNameFor(model => model.Kassa.Gatuadress)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.Gatuadress)
+                        @Html.DisplayFor(model => model.Kassa.Gatuadress)
                     </td>                
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Status)
+                        @Html.DisplayNameFor(model => model.Kassa.Status)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.Status)
+                        @Html.DisplayFor(model => model.Kassa.Status)
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Ort)
+                        @Html.DisplayNameFor(model => model.Kassa.Ort)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.Ort)
+                        @Html.DisplayFor(model => model.Kassa.Ort)
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.ISSKontaktperson)
+                        @Html.DisplayNameFor(model => model.Kassa.ISSKontaktperson)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.ISSKontaktperson)
+                        @Html.DisplayFor(model => model.Kassa.ISSKontaktperson)
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
+                        @Html.DisplayNameFor(model => model.Kassa.EpostISSKontaktperson)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.EpostISSKontaktperson)
+                        @Html.DisplayFor(model => model.Kassa.EpostISSKontaktperson)
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
+                        @Html.DisplayNameFor(model => model.Kassa.TelefonISSKontaktperson)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.TelefonISSKontaktperson)
+                        @Html.DisplayFor(model => model.Kassa.TelefonISSKontaktperson)
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.KassaTyp)
+                        @Html.DisplayNameFor(model => model.Kassa.KassaTyp)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.KassaTyp)
+                        @Html.DisplayFor(model => model.Kassa.KassaTyp)
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Uppkopling)
+                        @Html.DisplayNameFor(model => model.Kassa.Uppkopling)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.Uppkopling)
+                        @Html.DisplayFor(model => model.Kassa.Uppkopling)
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Leveraantör)
+                        @Html.DisplayNameFor(model => model.Kassa.Leveraantör)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.Leveraantör)
+                        @Html.DisplayFor(model => model.Kassa.Leveraantör)
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Övrigt)
+                        @Html.DisplayNameFor(model => model.Kassa.Övrigt)
                     </th>
                     <td>
-                        @Html.DisplayFor(model => model.Övrigt)
+                        @Html.DisplayFor(model => model.Kassa.Övrigt)
                     </td>                
                 </tr>
         </tbody>
@@ -100,8 +100,56 @@
 <div>
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
 {
-    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.Id">Redigera</a>
+    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.Kassa.Id">Redigera</a>
 }
     <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
 </div>
+<br>
+<br>
+<br>
+<h2 class="main_h1">Ändringslogg</h2>
+<br>
+<br>
+<br>
+<table class="table table-bordered table-striped" style="width: 35%;">
+    <thead>
+        <tr>
+            <th>Ändringsdatum</th>
+            <th>Egenskap</th>
+            <th>Gammalt värde</th>
+            <th>Nytt värde</th>
+            <th>Ändrat av</th>
+        </tr>
+    </thead>
+
+    <tbody>
+       @if (Model.Logs.Any())
+        {
+
+        TimeZoneInfo cetZone = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
+
+        @foreach (var log in Model.Logs)
+            {
+                DateTime cetDateTime = TimeZoneInfo.ConvertTimeFromUtc(log.ChangeDate, cetZone);
+                string formattedDate = cetDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+                <tr>
+                    <td>@formattedDate</td>
+                    <td>@log.PropertyName</td>
+                    <td>@log.OldValue</td>
+                    <td>@log.NewValue</td>   
+                    <td>@log.UserName</td>
+                </tr>
+
+            }
+    }
+
+       else
+            {
+                <tr>
+                    <td colspan="5">Ingen historik tillgänglig</td>
+                </tr>
+        }
+  </tbody>
+</table>
 

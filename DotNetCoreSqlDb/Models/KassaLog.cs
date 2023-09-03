@@ -8,7 +8,7 @@ namespace DotNetCoreSqlDb.Models
 public class KassaLog
 {
     public int Id { get; set; }
-    public int PrinterId { get; set; }
+    public int KassaId { get; set; }
     public string? PropertyName { get; set; }
     public string? OldValue { get; set; }
     public string? NewValue { get; set; }

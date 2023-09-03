@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DotNetCoreSqlDb.Data;
 using DotNetCoreSqlDb.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace DotNetCoreSqlDb.Controllers
 {
@@ -17,9 +18,12 @@ namespace DotNetCoreSqlDb.Controllers
     {
         private readonly MyDatabaseContext _context;
 
-        public KassaController(MyDatabaseContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public KassaController(MyDatabaseContext context , UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Kassa
@@ -45,7 +49,8 @@ namespace DotNetCoreSqlDb.Controllers
                 return NotFound();
             }
 
-            return View(kassa);
+            var logs = await _context.KassaLogs.Where(l => l.KassaId == id).OrderByDescending(l => l.ChangeDate).ToListAsync();
+            return View((Kassa: kassa, Logs: logs));
         }
 
         // GET: Kassa/Create
@@ -95,6 +100,9 @@ namespace DotNetCoreSqlDb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,KontorSite,Gatuadress,Status,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,KassaTyp,Uppkopling,Leveraantör,Övrigt")] Kassa kassa)
         {
+            var originalKassa = await _context.Kassas.AsNoTracking().FirstOrDefaultAsync(s => s.Id == id);
+
+
             if (id != kassa.Id)
             {
                 return NotFound();
@@ -105,6 +113,19 @@ namespace DotNetCoreSqlDb.Controllers
                 try
                 {
                     _context.Update(kassa);
+
+                    CheckAndLogChange(originalKassa, kassa, "KontorSite");
+                    CheckAndLogChange(originalKassa, kassa, "Gatuadress");
+                    CheckAndLogChange(originalKassa, kassa, "Status");
+                    CheckAndLogChange(originalKassa, kassa, "Ort");
+                    CheckAndLogChange(originalKassa, kassa, "ISSKontaktperson");
+                    CheckAndLogChange(originalKassa, kassa, "EpostISSKontaktperson");
+                    CheckAndLogChange(originalKassa, kassa, "TelefonISSKontaktperson");
+                    CheckAndLogChange(originalKassa, kassa, "KassaTyp");
+                    CheckAndLogChange(originalKassa, kassa, "Uppkopling");
+                    CheckAndLogChange(originalKassa, kassa, "Leveraantör");
+                    CheckAndLogChange(originalKassa, kassa, "Övrigt");
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -165,5 +186,34 @@ namespace DotNetCoreSqlDb.Controllers
         {
           return (_context.Kassas?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        private void CheckAndLogChange(Kassa original, Kassa updated, string propertyName)
+            {
+                var originalValue = original.GetType().GetProperty(propertyName).GetValue(original)?.ToString();
+                var updatedValue = updated.GetType().GetProperty(propertyName).GetValue(updated)?.ToString();
+
+                if (originalValue != updatedValue && !(string.IsNullOrEmpty(originalValue) && string.IsNullOrEmpty(updatedValue)))
+                {
+                    LogChange(updated.Id, propertyName, originalValue, updatedValue);
+                }
+            }
+
+            private void LogChange(int kassaId, string propertyName, string oldValue, string newValue)
+            {
+                var userId = _userManager.GetUserId(User); 
+                var userName = _userManager.GetUserName(User);
+                var log = new PrinterLog 
+                {
+                    PrinterId = kassaId,
+                    PropertyName = propertyName,
+                    OldValue = oldValue,
+                    NewValue = newValue,
+                    ChangeDate = DateTime.UtcNow,
+                    UserId = userId,
+                    UserName = userName
+                };
+
+                _context.PrinterLogs.Add(log);
+            }
     }
 }
