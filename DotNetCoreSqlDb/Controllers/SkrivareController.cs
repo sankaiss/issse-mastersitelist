@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DotNetCoreSqlDb.Models;
 using Microsoft.AspNetCore.Authorization;
 using DotNetCoreSqlDb.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace DotNetCoreSqlDb.Controllers
 {
@@ -16,7 +17,9 @@ namespace DotNetCoreSqlDb.Controllers
     {
         private readonly MyDatabaseContext _context;
 
-        public SkrivareController(MyDatabaseContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public SkrivareController(MyDatabaseContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
         }
@@ -164,5 +167,36 @@ namespace DotNetCoreSqlDb.Controllers
         {
           return (_context.Skrivare?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        private void CheckAndLogChange(Skrivare original, Skrivare updated, string propertyName)
+        {
+            var originalValue = original.GetType().GetProperty(propertyName).GetValue(original)?.ToString();
+            var updatedValue = updated.GetType().GetProperty(propertyName).GetValue(updated)?.ToString();
+
+            if (originalValue != updatedValue && !(string.IsNullOrEmpty(originalValue) && string.IsNullOrEmpty(updatedValue)))
+            {
+                LogChange(updated.Id, propertyName, originalValue, updatedValue);
+            }
+        }
+
+        private void LogChange(int printerId, string propertyName, string oldValue, string newValue)
+        {
+            var userId = _userManager.GetUserId(User); 
+            var userName = _userManager.GetUserName(User);
+            var log = new PrinterLog 
+            {
+                PrinterId = printerId,
+                PropertyName = propertyName,
+                OldValue = oldValue,
+                NewValue = newValue,
+                ChangeDate = DateTime.UtcNow,
+                UserId = userId,
+                UserName = userName
+            };
+
+            _context.PrinterLogs.Add(log);
+        }
+
+
     }
 }

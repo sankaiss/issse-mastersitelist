@@ -13,6 +13,7 @@ public class PrinterLog
     public string? OldValue { get; set; }
     public string? NewValue { get; set; }
     public DateTime ChangeDate { get; set; }
+    public string? UserId { get; set; }
     public string? UserName { get; set; }
 }
 }
