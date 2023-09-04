@@ -98,7 +98,7 @@ namespace DotNetCoreSqlDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,KontorSite,Gatuadress,Status,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,KassaTyp,Uppkopling,Leveraantör,Övrigt")] Kassa kassa)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Gatuadress,Status,Ort,ISSKontaktperson,EpostISSKontaktperson,TelefonISSKontaktperson,KassaTyp,Uppkopling,Leveraantör,Övrigt")] Kassa kassa)
         {
             var originalKassa = await _context.Kassas.AsNoTracking().FirstOrDefaultAsync(s => s.Id == id);
 
@@ -114,7 +114,6 @@ namespace DotNetCoreSqlDb.Controllers
                 {
                     _context.Update(kassa);
 
-                    CheckAndLogChange(originalKassa, kassa, "KontorSite");
                     CheckAndLogChange(originalKassa, kassa, "Gatuadress");
                     CheckAndLogChange(originalKassa, kassa, "Status");
                     CheckAndLogChange(originalKassa, kassa, "Ort");
@@ -202,9 +201,9 @@ namespace DotNetCoreSqlDb.Controllers
             {
                 var userId = _userManager.GetUserId(User); 
                 var userName = _userManager.GetUserName(User);
-                var log = new PrinterLog 
+                var log = new KassaLog 
                 {
-                    PrinterId = kassaId,
+                    KassaId = kassaId,
                     PropertyName = propertyName,
                     OldValue = oldValue,
                     NewValue = newValue,
@@ -213,7 +212,7 @@ namespace DotNetCoreSqlDb.Controllers
                     UserName = userName
                 };
 
-                _context.PrinterLogs.Add(log);
+                _context.KassaLogs.Add(log);
             }
     }
 }
