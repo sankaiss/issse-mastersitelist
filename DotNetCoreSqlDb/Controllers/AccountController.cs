@@ -156,45 +156,43 @@ public IActionResult Register()
     }
 
     [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser 
-                { 
-                    UserName = model.Email, 
-                    Email = model.Email,
-                    FullName = model.FullName
-                };
-                var result = await _userManager.CreateAsync(user, model.Password);
+public async Task<IActionResult> Register(RegisterViewModel model)
+{
+    if (ModelState.IsValid)
+    {
+        var user = new ApplicationUser 
+        { 
+            UserName = model.Email, 
+            Email = model.Email,
+            FullName = model.FullName
+        };
+        var result = await _userManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
+        if (result.Succeeded)
+        {
+            // Efter framgångsrik skapande av användare, tilldela "User" rollen till den nya användaren
+            var addToRoleResult = await _userManager.AddToRoleAsync(user, "User");
+            if (!addToRoleResult.Succeeded)
+            {
+                
+                foreach (var error in addToRoleResult.Errors)
                 {
-                    var addToRoleResult = await _userManager.AddToRoleAsync(user, "User");
-                    if (!addToRoleResult.Succeeded)
-                    {
-                        AddErrors(addToRoleResult);
-                        return View(model);
-                    }
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("index", "home");
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
-
-                AddErrors(result);
+                return View(model);
             }
 
-            // Om vi nått hit, något gick fel, visa registreringsformuläret igen
-            return View(model);
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            return RedirectToAction("index", "home");
         }
 
-        private void AddErrors(IdentityResult result)
+        foreach (var error in result.Errors)
         {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
+            ModelState.AddModelError(string.Empty, error.Description);
         }
+    }
 
+    return View(model);
+}
 
 }
