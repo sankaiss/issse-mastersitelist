@@ -170,29 +170,31 @@ public IActionResult Register()
 
                 if (result.Succeeded)
                 {
-                    // Om användare skapades framgångsrikt, gör något här (som att tilldela en roll eller logga in användaren)
-                    // ... resten av koden ...
+                    var addToRoleResult = await _userManager.AddToRoleAsync(user, "User");
+                    if (!addToRoleResult.Succeeded)
+                    {
+                        AddErrors(addToRoleResult);
+                        return View(model);
+                    }
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "home");
                 }
 
-                // Hantera fel relaterade till skapandet av användaren
-                foreach (var error in result.Errors)
-                {
-                    if (error.Code == "PasswordTooShort" ||
-                        error.Code == "PasswordRequiresNonAlphanumeric" ||
-                        error.Code == "PasswordRequiresDigit" ||
-                        error.Code == "PasswordRequiresLower" ||
-                        error.Code == "PasswordRequiresUpper")
-                    {
-                        ModelState.AddModelError("Password", "Lösenordet uppfyller inte kraven.");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                }
+                AddErrors(result);
             }
+
+            // Om vi nått hit, något gick fel, visa registreringsformuläret igen
             return View(model);
         }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+
 
 }
