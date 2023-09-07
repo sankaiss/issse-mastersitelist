@@ -166,34 +166,32 @@ public IActionResult Register()
                     Email = model.Email,
                     FullName = model.FullName
                 };
-
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    // Efter framgångsrik skapande av användare, tilldela "User" rollen till den nya användaren
-                    var addToRoleResult = await _userManager.AddToRoleAsync(user, "User");
-
-                    if (!addToRoleResult.Succeeded)
-                    {
-                        foreach (var error in addToRoleResult.Errors)
-                        {
-                            ModelState.AddModelError(string.Empty, error.Description);
-                        }
-                        return View(model);
-                    }
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    // Om användare skapades framgångsrikt, gör något här (som att tilldela en roll eller logga in användaren)
+                    // ... resten av koden ...
                     return RedirectToAction("index", "home");
                 }
-                
+
+                // Hantera fel relaterade till skapandet av användaren
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    if (error.Code == "PasswordTooShort" ||
+                        error.Code == "PasswordRequiresNonAlphanumeric" ||
+                        error.Code == "PasswordRequiresDigit" ||
+                        error.Code == "PasswordRequiresLower" ||
+                        error.Code == "PasswordRequiresUpper")
+                    {
+                        ModelState.AddModelError("Password", "Lösenordet uppfyller inte kraven.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
             }
-
-            // Denna kod kommer att köra om ModelState är ogiltig ELLER om _userManager.CreateAsync misslyckas.
             return View(model);
         }
 
