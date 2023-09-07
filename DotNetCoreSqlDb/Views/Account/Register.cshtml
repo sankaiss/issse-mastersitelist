@@ -19,6 +19,7 @@
             <div class="form-group">
                 <label>Lösenord:</label>
                 <input asp-for="Password" class="form-control" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             
             <div class="form-group">
@@ -44,4 +45,5 @@
         </div>
     </div>
 </form>
+
 

@@ -174,7 +174,6 @@ public async Task<IActionResult> Register(RegisterViewModel model)
             var addToRoleResult = await _userManager.AddToRoleAsync(user, "User");
             if (!addToRoleResult.Succeeded)
             {
-                
                 foreach (var error in addToRoleResult.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -185,10 +184,12 @@ public async Task<IActionResult> Register(RegisterViewModel model)
             await _signInManager.SignInAsync(user, isPersistent: false);
             return RedirectToAction("index", "home");
         }
-
-        foreach (var error in result.Errors)
+        else
         {
-            ModelState.AddModelError(string.Empty, error.Description);
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
         }
     }
 
