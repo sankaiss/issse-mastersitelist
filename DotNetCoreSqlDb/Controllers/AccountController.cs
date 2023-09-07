@@ -186,11 +186,39 @@ public async Task<IActionResult> Register(RegisterViewModel model)
             return RedirectToAction("index", "home");
         }
 
-        foreach (var error in result.Errors)
-        {
-            ModelState.AddModelError(string.Empty, error.Description);
-        }
+        else
+            {
+                foreach (var error in result.Errors)
+                {
+                    if (error.Code == "PasswordTooShort")
+                    {
+                        ModelState.AddModelError("Password", "Lösenordet är för kort.");
+                    }
+                    else if (error.Code == "PasswordRequiresDigit")
+                    {
+                        ModelState.AddModelError("Password", "Lösenordet måste innehålla minst en siffra.");
+                    }
+                    else if (error.Code == "PasswordRequiresUpper")
+                    {
+                        ModelState.AddModelError("Password", "Lösenordet måste innehålla minst en stor bokstav.");
+                    }
+                    else if (error.Code == "PasswordRequiresLower")
+                    {
+                        ModelState.AddModelError("Password", "Lösenordet måste innehålla minst en liten bokstav.");
+                    }
+                    else if (error.Code == "PasswordRequiresNonAlphanumeric")
+                    {
+                        ModelState.AddModelError("Password", "Lösenordet måste innehålla minst ett specialtecken.");
+                    }
+           }     }
     }
+
+        ViewBag.PasswordLengthRequirement = _userManager.Options.Password.RequiredLength;
+        ViewBag.RequireDigit = _userManager.Options.Password.RequireDigit;
+        ViewBag.RequireUppercase = _userManager.Options.Password.RequireUppercase;
+        ViewBag.RequireLowercase = _userManager.Options.Password.RequireLowercase;
+        ViewBag.RequireNonAlphanumeric = _userManager.Options.Password.RequireNonAlphanumeric;
+
 
     return View(model);
 }
