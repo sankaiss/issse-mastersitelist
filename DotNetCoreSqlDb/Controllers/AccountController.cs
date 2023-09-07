@@ -160,6 +160,13 @@ public async Task<IActionResult> Register(RegisterViewModel model)
 {
     if (ModelState.IsValid)
     {
+        // Kontrollera om e-postadressen redan finns
+        var existingUser = await _userManager.FindByEmailAsync(model.Email);
+        if (existingUser != null)
+        {
+            ModelState.AddModelError(string.Empty, "E-postadressen används redan för ett annat konto.");
+            return View(model);
+        }
         var user = new ApplicationUser 
         { 
             UserName = model.Email, 
