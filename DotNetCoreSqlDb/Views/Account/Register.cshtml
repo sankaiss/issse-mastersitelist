@@ -1,4 +1,7 @@
 @model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
 
 <h2 class="main_h1">Registrera</h2>
 
@@ -51,6 +54,8 @@
                     <li>@if (ViewBag.RequireNonAlphanumeric) { <span>Innehålla minst ett icke-alfanumeriskt tecken (t.ex. !, $, #, %).</span> }</li>
                 </ul>
             </div>
+
         </div>
     </div>
 </form>
+
