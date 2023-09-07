@@ -6,6 +6,13 @@
     <div class="container">
         <div class="login-form">
 
+            <div class="text-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+
             <div class="form-group">
                 <label>Ditt Namn:</label>
                 <input asp-for="FullName" class="form-control" required />
