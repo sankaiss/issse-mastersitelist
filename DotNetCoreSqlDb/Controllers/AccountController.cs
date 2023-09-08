@@ -164,8 +164,8 @@ public async Task<IActionResult> Register(RegisterViewModel model)
         var existingUser = await _userManager.FindByEmailAsync(model.Email);
         if (existingUser != null)
         {
-            ModelState.AddModelError(string.Empty, "E-postadressen används redan för ett annat konto.");
-            return View(model);
+            TempData["ErrorMessage"] = "E-postadressen används redan för ett annat konto.";
+            return RedirectToAction("Register");
         }
         var user = new ApplicationUser 
         { 
