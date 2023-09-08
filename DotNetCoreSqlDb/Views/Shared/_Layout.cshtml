@@ -54,7 +54,7 @@
         }
     }
 
-    roleDisplay = !string.IsNullOrEmpty(fullName) && !string.IsNullOrEmpty(roleDisplay) ? $" {fullName} - {roleDisplay}" : $"{fullName}{roleDisplay}";
+    roleDisplay = !string.IsNullOrEmpty(fullName) && !string.IsNullOrEmpty(roleDisplay) ? $", {fullName} - {roleDisplay}" : $"{fullName}{roleDisplay}";
     }
 
 
@@ -144,7 +144,7 @@
             @if (SignInManager.IsSignedIn(User))
             {
                 <span class="navbar-text" style="color: #ffffff; font-weight: bold;">
-                    Välkommen,   
+                    Välkommen   
                 </span>
                 @if (!string.IsNullOrEmpty(roleDisplay))
                 {
