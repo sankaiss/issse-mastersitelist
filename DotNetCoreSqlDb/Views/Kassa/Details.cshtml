@@ -98,7 +98,7 @@
 
 
 <div>
-@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+@if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("KassaAdmin"))
 {
     <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.Kassa.Id">Redigera</a>
 }
