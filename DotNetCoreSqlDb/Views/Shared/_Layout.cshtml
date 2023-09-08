@@ -41,6 +41,9 @@
     @{
     var user = await UserManager.GetUserAsync(User);
     var fullName = user?.FullName;
+    var roles = await UserManager.GetRolesAsync(user);
+    var roleDisplay = roles.Any() ? $"Inloggad som {string.Join(", ", roles)}" : "";
+
     }
 
     <header>
@@ -131,6 +134,12 @@
                 <span class="navbar-text" style="color: #ffffff; font-weight: bold;">
                     Välkommen, @fullName
                 </span>
+                @if (!string.IsNullOrEmpty(roleDisplay))
+                {
+                    <span class="navbar-text" style="color: #ffffff; font-weight: bold;">
+                        @roleDisplay
+                    </span>
+                }
             }
         </div>
     </div>
