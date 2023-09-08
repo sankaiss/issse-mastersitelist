@@ -42,7 +42,7 @@
     var user = await UserManager.GetUserAsync(User);
     var fullName = user?.FullName;
     var roles = await UserManager.GetRolesAsync(user);
-    var roleDisplay = roles.Any() ? $"Inloggad som {string.Join(", ", roles)}" : "";
+    var roleDisplay = roles.Any() ? $"Inloggad som:{string.Join(", ", roles)}" : "";
 
     }
 
@@ -132,7 +132,7 @@
             @if (SignInManager.IsSignedIn(User))
             {
                 <span class="navbar-text" style="color: #ffffff; font-weight: bold;">
-                    Välkommen, @fullName
+                    Välkommen, @fullName - 
                 </span>
                 @if (!string.IsNullOrEmpty(roleDisplay))
                 {
