@@ -146,6 +146,13 @@
 </table>
 <script>
     $(document).ready(function () {
+        var buttons = [];
+
+        @if (User.IsInRole("Admin"))
+        {
+            @:buttons.push('excel', 'pdf');
+        }
+
         $('#myTable').DataTable({
             "paging": true,
             "lengthChange": true,
@@ -157,7 +164,9 @@
             "info": true,
             "autoWidth": false,
             "responsive": true,
-            "compact": true
+            "compact": true,
+            "dom": 'lBfrtip',
+            "buttons": buttons
         });
     });
 </script>
