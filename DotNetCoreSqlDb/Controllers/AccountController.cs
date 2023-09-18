@@ -121,7 +121,7 @@ public IActionResult Register()
         if (result.Succeeded)
         {
             // Inloggning lyckades
-            return RedirectToAction("Index", "Sites"); 
+            return RedirectToAction("Lathund", "Home"); 
         }
         ModelState.AddModelError(string.Empty, "Inloggning misslyckades");
     }
