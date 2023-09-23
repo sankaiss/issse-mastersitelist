@@ -137,7 +137,7 @@ namespace DotNetCoreSqlDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Etableringar");
+                    b.ToTable("Etableringar", (string)null);
                 });
 
             modelBuilder.Entity("DotNetCoreSqlDb.Models.IPPlan", b =>
@@ -177,7 +177,7 @@ namespace DotNetCoreSqlDb.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("IPPlan");
+                    b.ToTable("IPPlan", (string)null);
                 });
 
             modelBuilder.Entity("DotNetCoreSqlDb.Models.Kassa", b =>
@@ -220,7 +220,7 @@ namespace DotNetCoreSqlDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Kassas");
+                    b.ToTable("Kassas", (string)null);
                 });
 
             modelBuilder.Entity("DotNetCoreSqlDb.Models.KassaLog", b =>
@@ -254,7 +254,7 @@ namespace DotNetCoreSqlDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("KassaLogs");
+                    b.ToTable("KassaLogs", (string)null);
                 });
 
             modelBuilder.Entity("DotNetCoreSqlDb.Models.PrinterLog", b =>
@@ -288,7 +288,7 @@ namespace DotNetCoreSqlDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PrinterLogs");
+                    b.ToTable("PrinterLogs", (string)null);
                 });
 
             modelBuilder.Entity("DotNetCoreSqlDb.Models.Site", b =>
@@ -312,9 +312,6 @@ namespace DotNetCoreSqlDb.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ISSKontorSite")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsArchived")
@@ -358,7 +355,38 @@ namespace DotNetCoreSqlDb.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Site");
+                    b.ToTable("Site", (string)null);
+                });
+
+            modelBuilder.Entity("DotNetCoreSqlDb.Models.SiteImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SiteID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SiteId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SiteID");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SiteID");
+
+                    b.ToTable("SiteImages", null, t =>
+                        {
+                            t.Property("SiteID")
+                                .HasColumnName("SiteID1");
+                        });
                 });
 
             modelBuilder.Entity("DotNetCoreSqlDb.Models.SiteLog", b =>
@@ -392,7 +420,7 @@ namespace DotNetCoreSqlDb.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Sitelogs");
+                    b.ToTable("Sitelogs", (string)null);
                 });
 
             modelBuilder.Entity("DotNetCoreSqlDb.Models.Skrivare", b =>
@@ -420,7 +448,7 @@ namespace DotNetCoreSqlDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Skrivare");
+                    b.ToTable("Skrivare", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -556,6 +584,13 @@ namespace DotNetCoreSqlDb.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DotNetCoreSqlDb.Models.SiteImage", b =>
+                {
+                    b.HasOne("DotNetCoreSqlDb.Models.Site", null)
+                        .WithMany("Images")
+                        .HasForeignKey("SiteID");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -605,6 +640,11 @@ namespace DotNetCoreSqlDb.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DotNetCoreSqlDb.Models.Site", b =>
+                {
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }
