@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
 
 namespace DotNetCoreSqlDb.Models
 {
@@ -24,6 +26,8 @@ namespace DotNetCoreSqlDb.Models
         public string? Kommentarer { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public bool IsArchived { get; set; } = false;
+
+        public List<SiteImage> Images { get; set; }
     
 
 

@@ -1,6 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
+namespace DotNetCoreSqlDb.Models
+{
 public class SiteImage
 {
     public int Id { get; set; }
@@ -12,4 +14,5 @@ public class SiteImage
     public string? ImageUrl { get; set; } // Länken till den uppladdade bilden
 
     // Lägg till fler egenskaper om det behövs (t.ex. beskrivning, datum, osv.)
+}
 }
