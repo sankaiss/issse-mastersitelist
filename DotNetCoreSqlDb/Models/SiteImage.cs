@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema; // Importera detta namespace
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotNetCoreSqlDb.Models
 {
@@ -9,7 +9,7 @@ namespace DotNetCoreSqlDb.Models
         public int Id { get; set; }
 
         [Required]
-        [Column("SiteID")] // Ange det faktiska kolumnnamnet i din databas
+        [Column("SiteId")] // Matcha kolumnnamnet i databasen
         public string? SiteId { get; set; } // Länka bilden till en specifik Site med ett ID
 
         [Required]
@@ -18,3 +18,4 @@ namespace DotNetCoreSqlDb.Models
         // Lägg till fler egenskaper om det behövs (t.ex. beskrivning, datum, osv.)
     }
 }
+
