@@ -23,9 +23,7 @@ namespace DotNetCoreSqlDb.Data
         public DbSet<DotNetCoreSqlDb.Models.Skrivare> Skrivare { get; set; } = default!;
         public DbSet<DotNetCoreSqlDb.Models.PrinterLog> PrinterLogs { get; set; } = default!;
         public DbSet<DotNetCoreSqlDb.Models.KassaLog> KassaLogs { get; set; } = default!;
-        public DbSet<DotNetCoreSqlDb.Models.SiteImage> SiteImages { get; set; } = default!;
-
-              
+             
 
     }
 }
