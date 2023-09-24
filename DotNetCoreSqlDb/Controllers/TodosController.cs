@@ -30,30 +30,6 @@ namespace DotNetCoreSqlDb.Controllers
             _userManager = userManager;
         }
 
-        private async Task<string> UploadImageToBlobStorage(IFormFile imageFile)
-        {
-            // Anslut till Azure Blob Storage (använd dina egna uppgifter)
-            var connectionString = "DIN_ANSLUTNINGSSTRÄNG_TILL_AZURE_BLOB_STORAGE";
-            var containerName = "images";
-
-            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-
-            // Skapa ett unikt filnamn
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-
-            // Ladda upp bilden till Blob Storage
-            BlobClient blobClient = containerClient.GetBlobClient(fileName);
-            using (var stream = imageFile.OpenReadStream())
-            {
-                await blobClient.UploadAsync(stream, true);
-            }
-
-            // Returnera bildens URL
-            return blobClient.Uri.AbsoluteUri;
-        }
-
-
         // GET: Sites
         public async Task<IActionResult> Index()
         {
@@ -119,10 +95,6 @@ namespace DotNetCoreSqlDb.Controllers
             if (ModelState.IsValid)
             {
                 
-                if (imageFile != null && imageFile.Length > 0)
-                    {
-                        site.ImageUrl = await UploadImageToBlobStorage(imageFile);
-                    }
                 site.LastUpdatedDate = DateTime.UtcNow;
 
                 _context.Add(site);
@@ -165,10 +137,6 @@ namespace DotNetCoreSqlDb.Controllers
             if (ModelState.IsValid)
             {
 
-                if (imageFile != null && imageFile.Length > 0)
-                    {
-                        site.ImageUrl = await UploadImageToBlobStorage(imageFile);
-                    }
                 try
                 {
                     site.IsArchived = originalSite.IsArchived;

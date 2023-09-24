@@ -16,10 +16,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configuration
 builder.Configuration.AddEnvironmentVariables();
-builder.Configuration.AddJsonFile("appsettings.json"); // Läsa från appsettings.json
-
-
-var connectionString = builder.Configuration.GetConnectionString("BlobStorageConnection"); // Hämta anslutningssträngen från appsettings.json
 
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()

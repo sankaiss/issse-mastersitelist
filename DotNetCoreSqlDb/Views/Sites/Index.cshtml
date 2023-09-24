@@ -76,8 +76,6 @@
                 @Html.DisplayNameFor(model => model.Kommentarer)
             </th>
 
-            <th>Bild</th>
-
             <th></th>
         </tr>
     </thead>
@@ -131,16 +129,6 @@
             </td>
             <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.Kommentarer)
-            </td>
-
-            <td class="@cellClass">
-                <!-- Visa en länk om det finns en bild, annars tom cell -->
-                @if (!string.IsNullOrEmpty(item.ImageUrl))
-                {
-                    <a href="@item.ImageUrl" data-fancybox="images" data-caption="Bild för @item.Ort">
-                        <img src="@item.ImageUrl" alt="Bild för @item.Ort" style="max-width: 100px; max-height: 100px;" />
-                    </a>
-                }
             </td>
 
             <td>

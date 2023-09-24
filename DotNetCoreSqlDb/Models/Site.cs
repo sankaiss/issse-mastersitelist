@@ -29,10 +29,5 @@ namespace DotNetCoreSqlDb.Models
         public DateTime LastUpdatedDate { get; set; }
         public bool IsArchived { get; set; } = false;
 
-        public string? ImageUrl { get; set; } 
-
-        [NotMapped]
-         public IFormFile ImageFile { get; set; }       
-
     }
 }
