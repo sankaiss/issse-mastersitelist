@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotNetCoreSqlDb.Models
 {
@@ -27,7 +29,10 @@ namespace DotNetCoreSqlDb.Models
         public DateTime LastUpdatedDate { get; set; }
         public bool IsArchived { get; set; } = false;
 
-        public string? ImageUrl { get; set; }
+        public string? ImageUrl { get; set; } 
+
+        [NotMapped]
+         public IFormFile ImageFile { get; set; }       
 
     }
 }

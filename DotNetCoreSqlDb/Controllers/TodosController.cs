@@ -11,6 +11,7 @@ using DotNetCoreSqlDb.Models;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Azure.Storage.Blobs;
 namespace DotNetCoreSqlDb.Controllers
 {
   
@@ -28,6 +29,31 @@ namespace DotNetCoreSqlDb.Controllers
             _cache = cache;
             _userManager = userManager;
         }
+
+        private async Task<string> UploadImageToBlobStorage(IFormFile imageFile)
+        {
+            // Anslut till Azure Blob Storage (använd dina egna uppgifter)
+            var connectionString = "DIN_ANSLUTNINGSSTRÄNG_TILL_AZURE_BLOB_STORAGE";
+            var containerName = "images";
+
+            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+            // Skapa ett unikt filnamn
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+
+            // Ladda upp bilden till Blob Storage
+            BlobClient blobClient = containerClient.GetBlobClient(fileName);
+            using (var stream = imageFile.OpenReadStream())
+            {
+                await blobClient.UploadAsync(stream, true);
+            }
+
+            // Returnera bildens URL
+            return blobClient.Uri.AbsoluteUri;
+        }
+
+
         // GET: Sites
         public async Task<IActionResult> Index()
         {
@@ -88,14 +114,22 @@ namespace DotNetCoreSqlDb.Controllers
         // POST: Sites/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer")] Site site)
+        public async Task<IActionResult> Create([Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer")] Site site, IFormFile imageFile)
         {
             if (ModelState.IsValid)
             {
+                
+                if (imageFile != null && imageFile.Length > 0)
+                    {
+                        site.ImageUrl = await UploadImageToBlobStorage(imageFile);
+                    }
                 site.LastUpdatedDate = DateTime.UtcNow;
+
                 _context.Add(site);
                 await _context.SaveChangesAsync();
                 await _cache.RemoveAsync(_SiteItemsCacheKey);
+                
+                                
                 return RedirectToAction(nameof(Index));
             }
             return View(site);
@@ -118,7 +152,7 @@ namespace DotNetCoreSqlDb.Controllers
         // POST: Sites/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer")] Site site)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer")] Site site, IFormFile imageFile)
         {
             if (id != site.ID)
             {
@@ -130,6 +164,11 @@ namespace DotNetCoreSqlDb.Controllers
 
             if (ModelState.IsValid)
             {
+
+                if (imageFile != null && imageFile.Length > 0)
+                    {
+                        site.ImageUrl = await UploadImageToBlobStorage(imageFile);
+                    }
                 try
                 {
                     site.IsArchived = originalSite.IsArchived;

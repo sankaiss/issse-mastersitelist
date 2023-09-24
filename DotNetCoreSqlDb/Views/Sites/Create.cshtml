@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Lägg till en ny site";
 }
-
 <h2 class="main_h1">Lägg till en ny site</h2>
 <br>
 <br>
@@ -80,6 +79,11 @@
                <div class="col-md-3 mb-1">
                 <label asp-for="Kommentarer" class="control-label"></label>
                 <input asp-for="Kommentarer" class="form-control" />
+                <span asp-validation-for="Kommentarer" class="text-danger"></span>
+            </div>
+            <div class="col-md-3 mb-1">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" type="file"  class="form-control" accept="image/*" />
                 <span asp-validation-for="Kommentarer" class="text-danger"></span>
             </div>
             <br>
