@@ -67,6 +67,12 @@
                 @Html.DisplayNameFor(model => model.WANUplink)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TICNummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IPAdress)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.AntalEnheter)
             </th>
             <th>
@@ -120,6 +126,12 @@
             </td>
             <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.WANUplink)
+            </td>
+            <td class="@cellClass">
+                @Html.DisplayFor(modelItem => item.TICNummer)
+            </td>
+            <td class="@cellClass">
+                @Html.DisplayFor(modelItem => item.IPAdress)
             </td>
             <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.AntalEnheter)
