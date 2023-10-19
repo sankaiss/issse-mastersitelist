@@ -26,6 +26,8 @@ namespace DotNetCoreSqlDb.Models
         public string? AntalEnheter { get; set; }
         public string? Sitestorlek { get; set; }
         public string? Kommentarer { get; set; }
+        public string? TICNummer { get; set; }
+        public string? IPAdress { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public bool IsArchived { get; set; } = false;
 
