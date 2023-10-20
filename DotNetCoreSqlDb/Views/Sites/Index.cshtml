@@ -143,22 +143,22 @@
                 @Html.DisplayFor(modelItem => item.Kommentarer)
             </td>
             <td>
-                    @if (site.ImageReferences != null && site.ImageReferences.Count > 0)
-                    {
-                        <ul>
-                            @foreach (var imageReference in site.ImageReferences)
-                            {
-                                <li>
-                                    <span class="popup-link" onclick="openImagePopup('@imageReference.Url')">Image</span>
-                                </li>
-                            }
-                        </ul>
-                    }
-                    else
-                    {
-                        <p>Inga bilder att visa</p>
-                    }
-                </td>
+                @if (item.ImageReferences != null && item.ImageReferences.Count > 0)
+                {
+                    <ul>
+                        @foreach (var imageReference in item.ImageReferences)
+                        {
+                            <li>
+                                <span class="popup-link" onclick="openImagePopup('@imageReference.Url')">Image</span>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>Inga bilder att visa</p>
+                }
+            </td>
 
             <td>
             <a asp-action="Details" asp-route-id="@item.ID" title="Detaljer"><i class="fas fa-info-circle"></i></a>
