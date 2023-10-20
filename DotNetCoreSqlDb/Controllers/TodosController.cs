@@ -353,7 +353,8 @@ namespace DotNetCoreSqlDb.Controllers
             return RedirectToAction(nameof(Archived));
         }
 
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         private async Task<string> UploadImageToBlobStorage(IFormFile imageFile)
         {
             string connectionString = "DefaultEndpointsProtocol=https;AccountName=mastersitebloob;AccountKey=fIs+wCc1RFXP4k6raU5DHul3OltKt88Vo6xW1PT8FeyNKUYbHi9LnMF78Re4kQ7buO7SjSGV545f+AStB1Esqg==;EndpointSuffix=core.windows.net";
