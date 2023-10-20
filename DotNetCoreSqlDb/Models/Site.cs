@@ -30,6 +30,7 @@ namespace DotNetCoreSqlDb.Models
         public string? IPAdress { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public bool IsArchived { get; set; } = false;
+        public List<ImageReference> ImageReferences { get; set; }
 
     }
 }
