@@ -93,6 +93,29 @@
                 <input asp-for="Kommentarer" class="form-control" />
                 <span asp-validation-for="Kommentarer" class="text-danger"></span>
             </div>
+
+                <!-- Befintliga bilder -->
+            @if (Model.ImageReferences != null && Model.ImageReferences.Count > 0)
+            {
+                <h4>Current Images</h4>
+                <ul>
+                    @foreach (var imageReference in Model.ImageReferences)
+                    {
+                        <li>
+                            <img src="@imageReference.Url" width="100" height="100" />
+                            <input type="checkbox" name="imagesToDelete" value="@imageReference.ID" /> Delete
+                        </li>
+                    }
+                </ul>
+            }
+
+            <!-- Ladda upp nya bilder -->
+            <div class="form-group">
+                <label for="imageFiles">Upload Images</label>
+                <input type="file" name="imageFiles" id="imageFiles" multiple accept="image/*" />
+            </div>
+
+
             <br>
             <div class="col-md-3 mb-1">
                 <input type="submit" value="Spara" class="btn btn-primary mr-2" /> <a asp-action="Index" class="btn btn-primary">Tillbaka</a>

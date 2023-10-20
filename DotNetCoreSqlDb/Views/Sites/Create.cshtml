@@ -91,6 +91,10 @@
                 <input asp-for="Kommentarer" class="form-control" />
                 <span asp-validation-for="Kommentarer" class="text-danger"></span>
             </div>
+                <div class="col-md-3 mb-1">
+                <label for="imageFiles">Upload Images</label>
+                <input type="file" name="imageFiles" id="imageFiles" multiple accept="image/*" />
+            </div>
             <br>
             <div class="col-md-3 mb-1">
                 <input type="submit" value="Spara" class="btn btn-primary mr-2" /> <a asp-action="Index" class="btn btn-primary">Tillbaka</a>

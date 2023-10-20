@@ -89,11 +89,22 @@ namespace DotNetCoreSqlDb.Controllers
         // POST: Sites/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,TICNummer,IPAdress")] Site site)
+        public async Task<IActionResult> Create([Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,TICNummer,IPAdress")] Site site, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
                 
+                if (imageFiles != null && imageFiles.Count > 0)
+                {
+                    site.ImageReferences = new List<ImageReference>();
+                    foreach (var imageFile in imageFiles)
+                    {
+                        string imageUrl = await UploadImageToBlobStorage(imageFile);
+                        var imageReference = new ImageReference { Url = imageUrl };
+                        site.ImageReferences.Add(imageReference);
+                    }
+                }
+
                 site.LastUpdatedDate = DateTime.UtcNow;
 
                 _context.Add(site);
@@ -123,7 +134,7 @@ namespace DotNetCoreSqlDb.Controllers
         // POST: Sites/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,TICNummer,IPAdress")] Site site)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,TICNummer,IPAdress")] Site site, List<IFormFile> imageFiles, List<int> imagesToDelete)
         {
             if (id != site.ID)
             {
@@ -138,6 +149,31 @@ namespace DotNetCoreSqlDb.Controllers
 
                 try
                 {
+
+                            // Lägg till nya bilder
+                    if (imageFiles != null && imageFiles.Count > 0)
+                    {
+                        foreach (var imageFile in imageFiles)
+                        {
+                            string imageUrl = await UploadImageToBlobStorage(imageFile);
+                            var imageReference = new ImageReference { Url = imageUrl };
+                            site.ImageReferences.Add(imageReference);
+                        }
+                    }
+
+                            // Ta bort valda bilder
+                    if (imagesToDelete != null && imagesToDelete.Count > 0)
+                    {
+                        foreach (var imageIdToDelete in imagesToDelete)
+                        {
+                            var imageReferenceToDelete = site.ImageReferences.FirstOrDefault(img => img.ID == imageIdToDelete);
+                            if (imageReferenceToDelete != null)
+                            {
+                                site.ImageReferences.Remove(imageReferenceToDelete);
+                            }
+                        }
+                    }
+
                     site.IsArchived = originalSite.IsArchived;
 
                     CheckAndLogChange(originalSite, site, "Ort");
@@ -316,6 +352,36 @@ namespace DotNetCoreSqlDb.Controllers
             await _cache.RemoveAsync(_SiteItemsCacheKey);
             return RedirectToAction(nameof(Archived));
         }
+
+
+        private async Task<string> UploadImageToBlobStorage(IFormFile imageFile)
+        {
+            string connectionString = "DefaultEndpointsProtocol=https;AccountName=mastersitebloob;AccountKey=fIs+wCc1RFXP4k6raU5DHul3OltKt88Vo6xW1PT8FeyNKUYbHi9LnMF78Re4kQ7buO7SjSGV545f+AStB1Esqg==;EndpointSuffix=core.windows.net";
+            string containerName = "images"; // Skapa en behållare för att lagra bilder
+
+            // Skapa en BlobServiceClient med din anslutningssträng
+            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
+            // Hämta eller skapa en behållare (container)
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+            await containerClient.CreateIfNotExistsAsync();
+
+            // Skapa ett unikt filnamn för bilden
+            string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+
+            // Skapa en BlobClient för att ladda upp bilden
+            BlobClient blobClient = containerClient.GetBlobClient(uniqueFileName);
+
+            // Öppna en ström från IFormFile och ladda upp bilden till Blob Storage
+            using (Stream stream = imageFile.OpenReadStream())
+            {
+                await blobClient.UploadAsync(stream, true);
+            }
+
+            // Returnera URL:en till den uppladdade bilden
+            return blobClient.Uri.ToString();
+        }
+
 
 
     }
