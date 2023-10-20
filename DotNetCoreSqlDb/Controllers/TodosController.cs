@@ -193,6 +193,7 @@ namespace DotNetCoreSqlDb.Controllers
                     CheckAndLogChange(originalSite, site, "Kommentarer");
                     CheckAndLogChange(originalSite, site, "TICNummer");
                     CheckAndLogChange(originalSite, site, "IPAdress");
+                    CheckAndLogChange(originalSite, site, "Bilder");
 
 
                     site.LastUpdatedDate = DateTime.UtcNow;
