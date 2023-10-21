@@ -46,16 +46,6 @@ namespace DotNetCoreSqlDb.Controllers
                 await _cache.SetAsync(_SiteItemsCacheKey, SiteListByteArray);
             }
 
-            foreach (var site in sites)
-            {
-                var imageUrls = site.ImageUrls?.Split(",");
-                if (imageUrls != null && imageUrls.Length > 0)
-                {
-                    var link = $"<a href=\"#\" onclick=\"showImages('{string.Join(",", imageUrls)}');\">View Image(s)</a>";
-                    site.ImageUrls = link;
-                }
-            }
-
             return View(sites);
         }
         // GET: Sites/Details/5
@@ -99,20 +89,10 @@ namespace DotNetCoreSqlDb.Controllers
         // POST: Sites/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,TICNummer,IPAdress")] Site site, List<IFormFile> ImageUrls)
+        public async Task<IActionResult> Create([Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,TICNummer,IPAdress")] Site site)
         {
             if (ModelState.IsValid)
             {
-                        // Upload images to Azure Blob Storage
-                var imageUrls = new List<string>();
-                foreach (var file in ImageUrls)
-                {
-                    var imageUrl = await UploadImageAsync(file);
-                    imageUrls.Add(imageUrl);
-                }
-
-        // Save image URLs to the Site model
-        site.ImageUrls = string.Join(",", imageUrls);
                 
                 site.LastUpdatedDate = DateTime.UtcNow;
 
@@ -143,7 +123,7 @@ namespace DotNetCoreSqlDb.Controllers
         // POST: Sites/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,TICNummer,IPAdress")] Site site, List<IFormFile> ImageUrls, List<string> DeleteImageUrls)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,TICNummer,IPAdress")] Site site)
         {
             if (id != site.ID)
             {
@@ -159,44 +139,7 @@ namespace DotNetCoreSqlDb.Controllers
                 try
                 {
 
-                    // Upload images to Azure Blob Storage
-                    var imageUrls = new List<string>();
-                    foreach (var file in ImageUrls)
-                    {
-                        var imageUrl = await UploadImageAsync(file);
-                        imageUrls.Add(imageUrl);
-                    }
-
-                    // Delete old images from Azure Blob Storage
-                    if (DeleteImageUrls != null && DeleteImageUrls.Count > 0)
-                    {
-                        var connectionString = "DefaultEndpointsProtocol=https;AccountName=mastersitebloob;AccountKey=fIs+wCc1RFXP4k6raU5DHul3OltKt88Vo6xW1PT8FeyNKUYbHi9LnMF78Re4kQ7buO7SjSGV545f+AStB1Esqg==;EndpointSuffix=core.windows.net";
-                        var containerName = "images";
-
-                        var blobServiceClient = new BlobServiceClient(connectionString);
-                        var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-
-                        foreach (var imageUrl in DeleteImageUrls)
-                        {
-                            var blobName = Path.GetFileName(new Uri(imageUrl).AbsolutePath);
-                            var blobClient = containerClient.GetBlobClient(blobName);
-                            await blobClient.DeleteIfExistsAsync();
-                        }
-                    }
-
-                    // Save image URLs to the Site model
-                    var oldImageUrls = site.ImageUrls?.Split(",");
-                    var newImageUrls = new List<string>();
-                    if (oldImageUrls != null && oldImageUrls.Length > 0)
-                    {
-                        imageUrls.AddRange(oldImageUrls);
-                    }
-                    if (newImageUrls.Count > 0)
-                    {
-                        imageUrls.AddRange(newImageUrls);
-                    }
-                    site.ImageUrls = string.Join(",", imageUrls);
-
+                    
                     site.IsArchived = originalSite.IsArchived;
 
                     CheckAndLogChange(originalSite, site, "Ort");
@@ -373,25 +316,6 @@ namespace DotNetCoreSqlDb.Controllers
             await _cache.RemoveAsync(GetSiteItemCacheKey(site.ID));
             await _cache.RemoveAsync(_SiteItemsCacheKey);
             return RedirectToAction(nameof(Archived));
-        }
-
-        private async Task<string> UploadImageAsync(IFormFile file)
-        {
-            var connectionString = "DefaultEndpointsProtocol=https;AccountName=mastersitebloob;AccountKey=fIs+wCc1RFXP4k6raU5DHul3OltKt88Vo6xW1PT8FeyNKUYbHi9LnMF78Re4kQ7buO7SjSGV545f+AStB1Esqg==;EndpointSuffix=core.windows.net";
-            var containerName = "images";
-
-            var blobServiceClient = new BlobServiceClient(connectionString);
-            var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-            var blobClient = containerClient.GetBlobClient(fileName);
-
-            using (var stream = file.OpenReadStream())
-            {
-                await blobClient.UploadAsync(stream);
-            }
-
-            return blobClient.Uri.ToString();
         }
 
     }

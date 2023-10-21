@@ -93,23 +93,6 @@
                 <input asp-for="Kommentarer" class="form-control" />
                 <span asp-validation-for="Kommentarer" class="text-danger"></span>
             </div>
-            <div class="col-md-3 mb-1">
-                <label asp-for="ImageUrls" class="control-label"></label>
-                <div>
-                    @if (!string.IsNullOrEmpty(Model.ImageUrls))
-                    {
-                        var imageUrls = Model.ImageUrls.Split(",");
-                        foreach (var imageUrl in imageUrls)
-                        {
-                            <div>
-                                <img src="@imageUrl" width="100">
-                                <input type="checkbox" name="DeleteImageUrls" value="@imageUrl">
-                            </div>
-                        }
-                    }
-                    <input type="file" name="ImageUrls" multiple>
-                </div>
-            </div>
             <br>
             <div class="col-md-3 mb-1">
                 <input type="submit" value="Spara" class="btn btn-primary mr-2" /> <a asp-action="Index" class="btn btn-primary">Tillbaka</a>

@@ -81,9 +81,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Kommentarer)
             </th>
-            <th>
-            Bilder
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -145,9 +142,6 @@
                 @Html.DisplayFor(modelItem => item.Kommentarer)
             </td>
             <td>
-                    @Html.Raw(item.ImageUrls)
-            </td>
-            <td>
             <a asp-action="Details" asp-route-id="@item.ID" title="Detaljer"><i class="fas fa-info-circle"></i></a>
 
             @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
@@ -187,20 +181,3 @@
         });
     });
 </script>
-@section Scripts {
-    <script>
-        function showImages(imageUrls) {
-            var images = imageUrls.split(",");
-            if (images.length == 1) {
-                window.open(images[0]);
-            } else {
-                var html = "";
-                for (var i = 0; i < images.length; i++) {
-                    html += "<img src=\"" + images[i] + "\">";
-                }
-                var popup = window.open("", "Image(s)", "width=800,height=600");
-                popup.document.write(html);
-            }
-        }
-    </script>
-}
