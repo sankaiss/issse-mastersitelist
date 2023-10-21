@@ -28,6 +28,7 @@ namespace DotNetCoreSqlDb.Models
         public string? Kommentarer { get; set; }
         public string? TICNummer { get; set; }
         public string? IPAdress { get; set; }
+        public string? ImageUrls { get; set; } 
         public DateTime LastUpdatedDate { get; set; }
         public bool IsArchived { get; set; } = false;
 
