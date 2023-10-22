@@ -12,11 +12,6 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Azure.Storage.Blobs;
-using Microsoft.Extensions.Configuration;
-using System.Configuration;
-using Azure.Storage.Sas;
-using Azure.Storage;
-
 namespace DotNetCoreSqlDb.Controllers
 {
   
@@ -28,13 +23,11 @@ namespace DotNetCoreSqlDb.Controllers
         private readonly IDistributedCache _cache;
         private readonly string _SiteItemsCacheKey = "SiteItemsList";
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IConfiguration _configuration;
-        public SitesController(MyDatabaseContext context, IDistributedCache cache, UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        public SitesController(MyDatabaseContext context, IDistributedCache cache, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _cache = cache;
             _userManager = userManager;
-            _configuration = configuration;
         }
         // GET: Sites
         public async Task<IActionResult> Index()
@@ -96,26 +89,11 @@ namespace DotNetCoreSqlDb.Controllers
         // POST: Sites/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,TICNummer,IPAdress")] Site site,List<IFormFile> images)
+        public async Task<IActionResult> Create([Bind("ID,Ort,Gatuadress,SiteTyp,GammalAdressEfterFlytt,Leverantör,Status,NätverkskapacitetMbps,NätverkskapacitetGbps,KontaktNamn,ISSKontorSite,Mobilnr,Epostadress,WANUplink,AntalEnheter,Sitestorlek,Kommentarer,TICNummer,IPAdress")] Site site)
         {
             if (ModelState.IsValid)
             {
                 
-                foreach (var imageFile in images)
-                {
-                    // Ladda upp bilden till Azure Blob Storage och spara filnamnet i databasen
-                    var fileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
-                    var image = new SiteImage
-                    {
-                        FileName = fileName,
-                        UploadDate = DateTime.Now
-                    };
-                    site.Images.Add(image);
-
-                    // Ladda upp bilden till Azure Blob Storage
-                    await UploadImageToBlobStorage(imageFile, fileName);
-                }
-
                 site.LastUpdatedDate = DateTime.UtcNow;
 
                 _context.Add(site);
@@ -135,9 +113,7 @@ namespace DotNetCoreSqlDb.Controllers
             {
                 return NotFound();
             }
-            // Hämta webbplatsen inklusive dess bilder
             var site = await _context.Site.FindAsync(id);
-            // var site = await _context.Site.Include(s => s.Images).FirstOrDefaultAsync(s => s.ID == id);
             if (site == null)
             {
                 return NotFound();
@@ -154,9 +130,7 @@ namespace DotNetCoreSqlDb.Controllers
                 return NotFound();
             }
 
-            //var originalSite = await _context.Site.Include(s => s.Images).AsNoTracking().FirstOrDefaultAsync(s => s.ID == id);
             var originalSite = await _context.Site.AsNoTracking().FirstOrDefaultAsync(s => s.ID == id);
-
 
 
             if (ModelState.IsValid)
@@ -185,36 +159,6 @@ namespace DotNetCoreSqlDb.Controllers
                     CheckAndLogChange(originalSite, site, "Kommentarer");
                     CheckAndLogChange(originalSite, site, "TICNummer");
                     CheckAndLogChange(originalSite, site, "IPAdress");
-
-                    
-               
-                    /*
-                     // Lägg till nya bilder
-                    if (images != null)
-                    {
-                        foreach (var imageFile in images)
-                        {
-                            var fileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
-                            var image = new SiteImage
-                            {
-                                FileName = fileName,
-                                UploadDate = DateTime.Now
-                            };
-                            site.Images.Add(image);
-
-                            await UploadImageToBlobStorage(imageFile, fileName);
-                        }
-                    }
-
-                    // Ta bort bilder som inte längre används
-                    var imagesToRemove = site.Images.Where(image => !originalSite.Images.Any(origImage => origImage.ID == image.ID)).ToList();
-                    foreach (var imageToRemove in imagesToRemove)
-                    {
-                        site.Images.Remove(imageToRemove);
-                        DeleteImageFromBlobStorage(imageToRemove.FileName);
-                    }
-                    */
-
                    
                     site.LastUpdatedDate = DateTime.UtcNow;
                     _context.Update(site);
@@ -373,100 +317,6 @@ namespace DotNetCoreSqlDb.Controllers
             await _cache.RemoveAsync(_SiteItemsCacheKey);
             return RedirectToAction(nameof(Archived));
         }
-
-        public IActionResult ShowImage(int id)
-        {
-            var image = _context.SiteImages.FirstOrDefault(i => i.ID == id);
-            if (image != null)
-            {
-                var imageUrl = GetImageUrlFromBlobStorage(image.FileName);
-                // Returnera en vy som visar bilden eller skicka bilden till klienten direkt
-                return View("ShowImage", imageUrl);
-            }
-            return NotFound();
-        }
-
-        [HttpPost]
-        public IActionResult DeleteImage(int id)
-        {
-            var image = _context.SiteImages.FirstOrDefault(i => i.ID == id);
-            if (image != null)
-            {
-                // Ta bort bilden från Azure Blob Storage
-                DeleteImageFromBlobStorage(image.FileName);
-                // Ta bort bilden från databasen
-                _context.SiteImages.Remove(image);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return NotFound();
-        }
-
-        private async Task UploadImageToBlobStorage(IFormFile file, string fileName)
-        {
-            var blobServiceClient = new BlobServiceClient(_configuration.GetConnectionString("AzureBlobStorage"));
-            var containerClient = blobServiceClient.GetBlobContainerClient("images");
-
-            if (containerClient.Exists())
-            {
-                var blobClient = containerClient.GetBlobClient(fileName);
-                using (var stream = file.OpenReadStream())
-                {
-                    await blobClient.UploadAsync(stream, true);
-                }
-            }
-        }
-
-        private void DeleteImageFromBlobStorage(string fileName)
-        {
-            var blobServiceClient = new BlobServiceClient(_configuration.GetConnectionString("AzureBlobStorage"));
-            var containerClient = blobServiceClient.GetBlobContainerClient("images");
-
-            if (containerClient.Exists())
-            {
-                var blobClient = containerClient.GetBlobClient(fileName);
-                blobClient.DeleteIfExists();
-            }
-        }
-
-        private string GetImageUrlFromBlobStorage(string fileName)
-        {
-            var connectionString = _configuration.GetConnectionString("AzureBlobStorage");
-            var containerName = "images"; // Ersätt med namnet på din behållare
-
-            if (!string.IsNullOrWhiteSpace(connectionString))
-            {
-                // Skapa en BlobContainerClient
-                var blobServiceClient = new BlobServiceClient(connectionString);
-                var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-
-                // Kontrollera om behållaren existerar
-                if (containerClient.Exists())
-                {
-                    // Skapa en URL för blobben
-                    var blobClient = containerClient.GetBlobClient(fileName);
-                    var sasBuilder = new BlobSasBuilder
-                    {
-                        BlobContainerName = containerName,
-                        BlobName = fileName,
-                        Resource = "b",
-                        StartsOn = DateTimeOffset.UtcNow,
-                        ExpiresOn = DateTimeOffset.UtcNow.AddHours(1)  // Justera tidslängden efter dina behov
-                    };
-
-                    sasBuilder.SetPermissions(BlobSasPermissions.Read);
-                    var sasToken = sasBuilder.ToSasQueryParameters(new StorageSharedKeyCredential(connectionString, null));
-                    var blobUri = blobClient.Uri;
-
-                    var imageUrl = $"{blobUri}?{sasToken}";
-
-                    return imageUrl;
-                }
-            }
-
-            return null; // Returnera null om blobben inte hittades
-        }
-
 
     }
     
