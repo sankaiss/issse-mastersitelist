@@ -97,28 +97,8 @@
                 <label for="images" class="control-label">Ladda upp nya bilder:</label>
                 <input type="file" name="images" id="images" multiple />
             </div>
-
-            <!-- Befintliga bilder -->
-            <div class="form-group">
-                <label class="control-label">Befintliga bilder:</label>
-                @if (Model.Images != null && Model.Images.Any())
-                {
-                    <ul>
-                        @foreach (var image in Model.Images)
-                        {
-                            <li>
-                                @image.FileName
-                                <a asp-action="DeleteImage" asp-route-id="@image.ID">Ta bort</a>
-                            </li>
-                        }
-                    </ul>
-                }
-                else
-                {
-                    <p>Inga bilder tillgängliga.</p>
-                }
-            </div>
-            <br>
+            
+           <br>
             <div class="col-md-3 mb-1">
                 <input type="submit" value="Spara" class="btn btn-primary mr-2" /> <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
             </div>
