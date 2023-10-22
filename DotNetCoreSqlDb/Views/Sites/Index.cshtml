@@ -144,9 +144,13 @@
             </td>
         
             <td>
-                @foreach (var image in item.Images)
+                @if (item != null && item.Images != null)
                 {
-                    <a href="javascript:void(0);" onclick="showImage('@Url.Action("ShowImage", "Sites", new { id = image.ID })')">Visa bild</a>
+
+                    @foreach (var image in item.Images)
+                    {
+                        <a href="javascript:void(0);" onclick="showImage('@Url.Action("ShowImage", "Sites", new { id = image.ID })')">Visa bild</a>
+                    }
                 }
             </td>
             }
