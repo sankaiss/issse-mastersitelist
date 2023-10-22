@@ -136,7 +136,8 @@ namespace DotNetCoreSqlDb.Controllers
                 return NotFound();
             }
             // Hämta webbplatsen inklusive dess bilder
-            var site = await _context.Site.Include(s => s.Images).FirstOrDefaultAsync(s => s.ID == id);
+            var site = await _context.Site.FindAsync(id);
+            // var site = await _context.Site.Include(s => s.Images).FirstOrDefaultAsync(s => s.ID == id);
             if (site == null)
             {
                 return NotFound();
@@ -186,7 +187,7 @@ namespace DotNetCoreSqlDb.Controllers
 
                     
                
-
+                    /*
                      // Lägg till nya bilder
                     if (images != null)
                     {
@@ -211,7 +212,8 @@ namespace DotNetCoreSqlDb.Controllers
                         site.Images.Remove(imageToRemove);
                         DeleteImageFromBlobStorage(imageToRemove.FileName);
                     }
-                    
+                    */
+
                    
                     site.LastUpdatedDate = DateTime.UtcNow;
                     _context.Update(site);
