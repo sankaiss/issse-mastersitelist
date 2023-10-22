@@ -81,6 +81,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Kommentarer)
             </th>
+            <th>Bilder</th>
             <th></th>
         </tr>
     </thead>
@@ -141,6 +142,15 @@
             <td class="@cellClass">
                 @Html.DisplayFor(modelItem => item.Kommentarer)
             </td>
+        
+            <td>
+                @foreach (var image in item.Images)
+                {
+                    <a href="javascript:void(0);" onclick="showImage('@Url.Action("ShowImage", "Sites", new { id = image.ID })')">Visa bild</a>
+                }
+            </td>
+            }
+
             <td>
             <a asp-action="Details" asp-route-id="@item.ID" title="Detaljer"><i class="fas fa-info-circle"></i></a>
 
@@ -180,4 +190,11 @@
             "buttons": buttons
         });
     });
+</script>
+
+<script>
+    function showImage(imageUrl) {
+        // Visa bilden i en popup eller modal
+        // Implementera detta med JavaScript eller ett bibliotek som Bootstrap Modal
+    }
 </script>

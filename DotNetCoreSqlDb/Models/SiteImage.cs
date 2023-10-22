@@ -14,5 +14,6 @@ namespace DotNetCoreSqlDb.Models
         public int SiteID { get; set; }
         public string? FileName { get; set; }        
         public DateTime UploadDate { get; set; }
+        public Site Site { get; set; }
 }
 }

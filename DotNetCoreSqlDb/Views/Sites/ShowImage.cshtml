@@ -1,0 +1,9 @@
+@model string // Modellen är en sträng som innehåller bildens URL
+
+<h2>Visa bild</h2>
+
+<img src="@Model" alt="Bild" />
+
+<form asp-controller="Sites" asp-action="DeleteImage" asp-route-id="@ViewBag.ImageID" method="post" onsubmit="return confirm('Vill du ta bort bilden?')">
+    <button type="submit" class="btn btn-danger">Ta bort bild</button>
+</form>
