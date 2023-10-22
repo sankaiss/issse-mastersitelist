@@ -154,7 +154,8 @@ namespace DotNetCoreSqlDb.Controllers
                 return NotFound();
             }
 
-            var originalSite = await _context.Site.Include(s => s.Images).AsNoTracking().FirstOrDefaultAsync(s => s.ID == id);
+            //var originalSite = await _context.Site.Include(s => s.Images).AsNoTracking().FirstOrDefaultAsync(s => s.ID == id);
+            var originalSite = await _context.Site.AsNoTracking().FirstOrDefaultAsync(s => s.ID == id);
 
 
 
