@@ -31,7 +31,7 @@ namespace DotNetCoreSqlDb.Models
         public string? ImageUrl { get; set; } 
         public DateTime LastUpdatedDate { get; set; }
         public bool IsArchived { get; set; } = false;
-        public virtual ICollection<SiteImage> Images { get; set; }
+
 
     }
 }
