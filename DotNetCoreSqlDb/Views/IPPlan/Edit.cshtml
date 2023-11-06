@@ -37,8 +37,10 @@
                     </div>
                     <div class="col-md-3 mb-1">
                         <label asp-for="Status" class="control-label"></label>
-                        <input asp-for="Status" class="form-control" style="width:100%;" />
-                        <span asp-validation-for="Status" class="text-danger"></span>
+                        <select asp-for="Status" class="form-control" style="width:100%;" />
+                            <option value="Används">Används</option>
+                            <option value="Ledig">Ledig</option>
+                        </select>
                     </div>
                     <div class="col-md-3 mb-1">
                         <label asp-for="Site" class="control-label"></label>
