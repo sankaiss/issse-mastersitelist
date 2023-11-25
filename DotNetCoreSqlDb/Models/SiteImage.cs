@@ -10,13 +10,10 @@ namespace DotNetCoreSqlDb.Models
 {
     public class SiteImage
     {
-        public int Id { get; set; }
-        [Required]
+        public int ID { get; set; }
         public int SiteID { get; set; }
-
-        [Required]
-        public string ImageUrl { get; set; }
-     
-
+        public string? FileName { get; set; }        
+        public DateTime UploadDate { get; set; }
+        public Site Site { get; set; }
 }
 }

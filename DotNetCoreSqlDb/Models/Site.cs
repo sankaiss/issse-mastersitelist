@@ -29,8 +29,6 @@ namespace DotNetCoreSqlDb.Models
         public string? TICNummer { get; set; }
         public string? IPAdress { get; set; }
         public string? ImageUrl { get; set; } 
-        public int? SiteImageId { get; set; }
-         public SiteImage SiteImage { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public bool IsArchived { get; set; } = false;
 
