@@ -3,7 +3,7 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "IP Planer";
+    ViewData["Title"] = "ISS SE IP Planer";
 
     int totalRows = Model.Count();
     int antalAnvands = Model.Count(m => m.Status == "Används");
