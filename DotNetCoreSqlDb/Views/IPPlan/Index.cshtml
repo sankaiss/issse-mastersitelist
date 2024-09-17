@@ -10,7 +10,7 @@
     int antalLedig = totalRows - antalAnvands;
 }
 
-<h1 class="main_h1">IP adress planer</h1>
+<h1 class="main_h1">IP planer</h1>
 <span class="lastUpdated"> - Totalt antal planer: @totalRows</span><span class="lastUpdated"> -  Upptagna: @antalAnvands</span><span class="lastUpdated"> Lediga: @antalLedig</span>
 <br>
 <br>
@@ -102,6 +102,18 @@
 </table>
 <script>
     $(document).ready(function () {
+        var buttons = [];
+
+        @if (User.IsInRole("Admin"))
+        {
+            @:buttons.push('excel', 'pdf');
+        }
+
+        @if (User.IsInRole("Editor"))
+        {
+            @:buttons.push('excel', 'pdf');
+        }
+        
         $('#myTable').DataTable({
             "paging": true,
             "lengthChange": true,
