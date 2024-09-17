@@ -32,21 +32,30 @@ namespace DotNetCoreSqlDb.Controllers
 
         // GET: IPPlan/Details/5
         public async Task<IActionResult> Details(int? id)
+    {
+        if (id == null || _context.IPPlan == null)
         {
-            if (id == null || _context.IPPlan == null)
-            {
-                return NotFound();
-            }
-
-            var iPPlan = await _context.IPPlan
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (iPPlan == null)
-            {
-                return NotFound();
-            }
-
-            return View(iPPlan);
+            return NotFound();
         }
+
+        // Hämta IPPlan baserat på det angivna id
+        var ipPlan = await _context.IPPlan
+            .FirstOrDefaultAsync(m => m.ID == id);
+
+        if (ipPlan == null)
+        {
+            return NotFound();
+        }
+
+        // Hämta IPPlanLogs för den aktuella IPPlan och sortera efter ändringsdatum
+        var logs = await _context.IPPlanLogs
+            .Where(l => l.IPPlanId == id)
+            .OrderByDescending(l => l.ChangeDate)
+            .ToListAsync();
+
+        // Returnera vyn med både IPPlan och dess loggar
+        return View((IPPlan: ipPlan, Logs: logs));
+    }
 
         // GET: IPPlan/Create
         [Authorize(Roles = "Admin,Editor")]
