@@ -14,6 +14,7 @@ namespace DotNetCoreSqlDb.Models
         public string? Site { get; set; }
         public string? GammalSite { get; set; }
         public string? Status { get; set; }
+        public string? PRNT { get; set; }
     
 
         public DateTime LastUpdatedDate { get; set; } 
