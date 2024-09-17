@@ -17,6 +17,7 @@ namespace DotNetCoreSqlDb.Data
 
         public DbSet<DotNetCoreSqlDb.Models.Site> Site { get; set; } = default!;
         public DbSet<DotNetCoreSqlDb.Models.IPPlan> IPPlan { get; set; } = default!;
+        public DbSet<DotNetCoreSqlDb.Models.IPPlanLog> IPPlanLogs { get; set; } = default!;
         public DbSet<DotNetCoreSqlDb.Models.Etablering> Etableringar { get; set; } = default!;
         public DbSet<DotNetCoreSqlDb.Models.SiteLog> Sitelogs { get; set; } = default!;
         public DbSet<DotNetCoreSqlDb.Models.Kassa> Kassas { get; set; } = default!;
