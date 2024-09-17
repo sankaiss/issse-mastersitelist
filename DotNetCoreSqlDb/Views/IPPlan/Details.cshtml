@@ -1,4 +1,4 @@
-@model DotNetCoreSqlDb.Models.IPPlan
+@model (DotNetCoreSqlDb.Models.IPPlan IPPlan, List<DotNetCoreSqlDb.Models.IPPlanLog> Logs)
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
 
@@ -13,40 +13,40 @@
 <table class="table table-bordered table-striped">
     <tbody>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Nät)</th>
-            <td>@Html.DisplayFor(model => model.Nät)</td>
+            <th>@Html.DisplayNameFor(model => model.IPPlan.Nät)</th>
+            <td>@Html.DisplayFor(model => model.IPPlan.Nät)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Mask)</th>
-            <td>@Html.DisplayFor(model => model.Mask)</td>
+            <th>@Html.DisplayNameFor(model => model.IPPlan.Mask)</th>
+            <td>@Html.DisplayFor(model => model.IPPlan.Mask)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.MGMT)</th>
-            <td>@Html.DisplayFor(model => model.MGMT)</td>
+            <th>@Html.DisplayNameFor(model => model.IPPlan.MGMT)</th>
+            <td>@Html.DisplayFor(model => model.IPPlan.MGMT)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.WLAN)</th>
-            <td>@Html.DisplayFor(model => model.WLAN)</td>
+            <th>@Html.DisplayNameFor(model => model.IPPlan.WLAN)</th>
+            <td>@Html.DisplayFor(model => model.IPPlan.WLAN)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.LAN)</th>
-            <td>@Html.DisplayFor(model => model.LAN)</td>
+            <th>@Html.DisplayNameFor(model => model.IPPlan.LAN)</th>
+            <td>@Html.DisplayFor(model => model.IPPlan.LAN)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.PRNT)</th>
-            <td>@Html.DisplayFor(model => model.PRNT)</td>
+            <th>@Html.DisplayNameFor(model => model.IPPlan.PRNT)</th>
+            <td>@Html.DisplayFor(model => model.IPPlan.PRNT)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Status)</th>
-            <td>@Html.DisplayFor(model => model.Status)</td>
+            <th>@Html.DisplayNameFor(model => model.IPPlan.Status)</th>
+            <td>@Html.DisplayFor(model => model.IPPlan.Status)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Site)</th>
-            <td>@Html.DisplayFor(model => model.Site)</td>
+            <th>@Html.DisplayNameFor(model => model.IPPlan.Site)</th>
+            <td>@Html.DisplayFor(model => model.IPPlan.Site)</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.GammalSite)</th>
-            <td>@Html.DisplayFor(model => model.GammalSite)</td>
+            <th>@Html.DisplayNameFor(model => model.IPPlan.GammalSite)</th>
+            <td>@Html.DisplayFor(model => model.IPPlan.GammalSite)</td>
         </tr>
     </tbody>
 </table>
@@ -54,7 +54,55 @@
 <div>
 @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
 {
-    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.ID">Redigera</a>
+    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.IPPlan.ID">Redigera</a>
 }
     <a asp-action="Index" class="btn btn-primary">Tillbaka</a>
 </div>
+<br>
+<br>
+<br>
+<h2 class="main_h1">Ändringslogg</h2>
+<br>
+<br>
+<br>
+<table class="table table-bordered table-striped" style="width: 35%;">
+    <thead>
+        <tr>
+            <th>Ändringsdatum</th>
+            <th>Egenskap</th>
+            <th>Gammalt värde</th>
+            <th>Nytt värde</th>
+            <th>Ändrat av</th>
+        </tr>
+    </thead>
+
+    <tbody>
+       @if (Model.Logs.Any())
+        {
+
+        TimeZoneInfo cetZone = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
+
+        @foreach (var log in Model.Logs)
+            {
+                DateTime cetDateTime = TimeZoneInfo.ConvertTimeFromUtc(log.ChangeDate, cetZone);
+                string formattedDate = cetDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+                <tr>
+                    <td>@formattedDate</td>
+                    <td>@log.PropertyName</td>
+                    <td>@log.OldValue</td>
+                    <td>@log.NewValue</td>   
+                    <td>@log.UserName</td>
+                </tr>
+
+            }
+    }
+
+       else
+            {
+                <tr>
+                    <td colspan="5">Ingen historik tillgänglig</td>
+                </tr>
+        }
+  </tbody>
+</table>
