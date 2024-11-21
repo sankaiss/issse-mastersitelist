@@ -70,7 +70,7 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["Action"]?.ToString() == "Lathund" ? "active" : "")">
-                        <a class="nav-link" style="=font-weight: bold;" asp-controller="Home" asp-action="Lathund">Lathund</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="Lathund">Lathund</a>
                     </li>
 
                 }

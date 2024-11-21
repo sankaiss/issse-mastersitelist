@@ -160,7 +160,18 @@ html {
 .ledig-text {
   color: green; 
 }
-.nav-item .active {
-  border-bottom: 2px solid #ffcc00; /* Exempel på en markeringsfärg */
-  font-weight: bold;
+.navbar .nav-link {
+  font-weight: normal; /* Standardvikt för alla länkar */
+  color: #ffffff; /* Vit textfärg */
+  text-decoration: none; /* Ta bort understrykning */
+}
+
+.navbar .nav-link:hover {
+  font-weight: bold; /* Markerar länken vid hover */
+  color: #ffcc00; /* Gul färg för hover */
+}
+
+.navbar .nav-item.active .nav-link {
+  font-weight: bold; /* Markerar aktiv länk */
+  border-bottom: 2px solid #ffcc00; /* Markeringslinje för aktiv länk */
 }
