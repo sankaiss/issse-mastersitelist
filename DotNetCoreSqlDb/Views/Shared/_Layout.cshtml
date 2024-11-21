@@ -67,7 +67,7 @@
         </button>
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
             <ul class="navbar-nav flex-grow-1">
-                
+
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["Action"]?.ToString() == "Lathund" ? "active" : "")">
@@ -98,10 +98,10 @@
                         </li>
                     }
                     <li class="nav-item">
-                        <form asp-controller="Account" asp-action="Logout" method="post" style="display: inline;">
-                            <button type="submit" class="nav-link btn btn-link" style="color: #ffffff; font-weight: bold; background: none; border: none; margin: 0; padding: 0;">Logga ut</button>
-                        </form>
+                        <a class="nav-link" href="javascript:document.getElementById('logout-form').submit();">Logga ut</a>
+                        <form id="logout-form" asp-controller="Account" asp-action="Logout" method="post" style="display: none;"></form>
                     </li>
+
                 }
                 else
                 {
