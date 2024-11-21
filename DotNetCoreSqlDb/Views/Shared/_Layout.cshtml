@@ -67,77 +67,55 @@
         </button>
         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
             <ul class="navbar-nav flex-grow-1">
+                
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["Action"]?.ToString() == "Lathund" ? "active" : "")">
                         <a class="nav-link" asp-controller="Home" asp-action="Lathund">Lathund</a>
                     </li>
-
-                }
-
-                @if (SignInManager.IsSignedIn(User))
-                {
-                <li class="nav-item">
-                    <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-action="Index" asp-controller="Sites">MSL</a>
-                </li>
-                }
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="IPPlan" asp-action="Index">IP Planer</a>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Sites" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Sites" asp-action="Index">MSL</a>
                     </li>
-                }
-
-                
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Etablering" asp-action="Index">Pågående förändringar</a>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "IPPlan" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")">
+                        <a class="nav-link" asp-controller="IPPlan" asp-action="Index">IP Planer</a>
                     </li>
-                }
-
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Sites" asp-action="Archived">Arkiv</a>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Etablering" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Etablering" asp-action="Index">Pågående förändringar</a>
                     </li>
-                }
-
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Kassa" asp-action="Index">Siter med kassasystem</a>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Sites" && ViewContext.RouteData.Values["Action"]?.ToString() == "Archived" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Sites" asp-action="Archived">Arkiv</a>
                     </li>
-                }
-
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Skrivare" asp-action="Index">Skrivare</a>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Kassa" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Kassa" asp-action="Index">Siter med kassasystem</a>
                     </li>
-                }
-
-                @if (User.IsInRole("Admin"))
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Admin" asp-action="UserList">Användarlista</a>
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Skrivare" && ViewContext.RouteData.Values["Action"]?.ToString() == "Index" ? "active" : "")">
+                        <a class="nav-link" asp-controller="Skrivare" asp-action="Index">Skrivare</a>
                     </li>
-                }
-
-                <li class="nav-item" style="display: flex; align-items: center;">
-                    @if (SignInManager.IsSignedIn(User))
+                    @if (User.IsInRole("Admin"))
                     {
+                        <li class="nav-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Admin" && ViewContext.RouteData.Values["Action"]?.ToString() == "UserList" ? "active" : "")">
+                            <a class="nav-link" asp-controller="Admin" asp-action="UserList">Användarlista</a>
+                        </li>
+                    }
+                    <li class="nav-item">
                         <form asp-controller="Account" asp-action="Logout" method="post" style="display: inline;">
                             <button type="submit" class="nav-link btn btn-link" style="color: #ffffff; font-weight: bold; background: none; border: none; margin: 0; padding: 0;">Logga ut</button>
                         </form>
-                    }
-                    else
-                    {
-                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Home" asp-action="Info">Info</a>
-                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Account" asp-action="Login">Logga in</a>
-                        <a class="nav-link" style="color: #ffffff; font-weight: bold;" asp-controller="Account" asp-action="Register">Registrera</a>
-                    }
-                </li>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Info">Info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Login">Logga in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Register">Registrera</a>
+                    </li>
+                }
+
 
 
             </ul>
