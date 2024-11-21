@@ -25,6 +25,10 @@
 
 .middle-column {
   background-color: white;
+  background-image: url('/images/iss2.jpg'); 
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 100px auto;
   padding: 20px;
   box-sizing: border-box;
   overflow-x: auto;
