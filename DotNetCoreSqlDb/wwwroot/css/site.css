@@ -172,6 +172,8 @@ html {
 }
 
 .navbar .nav-item.active .nav-link {
+  color: #ffcc00 !important;
   font-weight: bold; /* Markerar aktiv länk */
   border-bottom: 2px solid #ffcc00; /* Markeringslinje för aktiv länk */
+  text-decoration: none;
 }
