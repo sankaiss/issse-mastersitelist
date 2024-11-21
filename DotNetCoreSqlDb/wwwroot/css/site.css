@@ -162,13 +162,13 @@ html {
 }
 .navbar .nav-link {
   font-weight: bold; /* Standardvikt för alla länkar */
-  color: #ffffff; /* Vit textfärg */
+  color: #ffffff !important; /* Vit textfärg */
   text-decoration: none; /* Ta bort understrykning */
 }
 
 .navbar .nav-link:hover {
   font-weight: bold; /* Markerar länken vid hover */
-  color: #ffcc00; /* Gul färg för hover */
+  color: #ffcc00 !important; /* Gul färg för hover */
 }
 
 .navbar .nav-item.active .nav-link {
