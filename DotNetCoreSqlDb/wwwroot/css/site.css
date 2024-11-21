@@ -161,7 +161,7 @@ html {
   color: green; 
 }
 .navbar .nav-link {
-  font-weight: normal; /* Standardvikt för alla länkar */
+  font-weight: bold; /* Standardvikt för alla länkar */
   color: #ffffff; /* Vit textfärg */
   text-decoration: none; /* Ta bort understrykning */
 }
