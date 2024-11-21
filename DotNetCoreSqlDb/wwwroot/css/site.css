@@ -160,3 +160,7 @@ html {
 .ledig-text {
   color: green; 
 }
+.nav-item .active {
+  border-bottom: 2px solid #ffcc00; /* Exempel på en markeringsfärg */
+  font-weight: bold;
+}
