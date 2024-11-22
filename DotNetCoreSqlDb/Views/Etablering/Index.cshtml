@@ -5,111 +5,118 @@
 @{
     ViewData["Title"] = "Pågående förändringar";
 }
+<div class="info-container">
+    <h1 class="info-title"><i class="fas fa-screwdriver-wrench"></i>Pågående förändringar</h1>
+    <h1 class="main_h1">Pågående förändringar</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+    {
+    <p>
+        <a asp-action="Create" class="add-new-site-btn">Skapa en ny</a>
+    </p>
+    }
+    <br>
+    <br>
+    <table class="table" id="myTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ort)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gatuadress)
+                </th>
 
-<h1 class="main_h1">Pågående förändringar</h1>
-<br>
-<br>
-@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-{
-<p>
-    <a asp-action="Create" class="add-new-site-btn">Skapa en ny</a>
-</p>
-}
-<br>
-<table class="table" id="myTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Ort)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gatuadress)
-            </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KontorSite)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ISSKontaktperson)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TeliaUppkoppling)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AteaKonsult)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KlartSenast)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ÖvrigInfo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ÄrendeNrISS)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ort)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gatuadress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KontorSite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISSKontaktperson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EpostISSKontaktperson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TelefonISSKontaktperson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeliaUppkoppling)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AteaKonsult)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KlartSenast)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ÖvrigInfo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ÄrendeNrISS)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="fas fa-info-circle"></i></a>
+                @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                    {   
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                    }
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    
+</div>
 
-            <th>
-                @Html.DisplayNameFor(model => model.KontorSite)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ISSKontaktperson)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TeliaUppkoppling)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AteaKonsult)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KlartSenast)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ÖvrigInfo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ÄrendeNrISS)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ort)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gatuadress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KontorSite)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ISSKontaktperson)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EpostISSKontaktperson)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TelefonISSKontaktperson)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeliaUppkoppling)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AteaKonsult)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KlartSenast)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ÖvrigInfo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ÄrendeNrISS)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="fas fa-info-circle"></i></a>
-             @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-                {   
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="fas fa-edit"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="fas fa-trash-alt"></i></a>
-                }
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
 <script>
     $(document).ready(function () {
         $('#myTable').DataTable({
