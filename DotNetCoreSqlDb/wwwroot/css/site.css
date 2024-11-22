@@ -188,7 +188,7 @@ html {
 
 
 .info-title {
-  font-size: 28px; 
+  font-size: 28px;
   font-weight: bold;
   color: #030037;
   border-bottom: 3px solid #ffcc00;
@@ -199,18 +199,18 @@ html {
 }
 
 
-.info-description {
-  font-size: 22px; 
-  font-weight: bold;
-  color: #030037;
-  margin-top: 20px;
-  margin-bottom: 10px;
+.info-title i,
+.info-description i,
+.info-details i,
+.info-contact i {
+  margin-right: 10px; 
+  color: #0056b3; 
 }
 
 
 .info-description,
 .info-details {
-  font-size: 16px;
+  font-size: 22px;
   color: #333;
   margin-bottom: 15px;
 }
