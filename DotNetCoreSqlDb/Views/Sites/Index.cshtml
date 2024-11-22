@@ -15,146 +15,148 @@
     int totalCount = Model.Count();
 }
 
+<div class="info-container">
+    <h1 class="info-title"><i class="fas fa-network-wired"></i> ISS SE Network MasterSite list</h1>
+    <span class="lastUpdated"> - Senast uppdaterad: @localLastUpdatedDate.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE"))</span><span class="lastUpdated"> - Total antal siter: @totalCount</span>
+    <br>
+    <br>
+    @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+    {
+        <p>
+            <a asp-action="Create" class="add-new-site-btn">Lägg till en ny site</a>
+        </p>
+    }
+    <br>
+    <table class="table" id="myTable">
+        <thead>
+            <tr>
+                <th>
+                Site ID
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ort)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gatuadress)
+                </th>
+                <th>
+                Site Typ
+                </th>
+                <th>
+                Gammal Adress EfterFlytt
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Leverantör)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                Nätverkskapacitet Mb/Gbps
+                </th>
+                <th>
+                Kontakt Namn
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mobilnr)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Epostadress)
+                </th>
+                <th>
+                WAN Uplink
+                </th>
+                <th>
+                TIC-Nummer
+                </th>
+                <th>
+                IP Adress
+                </th>
+                <th>
+                Antal Enheter
+                </th>
+                <th>
+                Site storlek
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Kommentarer)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            var cellClass = item.Status == "Pågående" ? "pågående-text" : 
+                    item.Status == "Avvecklad" ? "avvecklad-text" : "";
 
-<h1 class="main_h1">ISS SE Network MasterSite list</h1>
-<span class="lastUpdated"> - Senast uppdaterad: @localLastUpdatedDate.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE"))</span><span class="lastUpdated"> - Total antal siter: @totalCount</span>
-<br>
-<br>
-@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-{
-    <p>
-        <a asp-action="Create" class="add-new-site-btn">Lägg till en ny site</a>
-    </p>
-}
-<br>
-<table class="table" id="myTable">
-    <thead>
-        <tr>
-            <th>
-            Site ID
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ort)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gatuadress)
-            </th>
-            <th>
-            Site Typ
-            </th>
-            <th>
-            Gammal Adress EfterFlytt
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Leverantör)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-            Nätverkskapacitet Mb/Gbps
-            </th>
-            <th>
-            Kontakt Namn
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mobilnr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Epostadress)
-            </th>
-            <th>
-            WAN Uplink
-            </th>
-            <th>
-            TIC-Nummer
-            </th>
-            <th>
-            IP Adress
-            </th>
-            <th>
-            Antal Enheter
-            </th>
-            <th>
-            Site storlek
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kommentarer)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        var cellClass = item.Status == "Pågående" ? "pågående-text" : 
-                item.Status == "Avvecklad" ? "avvecklad-text" : "";
+            <tr>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.Ort)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.Gatuadress)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.SiteTyp)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.GammalAdressEfterFlytt)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.Leverantör)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.NätverkskapacitetMbps)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.KontaktNamn)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.Mobilnr)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.Epostadress)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.WANUplink)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.TICNummer)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.IPAdress)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.AntalEnheter)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.Sitestorlek)
+                </td>
+                <td class="@cellClass">
+                    @Html.DisplayFor(modelItem => item.Kommentarer)
+                </td>
+                <td>
+                <a asp-action="Details" asp-route-id="@item.ID" title="Detaljer"><i class="fas fa-info-circle"></i></a>
 
-        <tr>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.Ort)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.Gatuadress)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.SiteTyp)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.GammalAdressEfterFlytt)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.Leverantör)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.NätverkskapacitetMbps)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.KontaktNamn)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.Mobilnr)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.Epostadress)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.WANUplink)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.TICNummer)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.IPAdress)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.AntalEnheter)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.Sitestorlek)
-            </td>
-            <td class="@cellClass">
-                @Html.DisplayFor(modelItem => item.Kommentarer)
-            </td>
-            <td>
-            <a asp-action="Details" asp-route-id="@item.ID" title="Detaljer"><i class="fas fa-info-circle"></i></a>
+                @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.ID" title="Redigera"><i class="fas fa-edit"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.ID" title="Radera"><i class="fas fa-trash-alt"></i></a>
+                }
+    </td>
 
-            @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-            {
-                <a asp-action="Edit" asp-route-id="@item.ID" title="Redigera"><i class="fas fa-edit"></i></a>
-                <a asp-action="Delete" asp-route-id="@item.ID" title="Radera"><i class="fas fa-trash-alt"></i></a>
-            }
-</td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
 
-        </tr>
-}
-    </tbody>
-</table>
 <script>
     $(document).ready(function () {
         var buttons = [];
