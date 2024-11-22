@@ -20,12 +20,15 @@
     <span class="lastUpdated"> - Senast uppdaterad: @localLastUpdatedDate.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE"))</span><span class="lastUpdated"> - Total antal siter: @totalCount</span>
     <br>
     <br>
+    <br>
+    <br>
     @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
     {
         <p>
             <a asp-action="Create" class="add-new-site-btn">Lägg till en ny site</a>
         </p>
     }
+    <br>
     <br>
     <table class="table" id="myTable">
         <thead>
