@@ -17,18 +17,21 @@
 }
 
 /* Kolumnstilar */
-.left-column,
-.right-column {
+
+.left-column {
   background-color: blue;
   color: white;
 }
 
+.right-column {
+  background: linear-gradient(to right, #003399 50%, #66ccff 50%);
+  height: 100vh;
+  width: 100%; 
+}
+
+
 .middle-column {
   background-color: white;
-  background-image: url('/images/iss2.jpg'); 
-  background-repeat: no-repeat;
-  background-position: right bottom;
-  background-size: 100px auto;
   padding: 20px;
   box-sizing: border-box;
   overflow-x: auto;
