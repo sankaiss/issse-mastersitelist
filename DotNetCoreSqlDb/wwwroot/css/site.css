@@ -225,3 +225,10 @@ html {
   color: #ffcc00;
   text-decoration: underline;
 }
+.info-title i,
+.info-description i,
+.info-text i,
+.info-contact i {
+  color: #0056b3; 
+  margin-right: 10px;
+}
