@@ -5,13 +5,15 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@{
+    int totalCount = Model.Count();
+}
 <div class="info-container">
-    <h1 class="info-title"><i class="fas  fa-cash-register"></i>Siter med kassasystem</h1>
+    <h1 class="info-title"><i class="fas  fa-cash-register"></i>Siter med kassasystem</h1><span class="lastUpdated">Total antal kassasystem: @totalCount</span>
     <br>
     <br>
     <br>
-    <br>>
+    <br>
 
     @if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("KassaAdmin"))
     {
