@@ -24,9 +24,20 @@
 }
 
 .right-column {
-  background: linear-gradient(to right, #003399 50%, #66ccff 50%);
-  height: 100vh;
+  display: flex;
+  flex-direction: row; 
+  height: 100vh; 
   width: 100%; 
+}
+
+.right-column .left-side {
+  background-color: #003399; 
+  flex: 1; 
+}
+
+.right-column .right-side {
+  background-color: #66ccff; 
+  flex: 1; 
 }
 
 
