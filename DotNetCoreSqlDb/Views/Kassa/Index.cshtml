@@ -6,99 +6,104 @@
     ViewData["Title"] = "Index";
 }
 
+<div class="info-container">
+    <h1 class="info-title"><i class="fas  fa-box-archive"></i>Siter med kassasystem</h1>
+    <br>
+    <br>
+    <br>
+    <br>>
 
-<br>
-<br>
+    @if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("KassaAdmin"))
+    {
 
-@if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("KassaAdmin"))
-{
+    <p>
+        <a asp-action="Create" class="add-new-site-btn">Lägg till</a>
+    </p>
+    }
+    <br>
+    <table class="table" id="myTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gatuadress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ort)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ISSKontaktperson)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KassaTyp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Uppkopling)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Leveraantör)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Övrigt)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gatuadress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ort)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISSKontaktperson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EpostISSKontaktperson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TelefonISSKontaktperson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KassaTyp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Uppkopling)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Leveraantör)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Övrigt)
+                </td>
+            <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="fas fa-info-circle"></i></a>
+                @if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("KassaAdmin"))
+                    {   
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                    }
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
 
-<p>
-    <a asp-action="Create" class="add-new-site-btn">Lägg till</a>
-</p>
-}
-<br>
-<table class="table" id="myTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Gatuadress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ort)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ISSKontaktperson)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EpostISSKontaktperson)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TelefonISSKontaktperson)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KassaTyp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Uppkopling)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Leveraantör)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Övrigt)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gatuadress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ort)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ISSKontaktperson)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EpostISSKontaktperson)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TelefonISSKontaktperson)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KassaTyp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Uppkopling)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Leveraantör)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Övrigt)
-            </td>
-           <td>
-                <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="fas fa-info-circle"></i></a>
-             @if (User.IsInRole("Admin") || User.IsInRole("Editor") || User.IsInRole("KassaAdmin"))
-                {   
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="fas fa-edit"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="fas fa-trash-alt"></i></a>
-                }
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
 <script>
     $(document).ready(function () {
         var buttons = [];
