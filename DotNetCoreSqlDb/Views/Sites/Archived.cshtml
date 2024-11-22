@@ -11,80 +11,82 @@
     
     int totalCount = Model.Count();
 }
+<div class="info-container">
+    <h1 class="info-title"><i class="fas  fa-box-archive"></i>Arkiverade Siter</h1>
+    <span class="lastUpdated">Senast uppdaterad: @(localLastUpdatedDate.HasValue ? localLastUpdatedDate.Value.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE")) : "Ingen uppdatering tillgänglig")
+    </span>
+    <span class="lastUpdated"> - Total antal siter: @totalCount</span>
+    <br>
+    <br>
+    <br>
+    <br>
 
-<h1 class="main_h1">Arkiverade Siter</h1>
-<span class="lastUpdated">
-    - Senast uppdaterad: 
-    @(localLastUpdatedDate.HasValue ? localLastUpdatedDate.Value.ToString("d MMMM yyyy HH:mm:ss", new System.Globalization.CultureInfo("sv-SE")) : "Ingen uppdatering tillgänglig")
-</span>
-<span class="lastUpdated"> - Total antal siter: @totalCount</span>
-<br>
-<br>
+    <table class="table" id="myTable">
+        <thead>
+            <tr>
+                <th>Site ID</th>
+                <th>@Html.DisplayNameFor(model => model.Ort)</th>
+                <th>@Html.DisplayNameFor(model => model.Gatuadress)</th>
+                <th>@Html.DisplayNameFor(model => model.SiteTyp)</th>
+                <th>@Html.DisplayNameFor(model => model.GammalAdressEfterFlytt)</th>
+                <th>@Html.DisplayNameFor(model => model.Leverantör)</th>
+                <th>@Html.DisplayNameFor(model => model.Status)</th>
+                <th>@Html.DisplayNameFor(model => model.NätverkskapacitetMbps)</th>
+                <th>@Html.DisplayNameFor(model => model.KontaktNamn)</th>
+                <th>@Html.DisplayNameFor(model => model.Mobilnr)</th>
+                <th>@Html.DisplayNameFor(model => model.Epostadress)</th>
+                <th>@Html.DisplayNameFor(model => model.WANUplink)</th>
+                <th>@Html.DisplayNameFor(model => model.TICNummer)</th>
+                <th>@Html.DisplayNameFor(model => model.IPAdress)</th>
+                <th>@Html.DisplayNameFor(model => model.AntalEnheter)</th>
+                <th>@Html.DisplayNameFor(model => model.Sitestorlek)</th>
+                <th>@Html.DisplayNameFor(model => model.Kommentarer)</th>
+                <th>Åtgärder</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            var cellClass = item.Status == "Avvecklad" ? "avvecklad-text" : "";
+            <tr>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.ID)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.Ort)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.Gatuadress)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.SiteTyp)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.GammalAdressEfterFlytt)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.Leverantör)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.Status)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.NätverkskapacitetMbps)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.KontaktNamn)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.Mobilnr)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.Epostadress)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.WANUplink)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.TICNummer)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.IPAdress)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.AntalEnheter)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.Sitestorlek)</td>
+                <td class="@cellClass">@Html.DisplayFor(modelItem => item.Kommentarer)</td>
+                <td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+                    {
+                        <a asp-action="Restore" asp-route-id="@item.ID" title="Återställ" class="btn btn-primary">Återställ</a>
+                        <a asp-action="Edit" asp-route-id="@item.ID" title="Redigera" class="btn btn-warning">Redigera</a>
 
-<table class="table" id="myTable">
-    <thead>
-        <tr>
-            <th>Site ID</th>
-            <th>@Html.DisplayNameFor(model => model.Ort)</th>
-            <th>@Html.DisplayNameFor(model => model.Gatuadress)</th>
-            <th>@Html.DisplayNameFor(model => model.SiteTyp)</th>
-            <th>@Html.DisplayNameFor(model => model.GammalAdressEfterFlytt)</th>
-            <th>@Html.DisplayNameFor(model => model.Leverantör)</th>
-            <th>@Html.DisplayNameFor(model => model.Status)</th>
-            <th>@Html.DisplayNameFor(model => model.NätverkskapacitetMbps)</th>
-            <th>@Html.DisplayNameFor(model => model.KontaktNamn)</th>
-            <th>@Html.DisplayNameFor(model => model.Mobilnr)</th>
-            <th>@Html.DisplayNameFor(model => model.Epostadress)</th>
-            <th>@Html.DisplayNameFor(model => model.WANUplink)</th>
-            <th>@Html.DisplayNameFor(model => model.TICNummer)</th>
-            <th>@Html.DisplayNameFor(model => model.IPAdress)</th>
-            <th>@Html.DisplayNameFor(model => model.AntalEnheter)</th>
-            <th>@Html.DisplayNameFor(model => model.Sitestorlek)</th>
-            <th>@Html.DisplayNameFor(model => model.Kommentarer)</th>
-            <th>Åtgärder</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        var cellClass = item.Status == "Avvecklad" ? "avvecklad-text" : "";
-        <tr>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.ID)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Ort)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Gatuadress)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.SiteTyp)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.GammalAdressEfterFlytt)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Leverantör)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Status)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.NätverkskapacitetMbps)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.KontaktNamn)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Mobilnr)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Epostadress)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.WANUplink)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.TICNummer)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.IPAdress)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.AntalEnheter)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Sitestorlek)</td>
-            <td class="@cellClass">@Html.DisplayFor(modelItem => item.Kommentarer)</td>
-            <td>
-                @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-                {
-                    <a asp-action="Restore" asp-route-id="@item.ID" title="Återställ" class="btn btn-primary">Återställ</a>
-                    <a asp-action="Edit" asp-route-id="@item.ID" title="Redigera" class="btn btn-warning">Redigera</a>
+                    }
 
-                }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <form asp-controller="Sites" asp-action="RealDelete" asp-route-id="@item.ID" method="post" onsubmit="return confirm('Är du säker på att du vill radera?')" style="display: inline;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger">Radera</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
 
-                @if (User.IsInRole("Admin"))
-                {
-                    <form asp-controller="Sites" asp-action="RealDelete" asp-route-id="@item.ID" method="post" onsubmit="return confirm('Är du säker på att du vill radera?')" style="display: inline;">
-                        @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-danger">Radera</button>
-                    </form>
-                }
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
 <script>
     $(document).ready(function () {
         $('#myTable').DataTable({
